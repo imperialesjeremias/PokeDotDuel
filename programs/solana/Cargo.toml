@@ -1,0 +1,14 @@
+[workspace]
+members = [
+    "pvp_escrow",
+    "packs_vrf",
+    "pokecoins_bridge"
+]
+
+[profile.release]
+overflow-checks = true
+lto = "fat"
+codegen-units = 1
+
+[profile.dev]
+overflow-checks = true
