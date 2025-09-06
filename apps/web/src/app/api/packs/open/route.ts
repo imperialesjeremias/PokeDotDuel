@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { z } from 'zod';
+import { PackReward } from '../../../../types/shared';
+
+interface DatabasePackReward {
+  card_id: string;
+  card_name: string;
+  dex_number: number;
+  rarity: string;
+  is_shiny: boolean;
+}
 
 const OpenPackSchema = z.object({
   packId: z.string().uuid(),
@@ -59,12 +68,19 @@ export async function POST(request: NextRequest) {
 
     // Open pack using the database function
     const { data: rewards, error: openError } = await supabase
-      .rpc('open_booster_pack', { pack_id: validatedData.packId });
+      .rpc('open_booster_pack', { pack_id: validatedData.packId }) as { data: DatabasePackReward[] | null, error: any };
 
     if (openError) {
       console.error('Error opening pack:', openError);
       return NextResponse.json(
         { error: 'Failed to open pack' },
+        { status: 500 }
+      );
+    }
+
+    if (!rewards) {
+      return NextResponse.json(
+        { error: 'No rewards found' },
         { status: 500 }
       );
     }
@@ -88,10 +104,11 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      rewards: rewards.map(reward => ({
+      rewards: rewards.map((reward: DatabasePackReward): PackReward => ({
         cardId: reward.card_id,
         cardName: reward.card_name,
-        rarity: reward.rarity,
+        dexNumber: reward.dex_number,
+        rarity: reward.rarity as 'COMMON' | 'RARE' | 'LEGENDARY',
         isShiny: reward.is_shiny,
       })),
     });

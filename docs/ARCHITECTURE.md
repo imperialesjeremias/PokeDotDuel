@@ -1,15 +1,19 @@
-# Arquitectura de PokeBattle
+# Arquitectura de PokeDotDuel
 
-Este documento describe la arquitectura técnica de PokeBattle, un criptojuego PvP con apuestas en SOL.
+Este documento describe la arquitectura técnica de PokeDotDuel, un criptojuego PvP con apuestas en SOL.
+
+## ⚠️ **IMPORTANTE**: Arquitectura 100% TypeScript
+
+Este proyecto ha sido completamente migrado a **TypeScript**. Ya no contiene código Rust ni programas de Solana compilados. Todo el backend blockchain se maneja a través de clientes TypeScript que interactúan con programas de Solana desplegados externamente.
 
 ## 🏗️ Visión General de la Arquitectura
 
-PokeBattle utiliza una arquitectura híbrida que combina tecnologías centralizadas y descentralizadas:
+PokeDotDuel utiliza una arquitectura híbrida que combina tecnologías centralizadas y descentralizadas:
 
 - **Frontend**: Next.js 14 con App Router
 - **Backend**: API Routes + Edge Functions
 - **Base de Datos**: Supabase (PostgreSQL)
-- **Blockchain**: Solana con programas Anchor
+- **Blockchain**: Solana con clientes TypeScript para programas externos
 - **Tiempo Real**: WebSockets
 - **Autenticación**: Privy
 
@@ -19,7 +23,8 @@ PokeBattle utiliza una arquitectura híbrida que combina tecnologías centraliza
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Frontend      │    │   WebSocket     │    │   Supabase      │
 │   (Next.js)     │◄──►│   Server        │◄──►│   (PostgreSQL)  │
-│                 │    │   (Socket.IO)   │    │                 │
+│   + TypeScript  │    │   (Socket.IO)   │    │                 │
+│   Clients       │    │                 │    │                 │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          │                       │                       │
@@ -33,8 +38,8 @@ PokeBattle utiliza una arquitectura híbrida que combina tecnologías centraliza
          ▼                       ▼
 ┌─────────────────┐    ┌─────────────────┐
 │   Solana        │    │   External      │
-│   Programs      │    │   Services      │
-│   (Anchor)      │    │   (PokeAPI)     │
+│   TypeScript    │    │   Programs      │
+│   Clients       │    │   (Anchor)      │
 └─────────────────┘    └─────────────────┘
 ```
 
@@ -65,11 +70,20 @@ apps/web/src/
 ├── components/         # React components
 │   └── ui/            # shadcn/ui components
 ├── lib/               # Utilities and configs
+│   ├── clients.ts     # Export all blockchain clients
+│   ├── pvpClient.ts   # PVP Escrow client
+│   ├── vrfClient.ts   # VRF Packs client
+│   ├── bridgeClient.ts # PokéCoins Bridge client
 │   ├── supabase.ts    # Supabase client
 │   ├── privy.ts       # Privy config
 │   ├── solana.ts      # Solana utilities
 │   └── websocket.ts   # WebSocket client
-└── types/             # TypeScript types
+├── hooks/             # React hooks for blockchain
+│   ├── usePVP.ts      # PVP operations
+│   ├── useVRF.ts      # VRF operations
+│   └── useBridge.ts   # Bridge operations
+├── types/             # TypeScript types
+└── examples/          # Usage examples
 ```
 
 ### 2. WebSocket Server
@@ -100,48 +114,59 @@ apps/websocket-server/src/
     └── supabase.ts
 ```
 
-### 3. Programas Solana (Anchor)
+### 3. Clientes Blockchain TypeScript
 
-**Ubicación**: `programs/solana/`
+**Ubicación**: `apps/web/src/lib/`
 
-#### 3.1 PvP Escrow (`pvp_escrow`)
+Los clientes TypeScript interactúan con programas de Solana desplegados externamente.
 
-**Propósito**: Manejo seguro de apuestas en batallas PvP
+#### 3.1 PVP Escrow Client (`pvpClient.ts`)
 
-**Funcionalidades**:
-- Crear lobby con escrow
-- Unirse a lobby
-- Bloquear lobby para batalla
-- Resolver batalla y distribuir ganancias
-- Cancelar lobby y reembolsar
-
-**PDAs**:
-- `lobby_pda`: Información del lobby
-- `vault_pda`: SOL en escrow
-- `fee_vault`: Comisiones del protocolo
-
-#### 3.2 Booster Packs (`packs_vrf`)
-
-**Propósito**: Sistema de packs con VRF para aleatoriedad verificable
+**Propósito**: Cliente para interactuar con contratos de apuestas PvP
 
 **Funcionalidades**:
-- Comprar pack con SOL
-- Solicitar VRF
-- Cumplir VRF y generar recompensas
-- Reclamar recompensas
+- ✅ Crear lobby con escrow
+- ✅ Unirse a lobby
+- ✅ Bloquear lobby para batalla
+- ✅ Resolver batalla y distribuir ganancias
+- ✅ Cancelar lobby y reembolsar
 
-**PDAs**:
-- `pack_pda`: Información del pack
-- `vault_pda`: SOL de ventas
+**Métodos principales**:
+- `createLobby()`: Crear nuevo lobby
+- `joinLobby()`: Unirse a lobby existente
+- `lockLobby()`: Bloquear lobby para batalla
+- `resolveMatch()`: Resolver batalla y pagar
+- `cancelLobby()`: Cancelar y reembolsar
 
-#### 3.3 PokéCoins Bridge (`pokecoins_bridge`)
+#### 3.2 VRF Client (`vrfClient.ts`)
 
-**Propósito**: Intercambio entre SOL y PokéCoins
+**Propósito**: Cliente para sistema de booster packs con VRF
 
 **Funcionalidades**:
-- Comprar PokéCoins con SOL
-- Vender PokéCoins por SOL
-- Gestión de reservas
+- ✅ Comprar pack con SOL
+- ✅ Solicitar VRF para apertura
+- ✅ Abrir pack con resultado VRF
+- ✅ Reclamar recompensas
+
+**Métodos principales**:
+- `buyPack()`: Comprar booster pack
+- `requestVrf()`: Solicitar aleatoriedad VRF
+- `openPack()`: Abrir pack con resultado
+- `claimRewards()`: Reclamar recompensas
+
+#### 3.3 Bridge Client (`bridgeClient.ts`)
+
+**Propósito**: Cliente para puente SOL ↔ PokéCoins
+
+**Funcionalidades**:
+- ✅ Depositar SOL por PokéCoins
+- ✅ Retirar PokéCoins por SOL
+- ✅ Consultar estado del bridge
+
+**Métodos principales**:
+- `depositSol()`: Depositar SOL
+- `withdrawSol()`: Retirar SOL
+- `getBridge()`: Consultar estado
 
 ### 4. Base de Datos (Supabase)
 
@@ -327,13 +352,18 @@ railway variables set JWT_SECRET=...
 railway up
 ```
 
-### Solana Programs (Mainnet)
+### Programas Solana Externos
+
+Los programas de Solana deben desplegarse por separado:
+
+1. **Desarrollar programas** usando Anchor o similar
+2. **Desplegar a devnet/mainnet** usando herramientas de Solana
+3. **Actualizar variables de entorno** con las direcciones reales
+4. **Los clientes TypeScript** se conectarán automáticamente
 
 ```bash
-# Configurar mainnet
-solana config set --url mainnet-beta
-
-# Deploy
+# Ejemplo de despliegue con Anchor
+anchor build
 anchor deploy --provider.cluster mainnet-beta
 ```
 

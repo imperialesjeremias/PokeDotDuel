@@ -44,6 +44,24 @@ const lobbyManager = new LobbyManager();
 const battleManager = new BattleManager();
 const gameManager = new GameManager(lobbyManager, battleManager);
 
+// Import additional managers
+import { Matchmaker } from './lobby/Matchmaker';
+import { PackManager } from './packs/PackManager';
+import { TeamBuilder } from './teams/TeamBuilder';
+import { MarketplaceManager } from './marketplace/MarketplaceManager';
+import { EconomyManager } from './economy/EconomyManager';
+import { CollectionManager } from './collection/CollectionManager';
+import { ProgressionManager } from './progression/ProgressionManager';
+
+// Initialize additional managers
+const matchmaker = new Matchmaker(lobbyManager);
+const packManager = new PackManager();
+const teamBuilder = new TeamBuilder();
+const marketplaceManager = new MarketplaceManager();
+const economyManager = new EconomyManager();
+const collectionManager = new CollectionManager();
+const progressionManager = new ProgressionManager();
+
 // Socket.IO connection handling
 io.on('connection', (socket) => {
   console.log(`Client connected: ${socket.id}`);

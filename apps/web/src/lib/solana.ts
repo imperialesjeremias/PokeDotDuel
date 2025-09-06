@@ -2,7 +2,7 @@ import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js';
 
 // Solana configuration
 export const SOLANA_CLUSTER = process.env.NEXT_PUBLIC_SOLANA_CLUSTER || 'devnet';
-export const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL || clusterApiUrl(SOLANA_CLUSTER);
+export const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL || clusterApiUrl(SOLANA_CLUSTER as any);
 
 // Create connection
 export const connection = new Connection(RPC_URL, {
@@ -10,11 +10,11 @@ export const connection = new Connection(RPC_URL, {
   wsEndpoint: RPC_URL.replace('https://', 'wss://'),
 });
 
-// Program IDs (these will be set after deployment)
+// Program IDs - Configurar con las direcciones de los programas desplegados
 export const PROGRAMS = {
-  PVP_ESCROW: new PublicKey('11111111111111111111111111111111'), // Placeholder
-  PACKS_VRF: new PublicKey('11111111111111111111111111111111'), // Placeholder
-  POKECOINS_BRIDGE: new PublicKey('11111111111111111111111111111111'), // Placeholder
+  PVP_ESCROW: new PublicKey(process.env.NEXT_PUBLIC_PVP_ESCROW_PROGRAM_ID || '11111111111111111111111111111112'),
+  PACKS_VRF: new PublicKey(process.env.NEXT_PUBLIC_PACKS_VRF_PROGRAM_ID || '11111111111111111111111111111113'),
+  POKECOINS_BRIDGE: new PublicKey(process.env.NEXT_PUBLIC_BRIDGE_PROGRAM_ID || '11111111111111111111111111111114'),
 } as const;
 
 // Constants

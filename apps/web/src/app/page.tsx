@@ -1,6 +1,9 @@
 'use client';
 
 import { usePrivy } from '@privy-io/react-auth';
+
+// Force dynamic rendering to avoid static generation issues with Privy
+export const dynamic = 'force-dynamic';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';

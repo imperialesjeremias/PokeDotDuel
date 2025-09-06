@@ -1,6 +1,10 @@
-# Guía de Configuración - PokeBattle
+# Guía de Configuración - PokeDotDuel
 
-Esta guía te ayudará a configurar PokeBattle desde cero en tu entorno de desarrollo.
+Esta guía te ayudará a configurar PokeDotDuel desde cero en tu entorno de desarrollo.
+
+## ⚠️ **IMPORTANTE**: Proyecto 100% TypeScript
+
+Este proyecto ya no requiere Rust, Anchor, ni Solana CLI. Todo el backend blockchain se maneja a través de clientes TypeScript que interactúan con programas de Solana desplegados externamente.
 
 ## 📋 Prerrequisitos
 
@@ -13,30 +17,7 @@ Esta guía te ayudará a configurar PokeBattle desde cero en tu entorno de desar
    npm --version
    ```
 
-2. **Rust 1.70+**
-   ```bash
-   # Instalar Rust
-   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-   source ~/.cargo/env
-   rustc --version
-   ```
-
-3. **Solana CLI**
-   ```bash
-   # Instalar Solana CLI
-   sh -c "$(curl -sSfL https://release.solana.com/v1.17.0/install)"
-   export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
-   solana --version
-   ```
-
-4. **Anchor CLI**
-   ```bash
-   # Instalar Anchor
-   npm install -g @coral-xyz/anchor-cli
-   anchor --version
-   ```
-
-5. **Supabase CLI**
+2. **Supabase CLI** (opcional, para desarrollo local)
    ```bash
    # Instalar Supabase CLI
    npm install -g supabase
@@ -48,6 +29,7 @@ Esta guía te ayudará a configurar PokeBattle desde cero en tu entorno de desar
 1. **Privy Account**: [https://privy.io](https://privy.io)
 2. **Supabase Account**: [https://supabase.com](https://supabase.com)
 3. **Solana Wallet**: Phantom, Solflare, o similar
+4. **Programas de Solana**: Direcciones de programas desplegados (PVP, VRF, Bridge)
 
 ## 🚀 Configuración Paso a Paso
 
@@ -55,16 +37,11 @@ Esta guía te ayudará a configurar PokeBattle desde cero en tu entorno de desar
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/tu-usuario/pokebattle.git
-cd pokebattle
+git clone https://github.com/tu-usuario/pokedotduel.git
+cd pokedotduel
 
 # Instalar dependencias
 npm install
-
-# Instalar dependencias de Anchor
-cd programs/solana
-anchor build
-cd ../..
 ```
 
 ### 2. Configurar Supabase
@@ -97,6 +74,15 @@ Crea un archivo `.env.local` en la raíz del proyecto:
 NEXT_PUBLIC_SUPABASE_URL=https://tu-proyecto.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key
 SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
+
+# Solana Configuration
+NEXT_PUBLIC_SOLANA_CLUSTER=devnet
+NEXT_PUBLIC_RPC_URL=https://api.devnet.solana.com
+
+# Program IDs (Actualizar con direcciones reales de programas desplegados)
+NEXT_PUBLIC_PVP_ESCROW_PROGRAM_ID=tu_pvp_escrow_program_id
+NEXT_PUBLIC_PACKS_VRF_PROGRAM_ID=tu_packs_vrf_program_id
+NEXT_PUBLIC_BRIDGE_PROGRAM_ID=tu_bridge_program_id
 ```
 
 ### 3. Configurar Privy
@@ -116,61 +102,31 @@ NEXT_PUBLIC_PRIVY_APP_ID=tu_privy_app_id
 PRIVY_APP_SECRET=tu_privy_app_secret
 ```
 
-### 4. Configurar Solana
+### 4. Configurar Programas de Solana (Externos)
 
-#### Configurar Wallet
+#### Obtener Direcciones de Programas
 
-```bash
-# Crear nueva wallet (si no tienes)
-solana-keygen new --outfile ~/.config/solana/id.json
+Los programas de Solana deben estar desplegados externamente. Necesitas las direcciones de:
 
-# Configurar para devnet
-solana config set --url devnet
+1. **PVP Escrow Program**: Programa para gestionar apuestas en batallas
+2. **Packs VRF Program**: Programa para booster packs con VRF
+3. **PokéCoins Bridge**: Programa para puente SOL ↔ PokéCoins
 
-# Verificar configuración
-solana config get
+#### Opciones para Obtener Programas:
 
-# Obtener SOL de prueba
-solana airdrop 2
-```
+1. **Desplegar tus propios programas** usando Anchor
+2. **Usar programas ya desplegados** (si tienes acceso)
+3. **Programas de ejemplo** para desarrollo
 
-#### Configurar Variables de Entorno
+#### Actualizar Variables de Entorno
+
+Una vez que tengas las direcciones, actualízalas en `.env.local`:
 
 ```env
-# Solana
-NEXT_PUBLIC_SOLANA_CLUSTER=devnet
-NEXT_PUBLIC_RPC_URL=https://api.devnet.solana.com
+NEXT_PUBLIC_PVP_ESCROW_PROGRAM_ID=Ej7WjQt1w9BkMzWz8QX7pJzKQKQwbvL9W5TJG6X5c4N
+NEXT_PUBLIC_PACKS_VRF_PROGRAM_ID=ABC123...
+NEXT_PUBLIC_BRIDGE_PROGRAM_ID=DEF456...
 ```
-
-### 5. Desplegar Programas Anchor
-
-#### Configurar Anchor.toml
-
-Edita `Anchor.toml` con tu wallet:
-
-```toml
-[provider]
-cluster = "Devnet"
-wallet = "~/.config/solana/id.json"
-```
-
-#### Desplegar Programas
-
-```bash
-# Construir programas
-anchor build
-
-# Desplegar a devnet
-anchor deploy --provider.cluster devnet
-
-# Anotar los Program IDs generados
-```
-
-#### Actualizar Program IDs
-
-Actualiza los Program IDs en:
-- `apps/web/src/lib/solana.ts`
-- `programs/solana/*/src/lib.rs`
 
 ### 6. Configurar WebSocket Server
 
@@ -222,14 +178,14 @@ npm run test
 1. El servidor WebSocket debería estar corriendo en puerto 3001
 2. Verifica en `http://localhost:3001/health`
 
-### 3. Verificar Programas Solana
+### 3. Verificar Clientes TypeScript
 
 ```bash
-# Ejecutar tests
-anchor test
+# Ejecutar tests del cliente TypeScript
+npm test
 
-# Verificar deployment
-solana program show <PROGRAM_ID>
+# Verificar conexión con programas
+npm run test:integration
 ```
 
 ### 4. Verificar Base de Datos
@@ -245,14 +201,13 @@ solana program show <PROGRAM_ID>
 #### Error de Conexión a Solana
 
 ```bash
-# Verificar configuración
-solana config get
+# Verificar configuración en .env.local
+cat .env.local | grep SOLANA
 
-# Verificar balance
-solana balance
+# Verificar conexión RPC
+curl $(grep NEXT_PUBLIC_RPC_URL .env.local | cut -d'=' -f2)/health
 
-# Obtener más SOL de prueba
-solana airdrop 2
+# Verificar wallet conectada en la aplicación
 ```
 
 #### Error de Supabase
@@ -284,11 +239,14 @@ supabase start
 # Logs de Supabase
 supabase logs
 
-# Logs de Solana
-solana logs
-
 # Logs de Next.js
 npm run dev 2>&1 | tee logs/nextjs.log
+
+# Logs del cliente TypeScript
+npm run dev:debug
+
+# Verificar conexión con programas Solana
+npm run test:connection
 ```
 
 ## 📚 Recursos Adicionales
@@ -298,8 +256,9 @@ npm run dev 2>&1 | tee logs/nextjs.log
 - [Next.js 14 Docs](https://nextjs.org/docs)
 - [Supabase Docs](https://supabase.com/docs)
 - [Privy Docs](https://docs.privy.io)
-- [Anchor Docs](https://www.anchor-lang.com/docs)
+- [Solana Web3.js Docs](https://solana-labs.github.io/solana-web3.js/)
 - [Solana Docs](https://docs.solana.com)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 
 ### Comunidad
 

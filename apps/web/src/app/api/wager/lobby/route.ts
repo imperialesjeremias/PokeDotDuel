@@ -152,9 +152,9 @@ export async function GET(request: NextRequest) {
         wagerLamports: lobby.wager_lamports,
         status: lobby.status,
         bracket: {
-          name: lobby.wager_brackets.name,
-          minLamports: lobby.wager_brackets.min_lamports,
-          maxLamports: lobby.wager_brackets.max_lamports,
+          name: lobby.wager_brackets?.[0]?.name || 'Unknown',
+          minLamports: lobby.wager_brackets?.[0]?.min_lamports || 0,
+          maxLamports: lobby.wager_brackets?.[0]?.max_lamports || 0,
         },
         createdAt: lobby.created_at,
       })),

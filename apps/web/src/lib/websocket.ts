@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import { ClientMessage, ServerMessage } from '@pokebattle/shared';
+import { ClientMessage, ServerMessage } from '../types/shared';
 
 class WebSocketManager {
   private socket: Socket | null = null;

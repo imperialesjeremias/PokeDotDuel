@@ -1,6 +1,10 @@
-# PokeBattle - Criptojuego PvP con Apuestas en SOL
+# PokeDotDuel - Criptojuego PvP con Apuestas en SOL
 
-PokeBattle es un criptojuego PvP permite a los jugadores combatir por turnos con apuestas reales en SOL. Los jugadores pueden coleccionar cartas, construir equipos, comprar booster packs y participar en un marketplace descentralizado.
+PokeDotDuel es un criptojuego PvP que permite a los jugadores combatir por turnos con apuestas reales en SOL. Los jugadores pueden coleccionar cartas, construir equipos, comprar booster packs y participar en un marketplace descentralizado.
+
+## ⚠️ **IMPORTANTE**: Proyecto 100% TypeScript
+
+Este proyecto ha sido completamente migrado a **TypeScript**. Ya no contiene código Rust ni programas de Solana compilados. Todo el backend blockchain ahora se maneja a través de clientes TypeScript que interactúan con programas de Solana desplegados externamente.
 
 ## 🎮 Características Principales
 
@@ -20,7 +24,7 @@ PokeBattle es un criptojuego PvP permite a los jugadores combatir por turnos con
 - **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS, shadcn/ui
 - **Backend**: API Routes de Next.js, Edge Functions
 - **Base de Datos**: Supabase (PostgreSQL + RLS + Realtime)
-- **Blockchain**: Solana (programas con Anchor)
+- **Blockchain**: Solana (clientes TypeScript para programas externos)
 - **Autenticación**: Privy (wallets + social login)
 - **Tiempo Real**: WebSockets (Socket.IO)
 - **Estado**: Zustand/Jotai + React Query
@@ -28,32 +32,46 @@ PokeBattle es un criptojuego PvP permite a los jugadores combatir por turnos con
 ### Estructura del Proyecto
 
 ```
-PokeBattle/
+PokeDotDuel/
 ├── apps/
-│   ├── web/                 # Frontend Next.js
+│   ├── web/                 # Frontend Next.js + Clientes TypeScript
+│   │   ├── src/lib/         # Clientes blockchain (PVP, VRF, Bridge)
+│   │   ├── src/hooks/       # Hooks de React para blockchain
+│   │   └── src/types/       # Tipos TypeScript
 │   └── websocket-server/    # Servidor WebSocket
 ├── packages/
 │   └── shared/             # Tipos y utilidades compartidas
-├── programs/
-│   └── solana/             # Programas Anchor
-│       ├── pvp_escrow/     # Escrow para apuestas PvP
-│       ├── packs_vrf/      # Booster packs con VRF
-│       └── pokecoins_bridge/ # Bridge SOL ↔ PokéCoins
 ├── supabase/
 │   ├── migrations/         # Migraciones de base de datos
 │   └── config.toml         # Configuración de Supabase
-└── tests/                  # Tests de programas Solana
+└── tests/                  # Tests TypeScript
 ```
+
+## ⚡ Inicio Rápido
+
+```bash
+# 1. Configurar proyecto
+npm run setup
+
+# 2. Verificar implementación
+npm run verify
+
+# 3. Iniciar todo
+npm run start
+```
+
+**Acceder:** http://localhost:3000
+
+---
 
 ## 🚀 Instalación y Configuración
 
 ### Prerrequisitos
 
 - Node.js 18+
-- Rust 1.70+
-- Solana CLI
-- Anchor CLI
-- Supabase CLI
+- npm o yarn
+- Supabase CLI (opcional, para desarrollo local)
+- Wallet de Solana (Phantom, Solflare, etc.)
 
 ### 1. Clonar el Repositorio
 
@@ -76,6 +94,11 @@ Crea un archivo `.env.local` en la raíz del proyecto:
 # Solana
 NEXT_PUBLIC_SOLANA_CLUSTER=devnet
 NEXT_PUBLIC_RPC_URL=https://api.devnet.solana.com
+
+# Program IDs (Actualizar con direcciones reales de programas desplegados)
+NEXT_PUBLIC_PVP_ESCROW_PROGRAM_ID=tu_pvp_escrow_program_id
+NEXT_PUBLIC_PACKS_VRF_PROGRAM_ID=tu_packs_vrf_program_id
+NEXT_PUBLIC_BRIDGE_PROGRAM_ID=tu_bridge_program_id
 
 # Privy
 NEXT_PUBLIC_PRIVY_APP_ID=tu_privy_app_id
@@ -110,38 +133,33 @@ supabase db reset
 supabase start
 ```
 
-### 5. Configurar Solana
+### 5. Ejecutar el Proyecto
 
+#### Inicio Completo (Recomendado)
 ```bash
-# Configurar Solana CLI
-solana config set --url devnet
-
-# Crear wallet (si no tienes)
-solana-keygen new --outfile ~/.config/solana/id.json
-
-# Obtener SOL de prueba
-solana airdrop 2
+# Inicia frontend + websocket simultáneamente
+npm run start
+# o
+turbo run start
 ```
 
-### 6. Desplegar Programas Anchor
-
+#### Desarrollo Individual
 ```bash
-# Construir programas
-anchor build
-
-# Desplegar a devnet
-anchor deploy --provider.cluster devnet
-```
-
-### 7. Ejecutar el Proyecto
-
-```bash
-# Desarrollo
+# Desarrollo completo (Frontend + WebSocket)
 npm run dev
 
-# O ejecutar servicios individualmente
-npm run dev:web          # Frontend
+# Servicios individuales
+npm run dev:web          # Frontend Next.js
 npm run dev:websocket    # Servidor WebSocket
+```
+
+#### Comandos Útiles
+```bash
+npm run setup           # Configurar variables de entorno
+npm run verify          # Verificar implementación
+npm run test            # Ejecutar tests
+npm run build           # Construir para producción
+npm run lint            # Ejecutar linter
 ```
 
 ## 🎯 Funcionalidades Detalladas
@@ -212,15 +230,17 @@ npm run dev:websocket    # Servidor WebSocket
 
 ## 🧪 Testing
 
-### Tests de Programas Solana
+### Tests TypeScript
 
 ```bash
-# Ejecutar tests de Anchor
-anchor test
+# Ejecutar tests del cliente TypeScript
+npm test
 
-# Tests específicos
-npm run test:pvp-escrow
-npm run test:packs-vrf
+# Tests con watch mode
+npm run test:watch
+
+# Tests de integración
+npm run test:integration
 ```
 
 ### Tests E2E
@@ -296,15 +316,9 @@ railway init
 railway up
 ```
 
-### Programas Solana (Mainnet)
+### Programas Solana (Externos)
 
-```bash
-# Configurar mainnet
-solana config set --url mainnet-beta
-
-# Desplegar programas
-anchor deploy --provider.cluster mainnet-beta
-```
+Los programas de Solana deben desplegarse por separado usando Anchor o herramientas similares. Una vez desplegados, actualiza las variables de entorno con las direcciones reales de los programas.
 
 ### Base de Datos (Supabase)
 

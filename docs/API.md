@@ -1,6 +1,14 @@
-# API Documentation - PokeBattle
+# API Documentation - PokeDotDuel
 
-Esta documentación describe todas las APIs disponibles en PokeBattle.
+Esta documentación describe todas las APIs disponibles en PokeDotDuel, incluyendo:
+
+- **APIs REST tradicionales** (Next.js API Routes)
+- **Clientes TypeScript para Solana** (funciones blockchain)
+- **WebSocket APIs** (tiempo real)
+
+## ⚠️ **IMPORTANTE**: APIs Actualizadas
+
+El proyecto ha sido migrado completamente a **TypeScript**. Las APIs blockchain ahora se manejan a través de clientes TypeScript que interactúan con programas de Solana externos, en lugar de APIs REST tradicionales.
 
 ## 🔐 Autenticación
 
@@ -10,7 +18,97 @@ Todas las APIs (excepto las públicas) requieren autenticación mediante JWT en 
 Authorization: Bearer <jwt_token>
 ```
 
-## 📋 Endpoints
+## 🔗 APIs de Clientes TypeScript
+
+### Configuración Inicial
+
+```typescript
+import { usePVP, useVRF, useBridge } from '../hooks';
+
+// En tu componente
+const pvp = usePVP();
+const vrf = useVRF();
+const bridge = useBridge();
+```
+
+### PVP Escrow Client
+
+#### `createLobby(lobbyData, feeVault)`
+Crear un nuevo lobby para batalla PvP.
+
+**Parámetros**:
+```typescript
+lobbyData: {
+  lobbyId: string;
+  wagerLamports: number;
+}
+feeVault: string; // Dirección del vault de fees
+```
+
+**Retorno**: `Promise<string>` - Firma de transacción
+
+#### `joinLobby(lobbyId)`
+Unirse a un lobby existente.
+
+**Parámetros**:
+```typescript
+lobbyId: string;
+```
+
+**Retorno**: `Promise<string>` - Firma de transacción
+
+#### `getLobby(lobbyId)`
+Obtener información de un lobby.
+
+**Parámetros**:
+```typescript
+lobbyId: string;
+```
+
+**Retorno**: `Promise<Lobby | null>`
+
+### VRF Client
+
+#### `buyPack(packData)`
+Comprar un booster pack.
+
+**Parámetros**:
+```typescript
+packData: {
+  packId: string;
+}
+```
+
+**Retorno**: `Promise<string>` - Firma de transacción
+
+#### `requestVrf(packId, vrfAccount, permissionAccount, switchboardState)`
+Solicitar VRF para abrir un pack.
+
+**Parámetros**:
+```typescript
+packId: string;
+vrfAccount: string;
+permissionAccount: string;
+switchboardState: string;
+```
+
+**Retorno**: `Promise<string>` - Firma de transacción
+
+### Bridge Client
+
+#### `depositSol(data)`
+Depositar SOL para recibir PokéCoins.
+
+**Parámetros**:
+```typescript
+data: {
+  amount: number; // En lamports
+}
+```
+
+**Retorno**: `Promise<string>` - Firma de transacción
+
+## 📋 Endpoints REST
 
 ### Autenticación
 

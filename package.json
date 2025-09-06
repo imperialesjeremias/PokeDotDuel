@@ -2,16 +2,16 @@
   "name": "pokebattle",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "test": "turbo run test",
-    "clean": "turbo run clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "dev": "node start-project.js",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "cd apps/backend && npm run build",
+    "build:frontend": "cd apps/web && npm run build",
+    "start": "node start-project.js",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "setup": "node setup-env.js",
+    "verify": "node verify-implementation.js"
   },
   "devDependencies": {
-    "@turbo/gen": "^1.10.12",
-    "turbo": "latest",
     "prettier": "^3.0.0",
     "typescript": "^5.0.0"
   },

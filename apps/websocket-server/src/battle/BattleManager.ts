@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '../../lib/supabase';
-import { BattleEvent } from '@pokebattle/shared';
+import { BattleEvent, calculateTypeEffectiveness } from '@pokebattle/shared';
+import { BattleEngine, BattlePokemon, BattleTeam } from './BattleEngine';
 
 export interface Battle {
   id: string;
@@ -87,23 +88,34 @@ export class BattleManager {
     // Validate player turn
     const isPlayerATurn = battle.turn % 2 === 0;
     const expectedPlayer = isPlayerATurn ? battle.playerA : battle.playerB;
-    
+
     if (playerId !== expectedPlayer) {
       throw new Error('Not your turn');
     }
 
-    // Process the turn (simplified battle logic)
-    const events = await this.processBattleTurn(battle, move);
-    
+    // Get team data from database (simplified for now)
+    const teamA = await this.getTeamData(battle.teamA);
+    const teamB = await this.getTeamData(battle.teamB);
+
+    // Create battle engine instance
+    const battleEngine = new BattleEngine(teamA, teamB);
+
+    // Process the turn using the battle engine
+    const moveA = isPlayerATurn ? move : { slot: 0, moveId: 'struggle' }; // Default move
+    const moveB = !isPlayerATurn ? move : { slot: 0, moveId: 'struggle' }; // Default move
+
+    const events = battleEngine.processTurn(moveA, moveB);
+
     battle.turn = turn;
     battle.transcript.push(...events);
 
-    // Check for battle end conditions
-    const battleEnded = this.checkBattleEnd(battle, events);
-    
+    // Check for battle end
+    const winner = battleEngine.getWinner();
+    const battleEnded = winner !== null;
+
     if (battleEnded) {
       battle.status = 'ENDED';
-      battle.winner = this.determineWinner(battle);
+      battle.winner = winner === 'A' ? battle.playerA : battle.playerB;
       battle.reason = 'KO';
 
       // Update database
@@ -185,44 +197,49 @@ export class BattleManager {
     return this.battles.get(battleId);
   }
 
-  private generateSeed(): string {
-    return Math.random().toString(36).substring(2, 15) + 
-           Math.random().toString(36).substring(2, 15);
-  }
+  private async getTeamData(teamId: string): Promise<BattleTeam> {
+    // Get team from database
+    const { data: team } = await supabase
+      .from('teams')
+      .select(`
+        *,
+        team_cards (
+          position,
+          cards (*)
+        )
+      `)
+      .eq('id', teamId)
+      .single();
 
-  private async processBattleTurn(battle: Battle, move: any): Promise<BattleEvent[]> {
-    const events: BattleEvent[] = [];
-    
-    // Simplified battle logic - in a real implementation, this would be much more complex
-    // involving type effectiveness, damage calculation, status effects, etc.
-    
-    if (move.action === 'MOVE') {
-      // Calculate damage (simplified)
-      const damage = Math.floor(Math.random() * 50) + 10;
-      
-      events.push({
-        type: 'DAMAGE',
-        target: move.target || 0,
-        value: damage,
-        move: move.moveId,
-      });
-    } else if (move.action === 'SWITCH') {
-      events.push({
-        type: 'SWITCH',
-        target: move.target || 0,
-      });
+    if (!team) throw new Error('Team not found');
+
+    // Convert to BattleTeam format
+    const pokemon: BattlePokemon[] = [];
+
+    for (const teamCard of team.team_cards || []) {
+      const card = teamCard.cards;
+      if (card) {
+        pokemon[teamCard.position] = {
+          id: card.id,
+          dexNumber: card.dex_number,
+          name: card.name,
+          level: card.level,
+          types: card.types,
+          stats: card.stats,
+          currentHp: card.stats.hp, // Full HP at start
+          moves: [], // Would need to get moves from database
+        };
+      }
     }
 
-    return events;
+    return {
+      pokemon,
+      activeIndex: 0,
+    };
   }
 
-  private checkBattleEnd(battle: Battle, events: BattleEvent[]): boolean {
-    // Simplified end condition - in reality, this would check HP, status effects, etc.
-    return events.some(event => event.type === 'DAMAGE' && event.value && event.value > 100);
-  }
-
-  private determineWinner(battle: Battle): string {
-    // Simplified winner determination
-    return battle.turn % 2 === 0 ? battle.playerB : battle.playerA;
+  private generateSeed(): string {
+    return Math.random().toString(36).substring(2, 15) +
+           Math.random().toString(36).substring(2, 15);
   }
 }
