@@ -15,8 +15,13 @@ La aplicación consta de los siguientes servicios:
 - **Frontend** (Next.js): Interfaz de usuario en `http://localhost:3000`
 - **Backend** (NestJS): API REST y WebSockets en `http://localhost:3001`
 - **PostgreSQL**: Base de datos principal
-- **Supabase**: Servicios adicionales (Studio en `http://localhost:54323`)
+- **pgAdmin**: Interfaz web para gestión de BD en `http://localhost:5050`
 - **Redis**: Cache opcional
+
+### 🔧 Configuraciones Disponibles
+
+1. **`docker-compose.yml`**: Configuración completa (requiere configuración adicional)
+2. **`docker-compose.simple.yml`**: Configuración simplificada (recomendada para empezar)
 
 ## 🚀 Inicio Rápido
 
@@ -35,23 +40,31 @@ cp docker-env-example.txt .env
 # nano .env  # o tu editor favorito
 ```
 
-### 3. Iniciar los servicios
+### 3. Probar la configuración de Docker
 ```bash
-# Usando el script de desarrollo (Linux/Mac)
-./scripts/dev.sh start
-
-# O usando el script de PowerShell (Windows)
-.\scripts\dev.ps1 start
-
-# O directamente con docker-compose
-docker-compose up --build -d
+# Ejecutar el script de prueba
+./scripts/test-docker.sh
 ```
 
-### 4. Acceder a la aplicación
+### 4. Iniciar los servicios (Configuración Simplificada)
+```bash
+# Usando docker-compose simple (recomendado)
+docker-compose -f docker-compose.simple.yml up --build -d
+
+# O usando el script de desarrollo
+./scripts/dev.sh start
+
+# O usando PowerShell (Windows)
+.\scripts\dev.ps1 start
+```
+
+### 5. Acceder a la aplicación
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:3001
-- **Supabase Studio**: http://localhost:54323
-- **Email testing**: http://localhost:54324
+- **pgAdmin**: http://localhost:5050
+  - Usuario: admin@pokedotduel.com
+  - Contraseña: admin123
+- **Base de datos**: localhost:5432
 
 ## 🛠️ Comandos de Desarrollo
 

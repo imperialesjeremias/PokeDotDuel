@@ -1,3 +1,4 @@
+version: '3.8'
 
 services:
   # PostgreSQL Database
@@ -21,12 +22,7 @@ services:
     networks:
       - pokedotduel
 
-  # Supabase CLI Local Development (requiere Supabase CLI instalado)
-  # Para usar Supabase local, instala el CLI: npm install -g supabase
-  # Luego ejecuta: supabase start
-  # Esto iniciará Supabase en puertos estándar
-
-  # Alternativa: Usar pgAdmin para gestión de BD
+  # pgAdmin for database management
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pokedotduel-pgadmin
@@ -53,8 +49,8 @@ services:
       - CORS_ORIGIN=http://localhost:3000
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/pokedotduel
       - SUPABASE_URL=http://localhost:54321
-      - SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
-      - SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU
+      - SUPABASE_ANON_KEY=demo-key-for-development
+      - SUPABASE_SERVICE_ROLE_KEY=demo-service-key-for-development
     ports:
       - "3001:3001"
     volumes:
@@ -63,8 +59,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      supabase:
-        condition: service_started
     networks:
       - pokedotduel
     command: npm run start:dev
@@ -81,7 +75,7 @@ services:
       - NEXT_PUBLIC_WS_URL=http://localhost:3001
       - NEXT_PUBLIC_FRONTEND_URL=http://localhost:3000
       - NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321
-      - NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=demo-key-for-development
     ports:
       - "3000:3000"
     volumes:
@@ -107,7 +101,6 @@ services:
 
 volumes:
   postgres_data:
-  supabase_data:
   redis_data:
 
 networks:

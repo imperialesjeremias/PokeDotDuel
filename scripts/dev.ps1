@@ -92,16 +92,20 @@ NODE_ENV=development
 
 # Build and start services
 function Start-Services {
-    Write-Info "Building and starting services..."
-    docker-compose up --build -d
+    Write-Info "Building and starting services (using simple configuration)..."
+    docker-compose -f docker-compose.simple.yml up --build -d
 
     if ($LASTEXITCODE -eq 0) {
         Write-Success "Services started successfully!"
         Write-Info "Access your application at:"
         Write-Host "  🌐 Frontend: http://localhost:3000" -ForegroundColor $GREEN
         Write-Host "  🚀 Backend API: http://localhost:3001" -ForegroundColor $GREEN
-        Write-Host "  🗄️  Supabase Studio: http://localhost:54323" -ForegroundColor $GREEN
-        Write-Host "  📧 Email testing: http://localhost:54324" -ForegroundColor $GREEN
+        Write-Host "  🗄️  pgAdmin: http://localhost:5050" -ForegroundColor $GREEN
+        Write-Host "  🐘 PostgreSQL: localhost:5432" -ForegroundColor $GREEN
+        Write-Info ""
+        Write-Info "pgAdmin credentials:"
+        Write-Info "  Email: admin@pokedotduel.com"
+        Write-Info "  Password: admin123"
     }
     else {
         Write-Error "Failed to start services"
@@ -111,7 +115,7 @@ function Start-Services {
 # Show service status
 function Show-Status {
     Write-Info "Service Status:"
-    docker-compose ps
+    docker-compose -f docker-compose.simple.yml ps
 }
 
 # Show logs

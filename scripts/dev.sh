@@ -82,32 +82,46 @@ EOF
 
 # Build and start services
 start_services() {
-    print_info "Building and starting services..."
-    docker-compose up --build -d
-    print_success "Services started successfully!"
+    print_info "Building and starting services (using simple configuration)..."
+    docker-compose -f docker-compose.simple.yml up --build -d
+
+    if [ $? -eq 0 ]; then
+        print_success "Services started successfully!"
+        print_info "Access your application at:"
+        print_success "  🌐 Frontend: http://localhost:3000"
+        print_success "  🚀 Backend API: http://localhost:3001"
+        print_success "  🗄️  pgAdmin: http://localhost:5050"
+        print_success "  🐘 PostgreSQL: localhost:5432"
+        print_info ""
+        print_info "pgAdmin credentials:"
+        print_info "  Email: admin@pokedotduel.com"
+        print_info "  Password: admin123"
+    else
+        print_error "Failed to start services"
+    fi
 }
 
 # Show service status
 show_status() {
     print_info "Service Status:"
-    docker-compose ps
+    docker-compose -f docker-compose.simple.yml ps
 }
 
 # Show logs
 show_logs() {
     if [ -z "$2" ]; then
         print_info "Showing logs for all services (press Ctrl+C to exit):"
-        docker-compose logs -f
+        docker-compose -f docker-compose.simple.yml logs -f
     else
         print_info "Showing logs for $2 (press Ctrl+C to exit):"
-        docker-compose logs -f $2
+        docker-compose -f docker-compose.simple.yml logs -f $2
     fi
 }
 
 # Stop services
 stop_services() {
     print_info "Stopping services..."
-    docker-compose down
+    docker-compose -f docker-compose.simple.yml down
     print_success "Services stopped"
 }
 
@@ -118,7 +132,7 @@ cleanup() {
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         print_info "Cleaning up..."
-        docker-compose down -v --rmi all
+        docker-compose -f docker-compose.simple.yml down -v --rmi all
         print_success "Cleanup completed"
     fi
 }
