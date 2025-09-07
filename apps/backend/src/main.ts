@@ -12,8 +12,15 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // Enable validation pipes
-  app.useGlobalPipes(new ValidationPipe());
+  // Enable global validation pipes with enhanced configuration
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true,
+  }));
+
+  // Set global prefix for API routes
+  app.setGlobalPrefix('api');
 
   // Health check endpoint
   app.getHttpAdapter().get('/health', (req, res) => {
@@ -22,7 +29,8 @@ async function bootstrap() {
 
   const port = process.env.PORT ?? 3001;
   await app.listen(port);
-  console.log(`NestJS server running on port ${port}`);
-  console.log(`Health check available at http://localhost:${port}/health`);
+  console.log(`🚀 PokeDotDuel Backend running on: http://localhost:${port}`);
+  console.log(`📚 API Documentation available at: http://localhost:${port}/api`);
+  console.log(`💚 Health check available at http://localhost:${port}/health`);
 }
 bootstrap();

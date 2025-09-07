@@ -1,0 +1,67 @@
+# =================================================================
+# PokeDotDuel Docker Environment Configuration
+# Copy this file to .env and fill in your values
+# =================================================================
+
+# =================================================================
+# DATABASE CONFIGURATION
+# =================================================================
+# PostgreSQL Database
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+DATABASE_URL=postgresql://postgres:5432/pokedotduel
+
+# =================================================================
+# SUPABASE CONFIGURATION
+# =================================================================
+# Supabase URLs (for local development)
+SUPABASE_URL=http://supabase:54321
+SUPABASE_ANON_KEY=your-anon-key-here
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key-here
+
+# =================================================================
+# JWT CONFIGURATION
+# =================================================================
+JWT_SECRET=super-secret-jwt-token-with-at-least-32-characters-long
+
+# =================================================================
+# FRONTEND CONFIGURATION
+# =================================================================
+NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_WS_URL=http://localhost:3001
+NEXT_PUBLIC_FRONTEND_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+
+# =================================================================
+# BACKEND CONFIGURATION
+# =================================================================
+PORT=3001
+CORS_ORIGIN=http://localhost:3000
+NODE_ENV=development
+
+# =================================================================
+# PRODUCTION CONFIGURATION
+# =================================================================
+# Uncomment and fill these for production deployment
+# API_URL=https://api.pokedotduel.com
+# WS_URL=wss://api.pokedotduel.com
+# FRONTEND_URL=https://pokedotduel.com
+# SUPABASE_URL=https://your-project.supabase.co
+# SUPABASE_ANON_KEY=your-production-anon-key
+# SUPABASE_SERVICE_ROLE_KEY=your-production-service-role-key
+
+# =================================================================
+# OPTIONAL SERVICES
+# =================================================================
+# Redis URL (optional)
+# REDIS_URL=redis://redis:6379
+
+# =================================================================
+# DEVELOPMENT SETTINGS
+# =================================================================
+# Enable debug logging
+# DEBUG=true
+
+# Enable development tools
+# DEV_TOOLS=true

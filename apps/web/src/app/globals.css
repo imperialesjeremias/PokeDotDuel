@@ -1,11 +1,20 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: #ffffff;
+    --foreground: #171717;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
@@ -27,8 +36,8 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: #0a0a0a;
+    --foreground: #ededed;
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
@@ -54,7 +63,9 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
   }
 }
 
@@ -127,11 +138,19 @@
 
 /* Lobby styles */
 .lobby-card {
-  @apply bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow;
+  @apply bg-gray-800 border border-gray-700 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow;
+}
+
+.dark .lobby-card {
+  @apply bg-gray-800 border-gray-700;
 }
 
 .lobby-card.active {
-  @apply border-blue-400 bg-blue-50;
+  @apply border-blue-400 bg-blue-900;
+}
+
+.dark .lobby-card.active {
+  @apply bg-blue-900;
 }
 
 /* Marketplace styles */

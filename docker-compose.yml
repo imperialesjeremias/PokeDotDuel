@@ -1,0 +1,117 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: pokedotduel-postgres
+    environment:
+      POSTGRES_DB: pokedotduel
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./supabase/migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d pokedotduel"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - pokedotduel
+
+  # Supabase Local Development
+  supabase:
+    image: supabase/supabase:latest
+    container_name: pokedotduel-supabase
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - JWT_SECRET=super-secret-jwt-token-with-at-least-32-characters-long
+    ports:
+      - "54321:54321"  # API
+      - "54322:54322"  # DB
+      - "54323:54323"  # Studio
+      - "54324:54324"  # Inbucket (email)
+    volumes:
+      - ./supabase:/etc/supabase
+      - supabase_data:/var/lib/supabase
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - pokedotduel
+
+  # Backend API (Development)
+  backend:
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile.dev
+    container_name: pokedotduel-backend
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - CORS_ORIGIN=http://localhost:3000
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/pokedotduel
+      - SUPABASE_URL=http://supabase:54321
+      - SUPABASE_ANON_KEY=your-anon-key
+      - SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./apps/backend:/app
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      supabase:
+        condition: service_started
+    networks:
+      - pokedotduel
+    command: npm run start:dev
+
+  # Frontend (Development)
+  frontend:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile.dev
+    container_name: pokedotduel-frontend
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+      - NEXT_PUBLIC_WS_URL=http://localhost:3001
+      - NEXT_PUBLIC_FRONTEND_URL=http://localhost:3000
+      - NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+    networks:
+      - pokedotduel
+    command: npm run dev
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: pokedotduel-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - pokedotduel
+
+volumes:
+  postgres_data:
+  supabase_data:
+  redis_data:
+
+networks:
+  pokedotduel:
+    driver: bridge
