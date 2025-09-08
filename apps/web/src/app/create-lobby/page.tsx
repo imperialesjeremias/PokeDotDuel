@@ -136,7 +136,7 @@ export default function CreateLobbyPage() {
     <div className="min-h-screen bg-transparent">
       <Navigation />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Create Battle Lobby
@@ -244,14 +244,14 @@ export default function CreateLobbyPage() {
                 {/* Quick Amount Buttons */}
                 <div>
                   <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Quick amounts:</p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex gap-3">
                     {[0.1, 0.5, 1].map(amount => (
                       <Button
                         key={amount}
                         variant="outline"
                         size="sm"
                         onClick={() => setWagerAmount(amount)}
-                        className={`flex-1 min-w-0 text-xs px-2 py-1 ${wagerAmount === amount ? 'bg-blue-50 border-blue-300' : ''}`}
+                        className={`flex-1 px-4 py-2 ${wagerAmount === amount ? 'bg-blue-50 border-blue-300' : ''}`}
                       >
                         {amount} SOL
                       </Button>

@@ -175,7 +175,7 @@ export default function QuickMatchPage() {
     <div className="min-h-screen bg-transparent">
       <Navigation />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
             <Zap className="w-8 h-8 mr-3 text-yellow-500" />
@@ -247,7 +247,7 @@ export default function QuickMatchPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Bracket Selection */}
             <div className="flex">
-              <Card className="flex-1">
+              <Card className="flex-1 h-full">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Trophy className="w-5 h-5 mr-2" />
@@ -290,7 +290,7 @@ export default function QuickMatchPage() {
             </div>
 
             {/* Quick Match Configuration */}
-            <div>
+            <div className="space-y-6">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
@@ -344,14 +344,14 @@ export default function QuickMatchPage() {
                   {/* Quick Amount Buttons */}
                   <div>
                     <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Quick amounts:</p>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="flex gap-3">
                       {[selectedBracket.minWager, ((selectedBracket.maxWager - selectedBracket.minWager) / 2), selectedBracket.maxWager].map(amount => (
                         <Button
                           key={amount}
                           variant="outline"
                           size="sm"
                           onClick={() => setWagerAmount(amount)}
-                          className={wagerAmount === amount ? 'bg-blue-50 border-blue-300' : ''}
+                          className={`flex-1 px-4 py-2 ${wagerAmount === amount ? 'bg-blue-50 border-blue-300' : ''}`}
                         >
                           {amount} SOL
                         </Button>
