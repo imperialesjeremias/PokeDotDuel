@@ -130,8 +130,10 @@ export default function PacksPage() {
 
   if (!ready || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 to-red-600">
+        <div className="w-32 h-32 border-8 border-orange-800 bg-orange-400 animate-pulse flex items-center justify-center">
+          <div className="w-16 h-16 border-4 border-orange-900 animate-pixel-step"></div>
+        </div>
       </div>
     );
   }
@@ -161,7 +163,7 @@ export default function PacksPage() {
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="flex items-center">
-              <Gift className="w-5 h-5 mr-2 text-green-600" />
+              <Package className="w-5 h-5 mr-2 text-orange-600" />
               Comprar Booster Pack
             </CardTitle>
             <CardDescription>
@@ -185,7 +187,7 @@ export default function PacksPage() {
               <Button 
                 size="lg" 
                 onClick={buyPack}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white"
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Comprar Pack
@@ -226,10 +228,10 @@ export default function PacksPage() {
                             <Package className="w-16 h-16 text-white mx-auto mb-4" />
                             <h3 className="text-white font-bold text-lg mb-2">Booster Pack</h3>
                             <p className="text-white text-sm">5 Cartas</p>
-                            <div className="mt-4">
+                            <div className="mt-4 flex justify-center">
                               <Button 
                                 size="sm" 
-                                className="bg-white text-orange-600 hover:bg-gray-100"
+                                className="bg-white text-orange-600 hover:bg-gray-100 mx-auto"
                               >
                                 Abrir Pack
                               </Button>

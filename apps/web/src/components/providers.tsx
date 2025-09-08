@@ -15,8 +15,8 @@ export function Providers({ children }: ProvidersProps) {
       config={{
         appearance: {
           theme: 'light',
-          accentColor: '#3B82F6',
-          logo: '/logo.png',
+          accentColor: '#FF6B35',
+          logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI1MCIgZm9udC1mYW1pbHk9IidQcmVzcyBTdGFydCAyUCcsIG1vbm9zcGFjZSIgZm9udC1zaXplPSIyNCIgZmlsbD0iI0ZGNkIzNSIgZmlsdGVyPSJkcm9wLXNoYWRvdygyMnggMnB4IDAgIzk5MUIxQikiPlBPS0VEVUVMPC90ZXh0Pjwvc3ZnPg==',
         },
         loginMethods: ['wallet', 'email', 'google', 'twitter'],
         embeddedWallets: {

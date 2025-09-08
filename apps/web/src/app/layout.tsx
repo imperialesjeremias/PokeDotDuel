@@ -1,9 +1,15 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Press_Start_2P, Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const pixelFont = Press_Start_2P({ 
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-pixel',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'PokeBattle - Criptojuego PvP con Apuestas en SOL',
@@ -29,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
-      <body className={inter.className}>
+    <html lang="es" className={`${inter.variable} ${pixelFont.variable}`}>
+      <body className="font-sans">
         <Providers>
           {children}
         </Providers>

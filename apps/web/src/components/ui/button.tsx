@@ -5,25 +5,26 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap text-sm font-pixel ring-offset-background transition-transform focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "bg-orange-400 text-orange-900 border-4 border-orange-600 shadow-[4px_4px_0px_0px_theme('colors.orange.800')] hover:bg-orange-300 hover:-translate-y-1 hover:shadow-[4px_5px_0px_0px_theme('colors.orange.800')] active:translate-y-1 active:translate-x-1 active:shadow-[2px_2px_0px_0px_theme('colors.orange.800')]",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "bg-red-400 text-white border-4 border-red-600 shadow-[4px_4px_0px_0px_theme('colors.red.700')] hover:bg-red-500 hover:-translate-y-1 hover:shadow-[4px_5px_0px_0px_theme('colors.red.700')] active:translate-y-1 active:translate-x-1 active:shadow-[2px_2px_0px_0px_theme('colors.red.700')]",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border-4 border-orange-600 bg-orange-50 text-orange-900 shadow-[4px_4px_0px_0px_theme('colors.orange.800')] hover:bg-orange-100 hover:-translate-y-1 hover:shadow-[4px_5px_0px_0px_theme('colors.orange.800')] active:translate-y-1 active:translate-x-1 active:shadow-[2px_2px_0px_0px_theme('colors.orange.800')]",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-orange-600 text-orange-50 border-4 border-orange-800 shadow-[4px_4px_0px_0px_black] hover:bg-orange-500 hover:text-orange-900 hover:-translate-y-1 hover:shadow-[4px_5px_0px_0px_black] active:translate-y-1 active:translate-x-1 active:shadow-[2px_2px_0px_0px_black]",
+        ghost: "hover:bg-orange-100 hover:text-orange-900",
+        link: "text-orange-600 underline-offset-4 hover:underline",
+        pixel: "bg-orange-400 text-orange-900 border-4 border-orange-600 shadow-[4px_4px_0px_0px_theme('colors.orange.800')] hover:bg-orange-300 hover:-translate-y-1 hover:shadow-[4px_5px_0px_0px_theme('colors.orange.800')] active:translate-y-1 active:translate-x-1 active:shadow-[2px_2px_0px_0px_theme('colors.orange.800')]",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
+        default: "h-12 px-4 py-2",
+        sm: "h-10 px-3 py-1",
+        lg: "h-14 px-8 py-3",
+        icon: "h-12 w-12",
       },
     },
     defaultVariants: {

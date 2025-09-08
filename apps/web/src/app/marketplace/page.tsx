@@ -163,15 +163,28 @@ export default function MarketplacePage() {
 
   const getTypeColor = (type: string) => {
     const colors: Record<string, string> = {
-      'GRASS': 'bg-green-100 text-green-800',
-      'FIRE': 'bg-red-100 text-red-800',
-      'WATER': 'bg-blue-100 text-blue-800',
-      'ELECTRIC': 'bg-yellow-100 text-yellow-800',
-      'PSYCHIC': 'bg-purple-100 text-purple-800',
-      'NORMAL': 'bg-gray-100 text-gray-800',
-      'POISON': 'bg-purple-100 text-purple-800',
+      'GRASS': 'bg-green-500 text-white',
+      'FIRE': 'bg-red-500 text-white',
+      'WATER': 'bg-blue-500 text-white',
+      'ELECTRIC': 'bg-yellow-500 text-black',
+      'PSYCHIC': 'bg-purple-500 text-white',
+      'NORMAL': 'bg-gray-500 text-white',
+      'POISON': 'bg-purple-600 text-white',
     };
-    return colors[type] || 'bg-gray-100 text-gray-800';
+    return colors[type] || 'bg-gray-500 text-white';
+  };
+
+  const getTypeIcon = (type: string) => {
+    const icons: Record<string, string> = {
+      'GRASS': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/12.png',
+      'FIRE': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/10.png',
+      'WATER': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/11.png',
+      'ELECTRIC': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/13.png',
+      'PSYCHIC': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/14.png',
+      'NORMAL': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/1.png',
+      'POISON': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/4.png',
+    };
+    return icons[type] || 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/1.png';
   };
 
   const filteredListings = listings.filter(listing => {
@@ -185,8 +198,10 @@ export default function MarketplacePage() {
 
   if (!ready || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 to-red-600">
+        <div className="w-32 h-32 border-8 border-orange-800 bg-orange-400 animate-pulse flex items-center justify-center">
+          <div className="w-16 h-16 border-4 border-orange-900 animate-pixel-step"></div>
+        </div>
       </div>
     );
   }
@@ -285,32 +300,52 @@ export default function MarketplacePage() {
             <Card key={listing.id} className="hover:shadow-lg transition-shadow">
               <CardHeader className="pb-3">
                 <div className="relative">
-                  <div className="w-full h-32 bg-gradient-to-br from-white to-gray-100 rounded-lg border border-gray-200 p-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-semibold text-gray-900">
+                  <div className="w-full h-48 bg-gradient-to-br from-white to-gray-100 rounded-lg border border-gray-200 p-4 relative overflow-hidden">
+                    {/* Pokemon Sprite */}
+                       <div className="absolute top-8 right-2 w-16 h-16">
+                         <img 
+                           src={`https://play.pokemonshowdown.com/sprites/gen1/${listing.card.name.toLowerCase()}.png`}
+                           alt={listing.card.name}
+                           className="w-full h-full object-contain pixelated"
+                           style={{ imageRendering: 'pixelated' }}
+                         />
+                       </div>
+                    
+                    {/* Pokemon Name and Shiny */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-lg font-bold text-gray-900 font-pixel">
                         {listing.card.name}
                       </span>
                       {listing.card.isShiny && (
-                        <Star className="w-4 h-4 text-yellow-500" />
+                        <div className="flex items-center">
+                          <Star className="w-4 h-4 text-yellow-500 mr-1" />
+                          <span className="text-xs font-pixel text-yellow-600">SHINY</span>
+                        </div>
                       )}
                     </div>
-                    <div className="flex flex-wrap gap-1 mb-2">
-                      {listing.card.types.map(type => (
-                        <Badge
-                          key={type}
-                          className={`text-xs ${getTypeColor(type)}`}
-                        >
-                          {type}
-                        </Badge>
-                      ))}
-                    </div>
+                    
+                    {/* Type Text Only */}
+                       <div className="flex flex-wrap gap-1 mb-3 mt-2">
+                         {listing.card.types.map(type => (
+                           <span
+                             key={type}
+                             className={`text-xs font-pixel px-2 py-1 rounded ${getTypeColor(type)}`}
+                           >
+                             {type}
+                           </span>
+                         ))}
+                       </div>
+                    
+                    {/* Rarity and Level */}
                     <div className="flex items-center justify-between">
-                      <Badge className={`text-xs ${getRarityColor(listing.card.rarity)}`}>
+                      <Badge className={`text-xs font-pixel border-2 border-black ${getRarityColor(listing.card.rarity)}`}>
                         {listing.card.rarity}
                       </Badge>
-                      <span className="text-xs text-gray-600">
-                        Lv.{listing.card.level}
-                      </span>
+                      <div className="bg-orange-500 text-white px-2 py-1 rounded border-2 border-black">
+                        <span className="text-xs font-pixel">
+                          LV.{listing.card.level}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -323,7 +358,7 @@ export default function MarketplacePage() {
                       {formatSol(listing.priceLamports)} SOL
                     </span>
                   </div>
-                  <Badge className="bg-green-100 text-green-800">
+                  <Badge className="bg-orange-100 text-orange-800">
                     Activo
                   </Badge>
                 </div>
@@ -371,7 +406,7 @@ export default function MarketplacePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <TrendingUp className="w-5 h-5 mr-2 text-green-500" />
+                <TrendingUp className="w-5 h-5 mr-2 text-orange-500" />
                 Cartas en Venta
               </CardTitle>
             </CardHeader>

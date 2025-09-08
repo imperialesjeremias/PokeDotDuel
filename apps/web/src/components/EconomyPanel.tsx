@@ -121,7 +121,7 @@ export function EconomyPanel() {
 
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-2">SOL Equivalent</h2>
-          <p className="text-2xl font-bold text-green-600">
+          <p className="text-2xl font-bold text-orange-600">
             ≈ {pokecoinsToSol(pokecoinsBalance).toFixed(4)} SOL
           </p>
           <p className="text-sm text-gray-600">
@@ -199,7 +199,7 @@ export function EconomyPanel() {
             <button
               onClick={handleWithdraw}
               disabled={loading || withdrawAmount <= 0 || withdrawAmount > pokecoinsBalance}
-              className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 disabled:opacity-50"
+              className="w-full bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 disabled:opacity-50"
             >
               {loading ? 'Withdrawing...' : 'Withdraw SOL'}
             </button>
@@ -226,7 +226,7 @@ export function EconomyPanel() {
                 <div className="text-right">
                   <p className={`font-semibold ${
                     tx.type === 'deposit' || tx.type === 'battle_win'
-                      ? 'text-green-600'
+                      ? 'text-orange-600'
                       : 'text-red-600'
                   }`}>
                     {tx.type === 'deposit' || tx.type === 'battle_win' ? '+' : '-'}
