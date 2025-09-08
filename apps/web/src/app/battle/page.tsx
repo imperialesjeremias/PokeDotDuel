@@ -10,6 +10,7 @@ import { Navigation } from '@/components/Navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { PVPBattle } from '@/components/PVPBattle';
 import { 
   Sword, 
   Users, 
@@ -354,6 +355,11 @@ export default function BattlePage() {
               <p className="text-sm text-gray-600">Total apostado</p>
             </CardContent>
           </Card>
+        </div>
+
+        {/* PVP Battle Component */}
+        <div className="mt-8">
+          <PVPBattle />
         </div>
       </div>
     </div>

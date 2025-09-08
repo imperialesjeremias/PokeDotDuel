@@ -10,6 +10,7 @@ import { Navigation } from '@/components/Navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { EconomyPanel } from '@/components/EconomyPanel';
 import { 
   Sword, 
   Coins, 
@@ -296,6 +297,11 @@ export default function DashboardPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Economy Panel */}
+        <div className="mt-8">
+          <EconomyPanel />
+        </div>
       </div>
     </div>
   );

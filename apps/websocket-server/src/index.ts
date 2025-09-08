@@ -3,8 +3,8 @@ import http from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { setupBattleHandlers } from './battle/battleHandlers';
-import { setupLobbyHandlers } from './lobby/lobbyHandlers';
+import { setupBattleHandlers } from '../src/battle/battleHandlers';
+import { setupLobbyHandlers } from '../src/lobby/lobbyHandlers';
 
 // Configurar variables de entorno
 dotenv.config();

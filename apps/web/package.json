@@ -15,8 +15,10 @@
     "@privy-io/wagmi": "^0.2.13",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
+    "@solana/wallet-adapter-base": "^0.9.27",
     "@solana/wallet-adapter-react": "^0.15.39",
     "@solana/wallet-adapter-react-ui": "^0.9.39",
+    "@solana/wallet-adapter-wallets": "^0.19.37",
     "@solana/web3.js": "^1.87.6",
     "@supabase/supabase-js": "^2.38.4",
     "@tanstack/react-query": "^5.8.4",
@@ -36,11 +38,11 @@
     "react-hot-toast": "^2.6.0",
     "socket.io-client": "^4.7.4",
     "tailwind-merge": "^2.0.0",
-    "zustand": "^5.0.8",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5",
     "wagmi": "^2.5.2",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@types/eslint": "^8",

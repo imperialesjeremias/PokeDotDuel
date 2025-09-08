@@ -10,6 +10,7 @@ import { Navigation } from '@/components/Navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { PackOpener } from '@/components/PackOpener';
 import { 
   Package, 
   Coins,
@@ -364,6 +365,11 @@ export default function PacksPage() {
               <p className="text-sm text-gray-600">En packs</p>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Pack Opener Component */}
+        <div className="mt-8">
+          <PackOpener />
         </div>
       </div>
     </div>
