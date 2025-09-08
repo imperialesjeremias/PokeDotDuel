@@ -299,14 +299,14 @@ export default function MarketplacePage() {
         </Card>
 
         {/* Listings Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredListings.map(listing => (
             <Card key={listing.id} className="hover:shadow-lg transition-shadow">
               <CardHeader className="pb-3">
                 <div className="relative">
-                  <div className="w-full h-48 bg-gradient-to-br from-white to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-lg border border-gray-200 dark:border-gray-600 p-4 relative overflow-hidden">
+                  <div className="w-full h-44 bg-gradient-to-br from-white to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-lg border border-gray-200 dark:border-gray-600 p-4 relative overflow-hidden">
                     {/* Pokemon Sprite */}
-                       <div className="absolute top-8 right-2 w-16 h-16">
+                       <div className="absolute top-6 right-2 w-20 h-20">
                          <img 
                            src={`https://play.pokemonshowdown.com/sprites/gen1/${listing.card.name.toLowerCase()}.png`}
                            alt={listing.card.name}
@@ -315,36 +315,38 @@ export default function MarketplacePage() {
                          />
                        </div>
                     
-                    {/* Pokemon Name and Shiny */}
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-lg font-bold text-gray-900 dark:text-white font-pixel">
+                    {/* Pokemon Name */}
+                    <div className="mb-3">
+                      <span className={`text-lg font-bold font-pixel ${
+                        listing.card.isShiny 
+                          ? 'text-yellow-500 dark:text-yellow-400' 
+                          : 'text-gray-900 dark:text-white'
+                      }`}>
                         {listing.card.name}
                       </span>
-                      {listing.card.isShiny && (
-                        <div className="flex items-center">
-                          <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                          <span className="text-xs font-pixel text-yellow-600">SHINY</span>
-                        </div>
-                      )}
                     </div>
                     
-                    {/* Type Text Only */}
-                       <div className="flex flex-wrap gap-1 mb-3 mt-2">
-                         {listing.card.types.map(type => (
-                           <span
-                             key={type}
-                             className={`text-xs font-pixel px-2 py-1 rounded ${getTypeColor(type)}`}
-                           >
-                             {type}
-                           </span>
-                         ))}
-                       </div>
+                    {/* Types Stacked Vertically - Left Aligned */}
+                    <div className="flex flex-col gap-1 mb-3 items-start">
+                      {listing.card.types.map(type => (
+                        <span
+                          key={type}
+                          className={`text-xs font-pixel px-2 py-1 rounded ${getTypeColor(type)}`}
+                        >
+                          {type}
+                        </span>
+                      ))}
+                    </div>
                     
-                    {/* Rarity and Level */}
-                    <div className="flex items-center justify-between">
-                      <Badge className={`text-xs font-pixel border-2 border-black ${getRarityColor(listing.card.rarity)}`}>
+                    {/* Rarity in bottom left corner */}
+                    <div className="absolute bottom-2 left-2">
+                      <Badge className={`text-sm font-pixel border border-black ${getRarityColor(listing.card.rarity)}`} style={{fontSize: '12px', padding: '4px 8px'}}>
                         {listing.card.rarity}
                       </Badge>
+                    </div>
+                    
+                    {/* Level in bottom right corner */}
+                    <div className="absolute bottom-2 right-2">
                       <div className="bg-orange-500 text-white px-2 py-1 rounded border-2 border-black">
                         <span className="text-xs font-pixel">
                           LV.{listing.card.level}
