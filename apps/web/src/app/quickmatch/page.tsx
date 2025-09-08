@@ -39,7 +39,7 @@ const BRACKETS: BracketInfo[] = [
     name: 'Bronze',
     minWager: 0.01,
     maxWager: 0.05,
-    description: 'Ideal para principiantes',
+    description: 'Ideal for beginners',
     color: 'bg-orange-100 text-orange-800 border-orange-200',
     estimatedWait: '< 30s'
   },
@@ -48,7 +48,7 @@ const BRACKETS: BracketInfo[] = [
     name: 'Silver',
     minWager: 0.05,
     maxWager: 0.1,
-    description: 'Para jugadores intermedios',
+    description: 'For intermediate players',
     color: 'bg-gray-100 text-gray-800 border-gray-200',
     estimatedWait: '< 1m'
   },
@@ -57,7 +57,7 @@ const BRACKETS: BracketInfo[] = [
     name: 'Gold',
     minWager: 0.1,
     maxWager: 0.5,
-    description: 'Competencia seria',
+    description: 'Serious competition',
     color: 'bg-yellow-100 text-yellow-800 border-yellow-200',
     estimatedWait: '< 2m'
   },
@@ -66,25 +66,16 @@ const BRACKETS: BracketInfo[] = [
     name: 'Platinum',
     minWager: 0.5,
     maxWager: 1.0,
-    description: 'Alto nivel de juego',
+    description: 'High level gameplay',
     color: 'bg-blue-100 text-blue-800 border-blue-200',
     estimatedWait: '< 3m'
-  },
-  {
-    id: 5,
-    name: 'Diamond',
-    minWager: 1.0,
-    maxWager: 5.0,
-    description: 'Solo para expertos',
-    color: 'bg-cyan-100 text-cyan-800 border-cyan-200',
-    estimatedWait: '< 5m'
   },
   {
     id: 6,
     name: 'Master',
     minWager: 5.0,
     maxWager: 100.0,
-    description: 'Liga de maestros',
+    description: 'Masters league',
     color: 'bg-purple-100 text-purple-800 border-purple-200',
     estimatedWait: '< 10m'
   }
@@ -110,11 +101,11 @@ export default function QuickMatchPage() {
   }, [ready, authenticated, router]);
 
   useEffect(() => {
-    // Ajustar el wager amount cuando cambie el bracket
+    // Adjust wager amount when bracket changes
     setWagerAmount(selectedBracket.minWager);
   }, [selectedBracket]);
 
-  // Timer para el tiempo de búsqueda
+  // Timer for search time
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (matchmakingState === 'searching') {
@@ -139,7 +130,7 @@ export default function QuickMatchPage() {
         setFoundMatch(matchResult);
         setMatchmakingState('found');
         
-        // Redirigir a la batalla después de un breve delay
+        // Redirect to battle after a brief delay
         setTimeout(() => {
           router.push(`/battle?match=${matchResult.matchId}`);
         }, 2000);
@@ -153,7 +144,7 @@ export default function QuickMatchPage() {
   const handleCancelSearch = () => {
     setMatchmakingState('idle');
     setSearchTime(0);
-    // Aquí podrías llamar a una función para cancelar la búsqueda en el servidor
+    // Here you could call a function to cancel the search on the server
   };
 
   const formatTime = (seconds: number) => {
@@ -184,10 +175,10 @@ export default function QuickMatchPage() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center">
             <Zap className="w-8 h-8 mr-3 text-yellow-500" />
-            Partida Rápida
+            Quick Match
           </h1>
           <p className="text-gray-600">
-            Encuentra un oponente automáticamente y comienza a batallar al instante
+            Find an opponent automatically and start battling instantly
           </p>
         </div>
 
@@ -195,7 +186,7 @@ export default function QuickMatchPage() {
         {(error || matchmakingState === 'error') && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 flex items-center">
             <AlertCircle className="w-5 h-5 mr-2" />
-            {error || 'No se pudo encontrar una partida. Inténtalo de nuevo.'}
+            {error || 'Could not find a match. Please try again.'}
           </div>
         )}
 
@@ -206,13 +197,13 @@ export default function QuickMatchPage() {
               <div className="text-center">
                 <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
                 <h3 className="text-xl font-semibold text-blue-900 mb-2">
-                  Buscando oponente...
+                  Searching for opponent...
                 </h3>
                 <p className="text-blue-700 mb-4">
-                  Tiempo de búsqueda: {formatTime(searchTime)}
+                  Search time: {formatTime(searchTime)}
                 </p>
                 <p className="text-sm text-blue-600 mb-4">
-                  Bracket: {selectedBracket.name} | Apuesta: {wagerAmount} SOL
+                  Bracket: {selectedBracket.name} | Wager: {wagerAmount} SOL
                 </p>
                 <Button 
                   onClick={handleCancelSearch}
@@ -220,7 +211,7 @@ export default function QuickMatchPage() {
                   className="border-blue-300 text-blue-700 hover:bg-blue-100"
                 >
                   <X className="w-4 h-4 mr-2" />
-                  Cancelar búsqueda
+                  Cancel search
                 </Button>
               </div>
             </CardContent>
@@ -234,13 +225,13 @@ export default function QuickMatchPage() {
               <div className="text-center">
                 <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-green-900 mb-2">
-                  ¡Partida encontrada!
+                  Match found!
                 </h3>
                 <p className="text-green-700 mb-4">
-                  Oponente: {foundMatch.opponent?.name || 'Jugador Anónimo'}
+                  Opponent: {foundMatch.opponent?.name || 'Anonymous Player'}
                 </p>
                 <p className="text-sm text-green-600">
-                  Redirigiendo a la batalla...
+                  Redirecting to battle...
                 </p>
               </div>
             </CardContent>
@@ -251,15 +242,15 @@ export default function QuickMatchPage() {
         {matchmakingState === 'idle' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Bracket Selection */}
-            <div>
-              <Card>
+            <div className="flex">
+              <Card className="flex-1">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Trophy className="w-5 h-5 mr-2" />
-                    Seleccionar Bracket
+                    Select Bracket
                   </CardTitle>
                   <CardDescription>
-                    Elige tu nivel de competencia para el matchmaking
+                    Choose your competition level for matchmaking
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -300,10 +291,10 @@ export default function QuickMatchPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Coins className="w-5 h-5 mr-2" />
-                    Configuración de Partida
+                    Match Configuration
                   </CardTitle>
                   <CardDescription>
-                    Establece tu apuesta y comienza la búsqueda
+                    Set your wager and start the search
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -318,14 +309,14 @@ export default function QuickMatchPage() {
                     </div>
                     <p className="text-sm mb-2">{selectedBracket.description}</p>
                     <p className="text-xs">
-                      Rango: {selectedBracket.minWager} - {selectedBracket.maxWager} SOL
+                      Range: {selectedBracket.minWager} - {selectedBracket.maxWager} SOL
                     </p>
                   </div>
 
                   {/* Wager Amount */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Cantidad de Apuesta (SOL)
+                      Wager Amount (SOL)
                     </label>
                     <input
                       type="number"
@@ -337,20 +328,20 @@ export default function QuickMatchPage() {
                       className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
                         !isValidWager ? 'border-red-300 bg-red-50' : 'border-gray-300'
                       }`}
-                      placeholder={`Entre ${selectedBracket.minWager} y ${selectedBracket.maxWager}`}
+                      placeholder={`Between ${selectedBracket.minWager} and ${selectedBracket.maxWager}`}
                     />
                     {!isValidWager && (
                       <p className="text-red-600 text-sm mt-1">
-                        La cantidad debe estar entre {selectedBracket.minWager} y {selectedBracket.maxWager} SOL
+                        Amount must be between {selectedBracket.minWager} and {selectedBracket.maxWager} SOL
                       </p>
                     )}
                   </div>
 
                   {/* Quick Amount Buttons */}
                   <div>
-                    <p className="text-sm font-medium text-gray-700 mb-2">Cantidades rápidas:</p>
+                    <p className="text-sm font-medium text-gray-700 mb-2">Quick amounts:</p>
                     <div className="grid grid-cols-3 gap-2">
-                      {[selectedBracket.minWager, (selectedBracket.minWager + selectedBracket.maxWager) / 2, selectedBracket.maxWager].map(amount => (
+                      {[selectedBracket.minWager, ((selectedBracket.maxWager - selectedBracket.minWager) / 2), selectedBracket.maxWager].map(amount => (
                         <Button
                           key={amount}
                           variant="outline"
@@ -372,7 +363,7 @@ export default function QuickMatchPage() {
                     size="lg"
                   >
                     <Search className="w-5 h-5 mr-2" />
-                    Buscar Partida Rápida
+                    Find Quick Match
                   </Button>
                 </CardContent>
               </Card>
@@ -382,7 +373,7 @@ export default function QuickMatchPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center text-lg">
                     <Users className="w-5 h-5 mr-2" />
-                    Matchmaking Inteligente
+                    Smart Matchmaking
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -391,32 +382,32 @@ export default function QuickMatchPage() {
                       <div className="w-6 h-6 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-xs font-semibold mr-3 mt-0.5">
                         ⚡
                       </div>
-                      <p>Búsqueda automática de oponentes de tu nivel</p>
+                      <p>Automatic search for opponents at your level</p>
                     </div>
                     <div className="flex items-start">
                       <div className="w-6 h-6 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-xs font-semibold mr-3 mt-0.5">
                         🎯
                       </div>
-                      <p>Emparejamiento basado en bracket y apuesta</p>
+                      <p>Matchmaking based on bracket and wager</p>
                     </div>
                     <div className="flex items-start">
                       <div className="w-6 h-6 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-xs font-semibold mr-3 mt-0.5">
                         ⏱️
                       </div>
-                      <p>Tiempos de espera optimizados por bracket</p>
+                      <p>Wait times optimized by bracket</p>
                     </div>
                     <div className="flex items-start">
                       <div className="w-6 h-6 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-xs font-semibold mr-3 mt-0.5">
                         🏆
                       </div>
-                      <p>Batallas justas y competitivas</p>
+                      <p>Fair and competitive battles</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Quick Match Panel - Bot Battle */}
-              <QuickMatchPanel />
+              {/* <QuickMatchPanel /> */}
             </div>
           </div>
         )}

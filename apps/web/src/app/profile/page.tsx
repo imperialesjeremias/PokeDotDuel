@@ -150,8 +150,8 @@ export default function ProfilePage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Mi Perfil</h1>
-          <p className="text-gray-600">Gestiona tu cuenta y ve tus estadísticas</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">My Profile</h1>
+          <p className="text-gray-600">Manage your account and view your statistics</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -161,7 +161,7 @@ export default function ProfilePage() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <User className="w-5 h-5 mr-2" />
-                  Información del Perfil
+                  Profile Information
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -172,13 +172,13 @@ export default function ProfilePage() {
                   <div className="flex-1">
                     {editing ? (
                       <div className="space-y-2">
-                        <Label htmlFor="username">Nombre de usuario</Label>
+                        <Label htmlFor="username">Username</Label>
                         <div className="flex space-x-2">
                           <Input
                             id="username"
                             value={newUsername}
                             onChange={(e) => setNewUsername(e.target.value)}
-                            placeholder="Ingresa tu nombre de usuario"
+                            placeholder="Enter your username"
                             maxLength={20}
                           />
                           <Button
@@ -203,7 +203,7 @@ export default function ProfilePage() {
                     ) : (
                       <div>
                         <h3 className="text-lg font-semibold">
-                          {profile?.username || 'Sin nombre'}
+                          {profile?.username || 'No name'}
                         </h3>
                         <Button
                           size="sm"
@@ -212,7 +212,7 @@ export default function ProfilePage() {
                           className="mt-1"
                         >
                           <Edit3 className="w-4 h-4 mr-1" />
-                          Editar
+                          Edit
                         </Button>
                       </div>
                     )}
@@ -225,7 +225,7 @@ export default function ProfilePage() {
                     <span className="text-sm text-gray-600">
                       {user?.wallet?.address ?
                         `${user.wallet.address.slice(0, 8)}...${user.wallet.address.slice(-6)}` :
-                        'Wallet no conectada'
+                        'Wallet not connected'
                       }
                     </span>
                   </div>
@@ -233,7 +233,7 @@ export default function ProfilePage() {
                   <div className="flex items-center space-x-2">
                     <Crown className="w-4 h-4 text-yellow-500" />
                     <span className="text-sm text-gray-600">
-                      Nivel {profile?.level || 1}
+                      Level {profile?.level || 1}
                     </span>
                   </div>
 
@@ -255,13 +255,13 @@ export default function ProfilePage() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Star className="w-5 h-5 mr-2" />
-                  Progreso de Nivel
+                  Level Progress
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span>Nivel {profile?.level || 1}</span>
+                    <span>Level {profile?.level || 1}</span>
                     <span>{profile?.xp || 0} XP</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -271,7 +271,7 @@ export default function ProfilePage() {
                     ></div>
                   </div>
                   <p className="text-xs text-gray-600">
-                    {Math.round(getLevelProgress())}% completado para el siguiente nivel
+                    {Math.round(getLevelProgress())}% completed to next level
                   </p>
                 </div>
               </CardContent>
@@ -282,18 +282,18 @@ export default function ProfilePage() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Trophy className="w-5 h-5 mr-2" />
-                  Estadísticas de Batalla
+                  Battle Statistics
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-orange-600">{profile?.stats.wins || 0}</div>
-                    <div className="text-sm text-gray-600">Victorias</div>
+                    <div className="text-sm text-gray-600">Wins</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-red-600">{profile?.stats.losses || 0}</div>
-                    <div className="text-sm text-gray-600">Derrotas</div>
+                    <div className="text-sm text-gray-600">Losses</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-blue-600">{getWinRate()}%</div>
@@ -314,18 +314,18 @@ export default function ProfilePage() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Package className="w-5 h-5 mr-2" />
-                  Colección
+                  Collection
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-orange-600">{profile?.stats.packsOpened || 0}</div>
-                    <div className="text-sm text-gray-600">Packs Abiertos</div>
+                    <div className="text-sm text-gray-600">Packs Opened</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-indigo-600">{profile?.stats.cardsOwned || 0}</div>
-                    <div className="text-sm text-gray-600">Cartas</div>
+                    <div className="text-sm text-gray-600">Cards</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-yellow-600">{profile?.pokecoins || 0}</div>
@@ -340,7 +340,7 @@ export default function ProfilePage() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Coins className="w-5 h-5 mr-2" />
-                  Economía
+                  Economy
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -349,13 +349,13 @@ export default function ProfilePage() {
                     <div className="text-2xl font-bold text-orange-600">
                       {(profile?.stats.totalWagered || 0) / 1_000_000_000} SOL
                     </div>
-                    <div className="text-sm text-gray-600">Total Apostado</div>
+                    <div className="text-sm text-gray-600">Total Wagered</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-blue-600">
                       {(profile?.stats.totalWon || 0) / 1_000_000_000} SOL
                     </div>
-                    <div className="text-sm text-gray-600">Total Ganado</div>
+                    <div className="text-sm text-gray-600">Total Won</div>
                   </div>
                 </div>
               </CardContent>

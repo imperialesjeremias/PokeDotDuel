@@ -130,11 +130,11 @@ export default function BattlePage() {
   const getStatusText = (status: string) => {
     switch (status) {
       case 'OPEN':
-        return 'Abierto';
+        return 'Open';
       case 'FULL':
-        return 'Lleno';
+        return 'Full';
       case 'IN_PROGRESS':
-        return 'En Progreso';
+        return 'In Progress';
       default:
         return status;
     }
@@ -165,10 +165,10 @@ export default function BattlePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Batallas PvP
+            PvP Battles
           </h1>
           <p className="text-gray-600">
-            Combate por turnos con apuestas en SOL
+            Turn-based combat with SOL betting
           </p>
         </div>
 
@@ -178,18 +178,18 @@ export default function BattlePage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Sword className="w-5 h-5 mr-2 text-orange-600" />
-                Crear Lobby
+                Create Lobby
               </CardTitle>
               <CardDescription>
-                Crea un nuevo lobby para batallas
+                Create a new lobby for battles
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Button 
                 className="w-full" 
-                onClick={() => router.push('/battle/create')}
+                onClick={() => router.push('/create-lobby')}
               >
-                Crear Lobby
+                Create Lobby
               </Button>
             </CardContent>
           </Card>
@@ -198,10 +198,10 @@ export default function BattlePage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Search className="w-5 h-5 mr-2 text-blue-600" />
-                Buscar Partida
+                Find Match
               </CardTitle>
               <CardDescription>
-                Encuentra una partida rápida
+                Find a quick match
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -210,7 +210,7 @@ export default function BattlePage() {
                 variant="outline"
                 onClick={() => router.push('/battle/quick-match')}
               >
-                Partida Rápida
+                Quick Match
               </Button>
             </CardContent>
           </Card>
@@ -219,7 +219,7 @@ export default function BattlePage() {
         {/* Bracket Filter */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle>Filtrar por Rango de Apuesta</CardTitle>
+            <CardTitle>Filter by Betting Range</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
@@ -227,7 +227,7 @@ export default function BattlePage() {
                 variant={selectedBracket === null ? "default" : "outline"}
                 onClick={() => setSelectedBracket(null)}
               >
-                Todos
+                All
               </Button>
               {brackets.map(bracket => (
                 <Button
@@ -247,19 +247,19 @@ export default function BattlePage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Users className="w-5 h-5 mr-2" />
-              Lobbies Disponibles
+              Available Lobbies
             </CardTitle>
             <CardDescription>
-              Únete a un lobby existente o crea uno nuevo
+              Join an existing lobby or create a new one
             </CardDescription>
           </CardHeader>
           <CardContent>
             {filteredLobbies.length === 0 ? (
               <div className="text-center py-8">
                 <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-4">No hay lobbies disponibles</p>
+                <p className="text-gray-600 mb-4">No lobbies available</p>
                 <Button onClick={() => router.push('/battle/create')}>
-                  Crear Primer Lobby
+                  Create First Lobby
                 </Button>
               </div>
             ) : (
@@ -278,10 +278,10 @@ export default function BattlePage() {
                           {lobby.bracket.name}
                         </h3>
                         <p className="text-sm text-gray-600">
-                          Apuesta: {formatSol(lobby.wagerLamports)} SOL
+                          Wager: {formatSol(lobby.wagerLamports)} SOL
                         </p>
                         <p className="text-xs text-gray-500">
-                          Creado hace {Math.floor(Math.random() * 60)} minutos
+                          Created {Math.floor(Math.random() * 60)} minutes ago
                         </p>
                       </div>
                     </div>
@@ -301,7 +301,7 @@ export default function BattlePage() {
                         disabled={lobby.status !== 'OPEN'}
                         onClick={() => router.push(`/battle/lobby/${lobby.id}`)}
                       >
-                        {lobby.status === 'OPEN' ? 'Unirse' : 'Ver'}
+                        {lobby.status === 'OPEN' ? 'Join' : 'View'}
                       </Button>
                     </div>
                   </div>
@@ -317,14 +317,14 @@ export default function BattlePage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Zap className="w-5 h-5 mr-2 text-yellow-500" />
-                Partidas Activas
+                Active Matches
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
                 {lobbies.filter(l => l.status === 'IN_PROGRESS').length}
               </div>
-              <p className="text-sm text-gray-600">En este momento</p>
+              <p className="text-sm text-gray-600">Right now</p>
             </CardContent>
           </Card>
 
@@ -332,14 +332,14 @@ export default function BattlePage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Users className="w-5 h-5 mr-2 text-blue-500" />
-                Jugadores Online
+                Online Players
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
                 {lobbies.reduce((acc, lobby) => acc + (lobby.opponentId ? 2 : 1), 0)}
               </div>
-              <p className="text-sm text-gray-600">En lobbies</p>
+              <p className="text-sm text-gray-600">In lobbies</p>
             </CardContent>
           </Card>
 
@@ -347,14 +347,14 @@ export default function BattlePage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Coins className="w-5 h-5 mr-2 text-orange-500" />
-                SOL en Apuestas
+                SOL in Bets
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
                 {formatSol(lobbies.reduce((acc, lobby) => acc + lobby.wagerLamports, 0))}
               </div>
-              <p className="text-sm text-gray-600">Total apostado</p>
+              <p className="text-sm text-gray-600">Total wagered</p>
             </CardContent>
           </Card>
         </div>

@@ -76,7 +76,7 @@ export default function TeamBuilderPage() {
       setTeams([
         {
           id: '1',
-          name: 'Equipo Principal',
+          name: 'Main Team',
           slots: ['card1', 'card2', 'card3', 'card4', 'card5', 'card6'],
           natures: ['Adamant', 'Modest', 'Jolly', 'Bold', 'Timid', 'Careful'],
           moves: {
@@ -218,7 +218,7 @@ export default function TeamBuilderPage() {
             Team Builder
           </h1>
           <p className="text-gray-600">
-            Construye y optimiza tu equipo de 6 Pokémon
+            Build and optimize your team of 6 Pokémon
           </p>
         </div>
 
@@ -230,11 +230,11 @@ export default function TeamBuilderPage() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center">
                     <Users className="w-5 h-5 mr-2" />
-                    Mis Equipos
+                    My Teams
                   </CardTitle>
                   <Button size="sm" onClick={() => router.push('/team-builder/create')}>
                     <Plus className="w-4 h-4 mr-1" />
-                    Nuevo
+                    New
                   </Button>
                 </div>
               </CardHeader>
@@ -282,12 +282,12 @@ export default function TeamBuilderPage() {
                     <div>
                       <CardTitle>{selectedTeam.name}</CardTitle>
                       <CardDescription>
-                        Equipo de 6 Pokémon para batallas
+                        Team of 6 Pokémon for battles
                       </CardDescription>
                     </div>
                     <Button>
                       <Save className="w-4 h-4 mr-1" />
-                      Guardar
+                      Save
                     </Button>
                   </div>
                 </CardHeader>
@@ -338,7 +338,7 @@ export default function TeamBuilderPage() {
                           ) : (
                             <div className="text-center">
                               <Plus className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                              <p className="text-sm text-gray-500">Agregar Pokémon</p>
+                              <p className="text-sm text-gray-500">Add Pokémon</p>
                             </div>
                           )}
                         </div>
@@ -352,9 +352,9 @@ export default function TeamBuilderPage() {
                 <CardContent className="flex items-center justify-center h-64">
                   <div className="text-center">
                     <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-600 mb-4">Selecciona un equipo para editarlo</p>
+                    <p className="text-gray-600 mb-4">Select a team to edit it</p>
                     <Button onClick={() => router.push('/team-builder/create')}>
-                      Crear Nuevo Equipo
+                      Create New Team
                     </Button>
                   </div>
                 </CardContent>
@@ -368,20 +368,20 @@ export default function TeamBuilderPage() {
           <Card className="mt-8">
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Shield className="w-5 h-5 mr-2" />
-                Análisis del Equipo
-              </CardTitle>
+              <Shield className="w-5 h-5 mr-2" />
+              Team Analysis
+            </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Cobertura de Tipos</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Type Coverage</h3>
                   <div className="space-y-1">
                     {['FIRE', 'WATER', 'GRASS', 'ELECTRIC', 'PSYCHIC'].map(type => (
                       <div key={type} className="flex items-center justify-between">
                         <span className="text-sm text-gray-600">{type}</span>
                         <Badge className={getTypeColor(type)}>
-                          {Math.random() > 0.5 ? 'Cubierto' : 'Débil'}
+                          {Math.random() > 0.5 ? 'Covered' : 'Weak'}
                         </Badge>
                       </div>
                     ))}
@@ -389,34 +389,34 @@ export default function TeamBuilderPage() {
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Estadísticas</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Statistics</h3>
                   <div className="space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Ataque Promedio</span>
+                      <span className="text-sm text-gray-600">Average Attack</span>
                       <span className="text-sm font-semibold">85</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Defensa Promedio</span>
+                      <span className="text-sm text-gray-600">Average Defense</span>
                       <span className="text-sm font-semibold">78</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Velocidad Promedio</span>
+                      <span className="text-sm text-gray-600">Average Speed</span>
                       <span className="text-sm font-semibold">92</span>
                     </div>
                   </div>
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Sugerencias</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Suggestions</h3>
                   <div className="space-y-2">
                     <div className="p-2 bg-yellow-50 border border-yellow-200 rounded">
                       <p className="text-sm text-yellow-800">
-                        Considera agregar un Pokémon tipo Roca para mejor cobertura
+                        Consider adding a Rock-type Pokémon for better coverage
                       </p>
                     </div>
                     <div className="p-2 bg-orange-50 border border-orange-200 rounded">
           <p className="text-sm text-orange-800">
-                        Buen balance entre ataque y defensa
+                        Good balance between attack and defense
                       </p>
                     </div>
                   </div>

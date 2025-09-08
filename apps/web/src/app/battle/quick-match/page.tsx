@@ -40,16 +40,16 @@ export default function QuickMatchBattlePage() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center">
             <Zap className="w-8 h-8 mr-3 text-yellow-500" />
-            Partida Rápida
+            Quick Match
           </h1>
           <p className="text-gray-600">
-            Encuentra un oponente rápidamente o practica contra bots
+            Find an opponent quickly or practice against bots
           </p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Opciones de Batalla</CardTitle>
+            <CardTitle>Battle Options</CardTitle>
           </CardHeader>
           <CardContent>
             <QuickMatchPanel />

@@ -5,7 +5,8 @@ import { usePrivy } from '@privy-io/react-auth';
 // Force dynamic rendering to avoid static generation issues with Privy
 export const dynamic = 'force-dynamic';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { initBackgroundMusic, playBackgroundMusic, toggleBackgroundMusic, isBackgroundMusicPlaying } from '@/utils/backgroundMusic';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -17,12 +18,15 @@ import {
   Trophy, 
   Zap,
   Shield,
-  Star
+  Star,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
 
 export default function HomePage() {
   const { ready, authenticated, login, user } = usePrivy();
   const router = useRouter();
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
   useEffect(() => {
     if (ready && authenticated) {
@@ -30,44 +34,76 @@ export default function HomePage() {
     }
   }, [ready, authenticated, router]);
 
+  useEffect(() => {
+    // Initialize and auto-start background music when component mounts
+    initBackgroundMusic();
+    
+    // Auto-start music after a brief delay to ensure proper initialization
+    const startMusic = async () => {
+      await playBackgroundMusic();
+      setIsMusicPlaying(isBackgroundMusicPlaying());
+    };
+    
+    // Use a timeout to allow user interaction first (required by browsers)
+    const timer = setTimeout(() => {
+      const handleFirstClick = async () => {
+        await startMusic();
+        document.removeEventListener('click', handleFirstClick);
+      };
+      document.addEventListener('click', handleFirstClick);
+    }, 100);
+    
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+  
+  // Handle music mute/unmute toggle
+  const handleMusicToggle = async () => {
+    await toggleBackgroundMusic();
+    setIsMusicPlaying(isBackgroundMusicPlaying());
+  };
+
+  
+
   const features = [
     {
       icon: Sword,
-      title: 'Batallas PvP',
-      description: 'Combate por turnos con mecánicas auténticas de Pokémon Gen 1',
+      title: 'PvP Battles',
+      description: 'Turn-based combat with authentic Pokémon Gen 1 mechanics',
     },
     {
       icon: Coins,
-      title: 'Apuestas en SOL',
-      description: 'Gana SOL real compitiendo en batallas con apuestas',
+      title: 'SOL Betting',
+      description: 'Win real SOL by competing in wagered battles',
     },
     {
       icon: Users,
       title: 'Matchmaking',
-      description: 'Sistema de emparejamiento por rangos de apuesta',
+      description: 'Pairing system based on betting ranges',
     },
     {
       icon: Package,
       title: 'Booster Packs',
-      description: 'Compra packs con SOL y descubre cartas raras',
+      description: 'Buy packs with SOL and discover rare cards',
     },
     {
       icon: Trophy,
       title: 'Rankings',
-      description: 'Sube de nivel y desbloquea insignias especiales',
+      description: 'Level up and unlock special badges',
     },
     {
       icon: Zap,
-      title: 'Tiempo Real',
-      description: 'WebSockets para batallas fluidas y sincronizadas',
+      title: 'Real Time',
+      description: 'WebSockets for smooth and synchronized battles',
     },
   ];
 
   const stats = [
-    { label: 'Jugadores Activos', value: '1,234' },
-    { label: 'SOL en Apuestas', value: '45.6' },
-    { label: 'Cartas Coleccionadas', value: '12,345' },
-    { label: 'Batallas Jugadas', value: '5,678' },
+    { label: 'Active Players', value: '1,234' },
+    { label: 'SOL in Wagers', value: '45.6' },
+    { label: 'Cards Collected', value: '12,345' },
+    { label: 'Battles Played', value: '5,678' },
   ];
 
   if (!ready) {
@@ -93,8 +129,15 @@ export default function HomePage() {
               <div className="battle-ui px-3 py-1">
                 <span className="text-xs">ONLINE</span>
               </div>
+              <Button 
+                onClick={handleMusicToggle}
+                className="pokemon-blue-theme border-4 border-black font-pixel px-3 py-3 hover:bg-pokemon-blue-accent"
+                title={isMusicPlaying ? "Mute Music" : "Unmute Music"}
+              >
+                {isMusicPlaying ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+              </Button>
               <Button onClick={login} className="pokemon-red-theme border-4 border-black font-pixel px-6 py-3 hover:bg-pokemon-red-accent">
-                Conectar Wallet
+                Connect Wallet
               </Button>
             </div>
           </div>
@@ -113,9 +156,9 @@ export default function HomePage() {
             </h1>
             <div className="status-window max-w-3xl mx-auto mb-8">
               <p className="text-lg font-pixel text-black">
-                ► Combate por turnos con mecánicas auténticas de Pokémon Gen 1<br/>
-                ► Gana SOL real, colecciona cartas raras<br/>
-                ► Construye el equipo definitivo
+                ► Turn-based combat with authentic Pokémon Gen 1 mechanics<br/>
+                ► Win real SOL, collect rare cards<br/>
+                ► Build the ultimate team
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -124,14 +167,14 @@ export default function HomePage() {
                 onClick={login}
                 className="pokemon-red-theme border-4 border-black font-pixel px-8 py-4 text-lg hover:bg-pokemon-red-accent"
               >
-                ► EMPEZAR BATALLA
+                ► START BATTLE
               </Button>
               <Button 
                 size="lg" 
                 onClick={() => router.push('/how-to-play')}
                 className="pokemon-blue-theme border-4 border-black font-pixel px-8 py-4 text-lg hover:bg-pokemon-blue-accent"
               >
-                ► COMO JUGAR
+                ► HOW TO PLAY
               </Button>
             </div>
           </div>
@@ -158,12 +201,12 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <div className="pokemon-menu p-6 inline-block">
               <h2 className="text-4xl font-pixel text-black mb-4 animate-pixel-step">
-                ► CARACTERISTICAS ◄
+                ► FEATURES ◄
               </h2>
             </div>
             <div className="status-window max-w-2xl mx-auto mt-6">
               <p className="text-lg font-pixel text-black">
-                Una experiencia de juego completa con tecnología blockchain
+                A complete gaming experience with blockchain technology
               </p>
             </div>
           </div>
@@ -191,19 +234,18 @@ export default function HomePage() {
       {/* Pokemon CTA Section */}
       <section className="py-20 pokecenter-ui">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="battle-ui p-8 inline-block">
-            <h2 className="text-4xl font-pixel text-white mb-6">
-              ¿LISTO PARA LA BATALLA?
+          <div className="battle-ui p-8 inline-block">            <h2 className="text-4xl font-pixel text-white mb-6">
+              READY FOR BATTLE?
             </h2>
             <p className="text-lg font-pixel text-gray-300 mb-8">
-              ► Conecta tu wallet y comienza tu aventura Pokémon
+              ► Connect your wallet and start your Pokémon adventure
             </p>
             <Button 
               size="lg" 
               onClick={login}
               className="pokemon-yellow-theme border-4 border-black font-pixel text-lg px-8 py-4 hover:bg-pokemon-yellow-accent"
             >
-              ★ CONECTAR Y JUGAR ★
+              ★ CONNECT & PLAY ★
             </Button>
           </div>
         </div>
@@ -219,22 +261,22 @@ export default function HomePage() {
               </div>
               <div className="status-window">
                 <p className="text-black font-pixel text-sm">
-                  El primer criptojuego PvP de Pokémon con apuestas en SOL
+                  The first Pokémon PvP crypto game with SOL betting
                 </p>
               </div>
             </div>
             <div>
-              <h3 className="font-pixel text-white mb-4 border-b-2 border-white pb-2">► JUEGO</h3>
+              <h3 className="font-pixel text-white mb-4 border-b-2 border-white pb-2">► GAME</h3>
               <div className="pokemon-menu">
-                <div className="pokemon-menu-item"><a href="/how-to-play">Cómo Jugar</a></div>
+                <div className="pokemon-menu-item"><a href="/how-to-play">How to Play</a></div>
                 <div className="pokemon-menu-item"><a href="/marketplace">Marketplace</a></div>
-                <div className="pokemon-menu-item"><a href="/leaderboard">Rankings</a></div>
+                <div className="pokemon-menu-item"><a href="/leaderboard">Leaderboard</a></div>
               </div>
             </div>
             <div>
-              <h3 className="font-pixel text-white mb-4 border-b-2 border-white pb-2">► RECURSOS</h3>
+              <h3 className="font-pixel text-white mb-4 border-b-2 border-white pb-2">► RESOURCES</h3>
               <div className="pokemon-menu">
-                <div className="pokemon-menu-item"><a href="/docs">Documentación</a></div>
+                <div className="pokemon-menu-item"><a href="/docs">Documentation</a></div>
                 <div className="pokemon-menu-item"><a href="/whitepaper">Whitepaper</a></div>
                 <div className="pokemon-menu-item"><a href="/faq">FAQ</a></div>
               </div>
@@ -242,14 +284,14 @@ export default function HomePage() {
             <div>
               <h3 className="font-pixel text-white mb-4 border-b-2 border-white pb-2">► LEGAL</h3>
               <div className="pokemon-menu">
-                <div className="pokemon-menu-item"><a href="/terms">Términos</a></div>
-                <div className="pokemon-menu-item"><a href="/privacy">Privacidad</a></div>
-                <div className="pokemon-menu-item"><a href="/contact">Contacto</a></div>
+                <div className="pokemon-menu-item"><a href="/terms">Terms</a></div>
+                <div className="pokemon-menu-item"><a href="/privacy">Privacy</a></div>
+                <div className="pokemon-menu-item"><a href="/contact">Contact</a></div>
               </div>
             </div>
           </div>
           <div className="border-t-4 border-white mt-8 pt-8 text-center">
-            <p className="font-pixel text-white">&copy; 2024 POKEDOTDUEL. TODOS LOS DERECHOS RESERVADOS.</p>
+            <p className="font-pixel text-white">&copy; 2025 POKEDOTDUEL. ALL RIGHTS RESERVED.</p>
           </div>
         </div>
       </footer>

@@ -62,9 +62,9 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
   // If already in a lobby, show lobby info
   if (currentLobby) {
     return (
-      <div className="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto">
+      <div className="rounded-lg shadow-lg p-6 max-w-md mx-auto">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-800">Lobby Actual</h2>
+          <h2 className="text-xl font-bold text-gray-800">Current Lobby</h2>
           {onClose && (
             <button
               onClick={onClose}
@@ -77,23 +77,23 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
         
         <div className="space-y-3">
           <div className="p-3 bg-gray-50 rounded">
-            <p className="text-sm text-gray-600">ID del Lobby:</p>
+            <p className="text-sm text-gray-600">Lobby ID:</p>
             <p className="font-mono text-sm">{currentLobby.id}</p>
           </div>
           
           <div className="p-3 bg-gray-50 rounded">
-            <p className="text-sm text-gray-600">Estado:</p>
+            <p className="text-sm text-gray-600">Status:</p>
             <p className="font-semibold">{currentLobby.status}</p>
           </div>
           
           <div className="p-3 bg-gray-50 rounded">
-            <p className="text-sm text-gray-600">Apuesta:</p>
+            <p className="text-sm text-gray-600">Wager:</p>
             <p className="font-semibold">{(currentLobby.wagerLamports / 1000000000).toFixed(3)} SOL</p>
           </div>
           
           {currentLobby.isBot && (
             <div className="p-3 bg-blue-50 rounded border border-blue-200">
-              <p className="text-sm text-blue-600 font-semibold">🤖 Batalla contra Bot</p>
+              <p className="text-sm text-blue-600 font-semibold">🤖 Bot Battle</p>
             </div>
           )}
         </div>
@@ -102,9 +102,9 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto">
+    <div className="rounded-lg shadow-lg p-6 max-w-md mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold text-gray-800">Modos de Juego</h2>
+        <h2 className="text-xl font-bold text-gray-800">Game Modes</h2>
         {onClose && (
           <button
             onClick={onClose}
@@ -133,15 +133,15 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
             className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             disabled={loading || inQueue}
           >
-            <option value={1}>Bracket 1 (Principiante)</option>
-            <option value={2}>Bracket 2 (Intermedio)</option>
-            <option value={3}>Bracket 3 (Avanzado)</option>
+            <option value={1}>Bracket 1 (Beginner)</option>
+            <option value={2}>Bracket 2 (Intermediate)</option>
+            <option value={3}>Bracket 3 (Advanced)</option>
           </select>
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Apuesta (SOL)
+            Wager (SOL)
           </label>
           <select
             value={wagerAmount}
@@ -159,16 +159,16 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
 
       {/* Quick Match Section */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-3">🚀 Partida Rápida</h3>
+        <h3 className="text-lg font-semibold text-gray-800 mb-3">🚀 Quick Match</h3>
         
         {inQueue ? (
           <div className="space-y-3">
             <div className="p-3 bg-blue-50 border border-blue-200 rounded">
-              <p className="text-blue-700 font-medium">Buscando oponente...</p>
+              <p className="text-blue-700 font-medium">Looking for opponent...</p>
               {matchmakingStatus && (
                 <div className="mt-2 text-sm text-blue-600">
-                  <p>Jugadores en cola: {matchmakingStatus.queueLength}</p>
-                  <p>Tiempo estimado: {matchmakingStatus.estimatedWaitTime}s</p>
+                  <p>Players in queue: {matchmakingStatus.queueLength}</p>
+                  <p>Estimated time: {matchmakingStatus.estimatedWaitTime}s</p>
                 </div>
               )}
             </div>
@@ -178,7 +178,7 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
               disabled={loading}
               className="w-full py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Saliendo...' : 'Salir de la Cola'}
+              {loading ? 'Leaving...' : 'Leave Queue'}
             </button>
           </div>
         ) : (
@@ -187,18 +187,18 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
             disabled={loading}
             className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Uniéndose...' : 'Buscar Partida'}
+            {loading ? 'Joining...' : 'Find Match'}
           </button>
         )}
       </div>
 
       {/* Bot Battle Section */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-800 mb-3">🤖 Contra Bot</h3>
+        <h3 className="text-lg font-semibold text-gray-800 mb-3">🤖 Against Bot</h3>
         
         <div className="mb-3">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Dificultad del Bot
+            Bot Difficulty
           </label>
           <select
             value={botDifficulty}
@@ -206,9 +206,9 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
             className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             disabled={loading || inQueue}
           >
-            <option value="easy">Fácil</option>
-            <option value="medium">Medio</option>
-            <option value="hard">Difícil</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
           </select>
         </div>
         
@@ -217,15 +217,15 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
           disabled={loading || inQueue}
           className="w-full py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading ? 'Iniciando...' : 'Jugar contra Bot'}
+          {loading ? 'Starting...' : 'Play against Bot'}
         </button>
       </div>
 
       {/* Matchmaking Status */}
       {matchmakingStatus && !inQueue && (
         <div className="mt-4 p-3 bg-gray-50 rounded">
-          <p className="text-sm text-gray-600">Estado del Matchmaking:</p>
-          <p className="text-sm">Jugadores en cola: {matchmakingStatus.queueLength}</p>
+          <p className="text-sm text-gray-600">Matchmaking Status:</p>
+          <p className="text-sm">Players in queue: {matchmakingStatus.queueLength}</p>
         </div>
       )}
     </div>

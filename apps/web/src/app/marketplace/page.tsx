@@ -220,7 +220,7 @@ export default function MarketplacePage() {
             Marketplace
           </h1>
           <p className="text-gray-600">
-            Compra y vende cartas Pokémon con SOL
+            Trade your favorite cards with SOLANA
           </p>
         </div>
 
@@ -229,30 +229,30 @@ export default function MarketplacePage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Filter className="w-5 h-5 mr-2" />
-              Filtros
+              Filters
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Rareza
+                  Rarity
                 </label>
                 <select
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   value={filters.rarity}
                   onChange={(e) => setFilters({ ...filters, rarity: e.target.value })}
                 >
-                  <option value="">Todas</option>
-                  <option value="COMMON">Común</option>
-                  <option value="RARE">Rara</option>
-                  <option value="LEGENDARY">Legendaria</option>
+                  <option value="">All</option>
+                  <option value="COMMON">Common</option>
+                  <option value="RARE">Rare</option>
+                  <option value="LEGENDARY">Legendary</option>
                 </select>
               </div>
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Precio Mínimo (SOL)
+                  Minimum Price (SOL)
                 </label>
                 <input
                   type="number"
@@ -265,7 +265,7 @@ export default function MarketplacePage() {
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Precio Máximo (SOL)
+                  Maximum Price (SOL)
                 </label>
                 <input
                   type="number"
@@ -285,9 +285,9 @@ export default function MarketplacePage() {
                   value={filters.isShiny}
                   onChange={(e) => setFilters({ ...filters, isShiny: e.target.value })}
                 >
-                  <option value="">Todos</option>
-                  <option value="true">Solo Shiny</option>
-                  <option value="false">Solo Normal</option>
+                  <option value="">All</option>
+                  <option value="true">Shiny Only</option>
+                  <option value="false">Normal Only</option>
                 </select>
               </div>
             </div>
@@ -359,7 +359,7 @@ export default function MarketplacePage() {
                     </span>
                   </div>
                   <Badge className="bg-orange-100 text-orange-800">
-                    Activo
+                    Active
                   </Badge>
                 </div>
                 
@@ -370,7 +370,7 @@ export default function MarketplacePage() {
                     onClick={() => router.push(`/marketplace/listing/${listing.id}`)}
                   >
                     <ShoppingCart className="w-4 h-4 mr-1" />
-                    Comprar
+                    Buy
                   </Button>
                   <Button 
                     className="w-full" 
@@ -379,7 +379,7 @@ export default function MarketplacePage() {
                     onClick={() => router.push(`/marketplace/listing/${listing.id}`)}
                   >
                     <Eye className="w-4 h-4 mr-1" />
-                    Ver Detalles
+                    View Details
                   </Button>
                 </div>
               </CardContent>
@@ -392,9 +392,9 @@ export default function MarketplacePage() {
             <CardContent className="flex items-center justify-center h-64">
               <div className="text-center">
                 <TrendingUp className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-4">No se encontraron cartas con estos filtros</p>
+                <p className="text-gray-600 mb-4">No cards found with these filters</p>
                 <Button onClick={() => setFilters({ rarity: '', minPrice: '', maxPrice: '', isShiny: '' })}>
-                  Limpiar Filtros
+                  Clear Filters
                 </Button>
               </div>
             </CardContent>
@@ -407,14 +407,14 @@ export default function MarketplacePage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <TrendingUp className="w-5 h-5 mr-2 text-orange-500" />
-                Cartas en Venta
+                Cards for Sale
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
                 {listings.length}
               </div>
-              <p className="text-sm text-gray-600">Actualmente</p>
+              <p className="text-sm text-gray-600">Currently</p>
             </CardContent>
           </Card>
 
@@ -422,14 +422,14 @@ export default function MarketplacePage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Coins className="w-5 h-5 mr-2 text-yellow-500" />
-                Precio Promedio
+                Average Price
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
                 {formatSol(listings.reduce((acc, listing) => acc + listing.priceLamports, 0) / listings.length || 0)} SOL
               </div>
-              <p className="text-sm text-gray-600">Por carta</p>
+              <p className="text-sm text-gray-600">Per card</p>
             </CardContent>
           </Card>
 
@@ -437,14 +437,14 @@ export default function MarketplacePage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Star className="w-5 h-5 mr-2 text-purple-500" />
-                Cartas Shiny
+                Shiny Cards
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
                 {listings.filter(l => l.card.isShiny).length}
               </div>
-              <p className="text-sm text-gray-600">Disponibles</p>
+              <p className="text-sm text-gray-600">Available</p>
             </CardContent>
           </Card>
         </div>

@@ -13,21 +13,21 @@ const pixelFont = Press_Start_2P({
 });
 
 export const metadata: Metadata = {
-  title: 'PokeDotDuel - Criptojuego PvP con Apuestas en SOL',
-  description: 'Juega batallas Pokémon PvP con apuestas en SOL. Colecciona cartas, construye equipos y compite por premios reales.',
+  title: 'PokeDotDuel - PvP Crypto Game with SOL Betting',
+  description: 'Play Pokémon PvP battles with SOL betting. Collect cards, build teams and compete for real prizes.',
   keywords: ['Pokemon', 'PvP', 'Solana', 'Crypto', 'Gaming', 'NFT', 'Trading', 'battles', 'lobby'],
   authors: [{ name: 'PokeDotDuel Team' }],
   viewport: "width=device-width, initial-scale=1",
   openGraph: {
-    title: 'PokeDotDuel - Criptojuego PvP con Apuestas en SOL',
-    description: 'Juega batallas Pokémon PvP con apuestas en SOL. Colecciona cartas, construye equipos y compite por premios reales.',
+    title: 'PokeDotDuel - PvP Crypto Game with SOL Betting',
+    description: 'Play Pokémon PvP battles with SOL betting. Collect cards, build teams and compete for real prizes.',
     type: 'website',
-    locale: 'es_ES',
+    locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PokeDotDuel - Criptojuego PvP con Apuestas en SOL',
-    description: 'Juega batallas Pokémon PvP con apuestas en SOL. Colecciona cartas, construye equipos y compite por premios reales.',
+    title: 'PokeDotDuel - PvP Crypto Game with SOL Betting',
+    description: 'Play Pokémon PvP battles with SOL betting. Collect cards, build teams and compete for real prizes.',
   },
 };
 
@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={`${inter.variable} ${pixelFont.variable}`}>
+    <html lang="en" className={`${inter.variable} ${pixelFont.variable}`}>
       <body className="font-sans">
         <Providers>
           {children}

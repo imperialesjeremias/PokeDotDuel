@@ -234,7 +234,7 @@ export function setupBattleHandlers(io: Server, socket: Socket): void {
   // Manejador para partidas rápidas (matchmaking)
   socket.on('quick_match', async (data: { team: any }) => {
     if (!userId) {
-      socket.emit('error', { message: 'Usuario no autenticado' });
+      socket.emit('error', { message: 'User not authenticated' });
       return;
     }
 
@@ -245,7 +245,7 @@ export function setupBattleHandlers(io: Server, socket: Socket): void {
       if (matchResult.type === 'WAITING') {
         socket.emit('message', {
           type: 'QUICK_MATCH_WAITING',
-          message: 'Buscando oponente...'
+          message: 'Searching for opponent...'
         });
       } else if (matchResult.type === 'MATCH_FOUND') {
         // Crear batalla inmediatamente
@@ -290,14 +290,14 @@ export function setupBattleHandlers(io: Server, socket: Socket): void {
          });
       }
     } catch (error) {
-      socket.emit('error', { message: 'Error en matchmaking' });
+      socket.emit('error', { message: 'Matchmaking error' });
     }
   });
 
   // Manejador para jugar contra bot
   socket.on('play_vs_bot', async (data: { team: any, difficulty?: 'easy' | 'medium' | 'hard' }) => {
     if (!userId) {
-      socket.emit('error', { message: 'Usuario no autenticado' });
+      socket.emit('error', { message: 'User not authenticated' });
       return;
     }
 
@@ -326,7 +326,7 @@ export function setupBattleHandlers(io: Server, socket: Socket): void {
       
       socket.join(`battle:${battleId}`);
     } catch (error) {
-      socket.emit('error', { message: 'Error creando batalla contra bot' });
+      socket.emit('error', { message: 'Error creating bot battle' });
     }
   });
 }

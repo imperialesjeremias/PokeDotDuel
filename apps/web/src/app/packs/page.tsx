@@ -156,7 +156,7 @@ export default function PacksPage() {
             Booster Packs
           </h1>
           <p className="text-gray-600">
-            Compra packs con SOL y descubre cartas raras
+            Buy packs with SOL and discover rare cards
           </p>
         </div>
 
@@ -165,10 +165,10 @@ export default function PacksPage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Package className="w-5 h-5 mr-2 text-orange-600" />
-              Comprar Booster Pack
+              Buy Booster Pack
             </CardTitle>
             <CardDescription>
-              Cada pack contiene 5 cartas aleatorias
+              Each pack contains 5 random cards
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -179,10 +179,10 @@ export default function PacksPage() {
                   <span className="text-2xl font-bold text-gray-900">0.1 SOL</span>
                 </div>
                 <p className="text-sm text-gray-600">
-                  Probabilidades: 80% Común, 18% Rara, 2% Legendaria
+                  Odds: 80% Common, 18% Rare, 2% Legendary
                 </p>
                 <p className="text-sm text-gray-600">
-                  + 1/128 chance de Shiny por carta
+                  + 1/128 Shiny chance per card
                 </p>
               </div>
               <Button 
@@ -191,7 +191,7 @@ export default function PacksPage() {
                 className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white"
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
-                Comprar Pack
+                Buy Pack
               </Button>
             </div>
           </CardContent>
@@ -202,12 +202,12 @@ export default function PacksPage() {
           <Card className="mb-8">
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Package className="w-5 h-5 mr-2 text-yellow-600" />
-                Packs Sin Abrir ({unopenedPacks.length})
-              </CardTitle>
-              <CardDescription>
-                Haz clic en un pack para abrirlo
-              </CardDescription>
+              <Package className="w-5 h-5 mr-2 text-yellow-600" />
+              Unopened Packs ({unopenedPacks.length})
+            </CardTitle>
+            <CardDescription>
+              Click on a pack to open it
+            </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -222,19 +222,19 @@ export default function PacksPage() {
                         {openingPack === pack.id ? (
                           <div className="animate-pulse">
                             <Zap className="w-12 h-12 text-white mx-auto mb-4 animate-spin" />
-                            <p className="text-white font-semibold">Abriendo...</p>
+                            <p className="text-white font-semibold">Opening...</p>
                           </div>
                         ) : (
                           <>
                             <Package className="w-16 h-16 text-white mx-auto mb-4" />
                             <h3 className="text-white font-bold text-lg mb-2">Booster Pack</h3>
-                            <p className="text-white text-sm">5 Cartas</p>
+                            <p className="text-white text-sm">5 Cards</p>
                             <div className="mt-4 flex justify-center">
                               <Button 
                                 size="sm" 
                                 className="bg-white text-orange-600 hover:bg-gray-100 mx-auto"
                               >
-                                Abrir Pack
+                                Open Pack
                               </Button>
                             </div>
                           </>
@@ -253,19 +253,19 @@ export default function PacksPage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Star className="w-5 h-5 mr-2 text-purple-600" />
-              Historial de Packs
+              Pack History
             </CardTitle>
             <CardDescription>
-              Tus packs abiertos y recompensas obtenidas
+              Your opened packs and rewards obtained
             </CardDescription>
           </CardHeader>
           <CardContent>
             {openedPacks.length === 0 ? (
               <div className="text-center py-8">
                 <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-4">No has abierto ningún pack aún</p>
+                <p className="text-gray-600 mb-4">You haven't opened any packs yet</p>
                 <Button onClick={buyPack}>
-                  Comprar Primer Pack
+                  Buy First Pack
                 </Button>
               </div>
             ) : (
@@ -327,7 +327,7 @@ export default function PacksPage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Package className="w-5 h-5 mr-2 text-blue-500" />
-                Packs Comprados
+                Purchased Packs
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -342,14 +342,14 @@ export default function PacksPage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Star className="w-5 h-5 mr-2 text-purple-500" />
-                Cartas Shiny
+                Shiny Cards
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
                 {Math.floor(packs.length * 5 * 0.0078)} {/* 1/128 chance */}
               </div>
-              <p className="text-sm text-gray-600">Estimado</p>
+              <p className="text-sm text-gray-600">Total cards</p>
             </CardContent>
           </Card>
 
@@ -357,14 +357,14 @@ export default function PacksPage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Coins className="w-5 h-5 mr-2 text-yellow-500" />
-                SOL Gastado
+                Spent SOL
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
                 {(packs.length * 0.1).toFixed(1)}
               </div>
-              <p className="text-sm text-gray-600">En packs</p>
+              <p className="text-sm text-gray-600">In all packs</p>
             </CardContent>
           </Card>
         </div>

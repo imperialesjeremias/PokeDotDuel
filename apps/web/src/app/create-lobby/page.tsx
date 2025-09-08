@@ -34,7 +34,7 @@ const BRACKETS: BracketInfo[] = [
     name: 'Bronze',
     minWager: 0.01,
     maxWager: 0.05,
-    description: 'Ideal para principiantes',
+    description: 'Ideal for beginners',
     color: 'bg-orange-100 text-orange-800 border-orange-200'
   },
   {
@@ -42,7 +42,7 @@ const BRACKETS: BracketInfo[] = [
     name: 'Silver',
     minWager: 0.05,
     maxWager: 0.1,
-    description: 'Para jugadores intermedios',
+    description: 'For intermediate players',
     color: 'bg-gray-100 text-gray-800 border-gray-200'
   },
   {
@@ -50,7 +50,7 @@ const BRACKETS: BracketInfo[] = [
     name: 'Gold',
     minWager: 0.1,
     maxWager: 0.5,
-    description: 'Competencia seria',
+    description: 'Serious competition',
     color: 'bg-yellow-100 text-yellow-800 border-yellow-200'
   },
   {
@@ -58,7 +58,7 @@ const BRACKETS: BracketInfo[] = [
     name: 'Platinum',
     minWager: 0.5,
     maxWager: 1.0,
-    description: 'Alto nivel de juego',
+    description: 'High level gameplay',
     color: 'bg-blue-100 text-blue-800 border-blue-200'
   },
   {
@@ -66,7 +66,7 @@ const BRACKETS: BracketInfo[] = [
     name: 'Diamond',
     minWager: 1.0,
     maxWager: 5.0,
-    description: 'Solo para expertos',
+    description: 'Experts only',
     color: 'bg-cyan-100 text-cyan-800 border-cyan-200'
   },
   {
@@ -74,7 +74,7 @@ const BRACKETS: BracketInfo[] = [
     name: 'Master',
     minWager: 5.0,
     maxWager: 100.0,
-    description: 'Liga de maestros',
+    description: 'Masters league',
     color: 'bg-purple-100 text-purple-800 border-purple-200'
   }
 ];
@@ -135,10 +135,10 @@ export default function CreateLobbyPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Crear Lobby de Batalla
+            Create Battle Lobby
           </h1>
           <p className="text-gray-600">
-            Configura tu lobby y espera a que otro jugador se una para comenzar la batalla
+            Configure your lobby and wait for another player to join to start the battle
           </p>
         </div>
 
@@ -149,17 +149,17 @@ export default function CreateLobbyPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Bracket Selection */}
-          <div>
-            <Card>
+          <div className="flex">
+            <Card className="flex-1 h-full">
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Trophy className="w-5 h-5 mr-2" />
-                  Seleccionar Bracket
+                  Select Bracket
                 </CardTitle>
                 <CardDescription>
-                  Elige el nivel de competencia y rango de apuestas
+                  Choose competition level and betting range
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -189,15 +189,15 @@ export default function CreateLobbyPage() {
           </div>
 
           {/* Lobby Configuration */}
-          <div>
+          <div className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Coins className="w-5 h-5 mr-2" />
-                  Configuración del Lobby
+                  Lobby Configuration
                 </CardTitle>
                 <CardDescription>
-                  Establece la cantidad de apuesta para tu batalla
+                  Set the wager amount for your battle
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -209,14 +209,14 @@ export default function CreateLobbyPage() {
                   </div>
                   <p className="text-sm mb-2">{selectedBracket.description}</p>
                   <p className="text-xs">
-                    Rango: {selectedBracket.minWager} - {selectedBracket.maxWager} SOL
+                    Range: {selectedBracket.minWager} - {selectedBracket.maxWager} SOL
                   </p>
                 </div>
 
                 {/* Wager Amount */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Cantidad de Apuesta (SOL)
+                    Wager Amount (SOL)
                   </label>
                   <input
                     type="number"
@@ -228,26 +228,26 @@ export default function CreateLobbyPage() {
                     className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
                       !isValidWager ? 'border-red-300 bg-red-50' : 'border-gray-300'
                     }`}
-                    placeholder={`Entre ${selectedBracket.minWager} y ${selectedBracket.maxWager}`}
+                    placeholder={`Between ${selectedBracket.minWager} and ${selectedBracket.maxWager}`}
                   />
                   {!isValidWager && (
                     <p className="text-red-600 text-sm mt-1">
-                      La cantidad debe estar entre {selectedBracket.minWager} y {selectedBracket.maxWager} SOL
+                      Amount must be between {selectedBracket.minWager} and {selectedBracket.maxWager} SOL
                     </p>
                   )}
                 </div>
 
                 {/* Quick Amount Buttons */}
                 <div>
-                  <p className="text-sm font-medium text-gray-700 mb-2">Cantidades rápidas:</p>
-                  <div className="grid grid-cols-3 gap-2">
-                    {[selectedBracket.minWager, (selectedBracket.minWager + selectedBracket.maxWager) / 2, selectedBracket.maxWager].map(amount => (
+                  <p className="text-sm font-medium text-gray-700 mb-2">Quick amounts:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {[0.1, 0.5, 1].map(amount => (
                       <Button
                         key={amount}
                         variant="outline"
                         size="sm"
                         onClick={() => setWagerAmount(amount)}
-                        className={wagerAmount === amount ? 'bg-blue-50 border-blue-300' : ''}
+                        className={`flex-1 min-w-0 text-xs px-2 py-1 ${wagerAmount === amount ? 'bg-blue-50 border-blue-300' : ''}`}
                       >
                         {amount} SOL
                       </Button>
@@ -265,12 +265,12 @@ export default function CreateLobbyPage() {
                   {isCreating ? (
                     <>
                       <Clock className="w-5 h-5 mr-2 animate-spin" />
-                      Creando Lobby...
+                      Creating Lobby...
                     </>
                   ) : (
                     <>
                       <Plus className="w-5 h-5 mr-2" />
-                      Crear Lobby
+                      Create Lobby
                     </>
                   )}
                 </Button>
@@ -282,7 +282,7 @@ export default function CreateLobbyPage() {
               <CardHeader>
                 <CardTitle className="flex items-center text-lg">
                   <Users className="w-5 h-5 mr-2" />
-                  ¿Cómo funciona?
+                  How does it work?
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -291,25 +291,25 @@ export default function CreateLobbyPage() {
                     <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold mr-3 mt-0.5">
                       1
                     </div>
-                    <p>Crea tu lobby con la apuesta deseada</p>
+                    <p>Create your lobby with the desired wager</p>
                   </div>
                   <div className="flex items-start">
                     <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold mr-3 mt-0.5">
                       2
                     </div>
-                    <p>Comparte el ID del lobby con otro jugador</p>
+                    <p>Share the lobby ID with another player</p>
                   </div>
                   <div className="flex items-start">
                     <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold mr-3 mt-0.5">
                       3
                     </div>
-                    <p>Ambos seleccionan sus equipos y confirman</p>
+                    <p>Both players select their teams and confirm</p>
                   </div>
                   <div className="flex items-start">
                     <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold mr-3 mt-0.5">
                       4
                     </div>
-                    <p>¡La batalla comienza automáticamente!</p>
+                    <p>The battle starts automatically!</p>
                   </div>
                 </div>
               </CardContent>

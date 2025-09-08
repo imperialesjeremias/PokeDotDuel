@@ -39,10 +39,10 @@ export function Navigation() {
 
   const navItems = [
     { href: '/dashboard', label: 'Dashboard', icon: Home },
-    { href: '/quickmatch', label: 'Partida Rápida', icon: Zap },
-    { href: '/create-lobby', label: 'Crear Lobby', icon: Plus },
-    { href: '/battle', label: 'Batalla', icon: Sword },
-    { href: '/team-builder', label: 'Equipo', icon: Users },
+    { href: '/quickmatch', label: 'Quick Match', icon: Zap },
+    { href: '/create-lobby', label: 'Create Lobby', icon: Plus },
+    { href: '/battle', label: 'Battle', icon: Sword },
+    { href: '/team-builder', label: 'Team', icon: Users },
     { href: '/packs', label: 'Packs', icon: Package },
     { href: '/marketplace', label: 'Marketplace', icon: ShoppingCart },
   ];
@@ -50,7 +50,7 @@ export function Navigation() {
   return (
     <nav className="bg-gradient-to-r from-orange-600 to-red-600 border-b-4 border-red-800 shadow-[0_4px_0px_0px_#8B0000]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 gap-4">
+        <div className="flex items-center h-20">
           {/* POKEDUEL Logo */}
           <div className="flex-shrink-0">
             <Link href="/dashboard" className="flex items-center">
@@ -65,7 +65,7 @@ export function Navigation() {
           </div>
 
           {/* Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-3 flex-1 justify-center">
+          <div className="hidden lg:flex items-center space-x-3 flex-1 justify-center px-8">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -81,21 +81,21 @@ export function Navigation() {
           </div>
 
           {/* Mobile Menu Button */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="px-2 py-1 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all"
-              >
-                {mobileMenuOpen ? (
-                  <X className="w-4 h-4 text-orange-100" />
-                ) : (
-                  <Menu className="w-4 h-4 text-orange-100" />
-                )}
-              </button>
-            </div>
+          <div className="lg:hidden ml-auto">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="px-2 py-1 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-4 h-4 text-orange-100" />
+              ) : (
+                <Menu className="w-4 h-4 text-orange-100" />
+              )}
+            </button>
+          </div>
 
-            {/* Desktop Trainer Menu */}
-            <div className="hidden lg:flex items-center space-x-2 flex-shrink-0">
+          {/* Desktop Trainer Menu */}
+          <div className="hidden lg:flex items-center space-x-2 flex-shrink-0">
               {/* Trainer Info */}
               <div className="px-2 py-1 bg-orange-600 border-2 border-orange-800 shadow-[2px_2px_0px_0px_#8B0000]">
                 <span className="font-pixel text-white text-xs">
