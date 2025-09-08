@@ -127,9 +127,11 @@ export function PackOpener() {
 
       {/* Current Pack Animation */}
       {openingPack && (
-        <div className="bg-white p-6 rounded-lg shadow-md mb-6 text-center">
-          <h2 className="text-xl font-semibold mb-4">Opening Pack...</h2>
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500 mx-auto"></div>
+        <div className="bg-gradient-to-br from-orange-100 to-red-100 p-6 rounded-lg shadow-md mb-6 text-center border-4 border-orange-600">
+          <h2 className="text-xl font-pixel text-orange-800 mb-4">OPENING PACK...</h2>
+          <div className="w-16 h-16 border-4 border-orange-600 bg-orange-400 animate-pulse mx-auto flex items-center justify-center">
+            <div className="w-8 h-8 border-2 border-orange-800 animate-pixel-step"></div>
+          </div>
         </div>
       )}
 
@@ -185,7 +187,7 @@ export function PackOpener() {
                   <button
                     onClick={() => handleOpenPack(pack.id)}
                     disabled={loading || openingPack}
-                    className="mt-2 w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 disabled:opacity-50"
+                    className="mt-2 w-full bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 disabled:opacity-50"
                   >
                     {openingPack ? 'Opening...' : 'Open Pack'}
                   </button>
@@ -221,7 +223,7 @@ export function PackOpener() {
             <p className="text-sm text-gray-600">Total Packs</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-green-600">
+            <p className="text-2xl font-bold text-orange-600">
               {userPacks.filter(p => p.opened).length}
             </p>
             <p className="text-sm text-gray-600">Opened</p>

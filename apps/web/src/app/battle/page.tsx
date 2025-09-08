@@ -117,7 +117,7 @@ export default function BattlePage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'OPEN':
-        return 'bg-green-100 text-green-800';
+        return 'bg-orange-100 text-orange-800';
       case 'FULL':
         return 'bg-blue-100 text-blue-800';
       case 'IN_PROGRESS':
@@ -142,8 +142,10 @@ export default function BattlePage() {
 
   if (!ready || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 to-red-600">
+        <div className="w-32 h-32 border-8 border-orange-800 bg-orange-400 animate-pulse flex items-center justify-center">
+          <div className="w-16 h-16 border-4 border-orange-900 animate-pixel-step"></div>
+        </div>
       </div>
     );
   }
@@ -175,7 +177,7 @@ export default function BattlePage() {
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Plus className="w-5 h-5 mr-2 text-green-600" />
+                <Sword className="w-5 h-5 mr-2 text-orange-600" />
                 Crear Lobby
               </CardTitle>
               <CardDescription>
@@ -268,7 +270,7 @@ export default function BattlePage() {
                     className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                   >
                     <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                      <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
                         <Sword className="w-6 h-6 text-white" />
                       </div>
                       <div>
@@ -344,7 +346,7 @@ export default function BattlePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Coins className="w-5 h-5 mr-2 text-green-500" />
+                <Coins className="w-5 h-5 mr-2 text-orange-500" />
                 SOL en Apuestas
               </CardTitle>
             </CardHeader>

@@ -123,7 +123,7 @@ export function PVPBattle() {
       {/* Connection Status */}
       <div className="mb-4">
         <span className={`px-2 py-1 rounded text-sm ${
-          isConnected ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+          isConnected ? 'bg-orange-100 text-orange-800' : 'bg-red-100 text-red-800'
         }`}>
           {isConnected ? '🟢 Connected' : '🔴 Disconnected'}
         </span>
@@ -203,7 +203,7 @@ export function PVPBattle() {
             <button
               onClick={handleJoinLobby}
               disabled={loading || !lobbyId}
-              className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 disabled:opacity-50"
+              className="w-full bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 disabled:opacity-50"
             >
               Join Lobby
             </button>

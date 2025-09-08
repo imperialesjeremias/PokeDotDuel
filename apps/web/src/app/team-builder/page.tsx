@@ -183,7 +183,7 @@ export default function TeamBuilderPage() {
 
   const getTypeColor = (type: string) => {
     const colors: Record<string, string> = {
-      'GRASS': 'bg-green-100 text-green-800',
+      'GRASS': 'bg-orange-100 text-orange-800',
       'FIRE': 'bg-red-100 text-red-800',
       'WATER': 'bg-blue-100 text-blue-800',
       'ELECTRIC': 'bg-yellow-100 text-yellow-800',
@@ -196,8 +196,10 @@ export default function TeamBuilderPage() {
 
   if (!ready || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 to-red-600">
+        <div className="w-32 h-32 border-8 border-orange-800 bg-orange-400 animate-pulse flex items-center justify-center">
+          <div className="w-16 h-16 border-4 border-orange-900 animate-pixel-step"></div>
+        </div>
       </div>
     );
   }
@@ -412,8 +414,8 @@ export default function TeamBuilderPage() {
                         Considera agregar un Pokémon tipo Roca para mejor cobertura
                       </p>
                     </div>
-                    <div className="p-2 bg-green-50 border border-green-200 rounded">
-                      <p className="text-sm text-green-800">
+                    <div className="p-2 bg-orange-50 border border-orange-200 rounded">
+          <p className="text-sm text-orange-800">
                         Buen balance entre ataque y defensa
                       </p>
                     </div>

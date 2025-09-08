@@ -72,30 +72,28 @@ export default function HomePage() {
 
   if (!ready) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 to-red-600">
+        <div className="w-32 h-32 border-8 border-orange-800 bg-orange-400 animate-pulse flex items-center justify-center">
+          <div className="w-16 h-16 border-4 border-orange-900 animate-pixel-step"></div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
+    <div className="min-h-screen bg-pokemon-blue-bg">
+      {/* Pokemon Game Style Header */}
+      <header className="pokecenter-ui border-b-8 border-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Sword className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-2xl font-bold text-gray-900">PokeBattle</span>
+            <div className="flex items-center space-x-4">
+              <span className="text-3xl font-pixel text-black">POKEDOTDUEL</span>
             </div>
             <div className="flex items-center space-x-4">
-              <Badge variant="secondary" className="bg-green-100 text-green-800">
-                <Zap className="w-3 h-3 mr-1" />
-                En Vivo
-              </Badge>
-              <Button onClick={login} className="bg-blue-600 hover:bg-blue-700">
+              <div className="battle-ui px-3 py-1">
+                <span className="text-xs">ONLINE</span>
+              </div>
+              <Button onClick={login} className="pokemon-red-theme border-4 border-black font-pixel px-6 py-3 hover:bg-pokemon-red-accent">
                 Conectar Wallet
               </Button>
             </div>
@@ -103,148 +101,155 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Pokemon Game Style Hero Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Batallas Pokémon
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              con Apuestas Reales
-            </span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Combate por turnos con mecánicas auténticas de Pokémon Gen 1. 
-            Gana SOL real, colecciona cartas raras y construye el equipo definitivo.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              onClick={login}
-              className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
-            >
-              <Sword className="w-5 h-5 mr-2" />
-              Empezar a Jugar
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              onClick={() => router.push('/how-to-play')}
-              className="text-lg px-8 py-3"
-            >
-              <Shield className="w-5 h-5 mr-2" />
-              Cómo Jugar
-            </Button>
+          <div className="pokemon-menu p-8 mb-12 animate-pixel-fade">
+            <h1 className="text-4xl md:text-6xl font-pixel text-black mb-6">
+              POKEMON BATTLE
+              <span className="block text-pokemon-red-primary">
+                ARENA
+              </span>
+            </h1>
+            <div className="status-window max-w-3xl mx-auto mb-8">
+              <p className="text-lg font-pixel text-black">
+                ► Combate por turnos con mecánicas auténticas de Pokémon Gen 1<br/>
+                ► Gana SOL real, colecciona cartas raras<br/>
+                ► Construye el equipo definitivo
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Button 
+                size="lg" 
+                onClick={login}
+                className="pokemon-red-theme border-4 border-black font-pixel px-8 py-4 text-lg hover:bg-pokemon-red-accent"
+              >
+                ► EMPEZAR BATALLA
+              </Button>
+              <Button 
+                size="lg" 
+                onClick={() => router.push('/how-to-play')}
+                className="pokemon-blue-theme border-4 border-black font-pixel px-8 py-4 text-lg hover:bg-pokemon-blue-accent"
+              >
+                ► COMO JUGAR
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white">
+      {/* Pokemon Stats Section */}
+      <section className="py-16 bg-pokemon-yellow-bg border-t-8 border-b-8 border-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">{stat.value}</div>
-                <div className="text-gray-600">{stat.label}</div>
+              <div key={index} className="battle-ui text-center animate-pixel-fade" style={{animationDelay: `${index * 150}ms`}}>
+                <div className="text-3xl font-pixel text-white mb-2">{stat.value}</div>
+                <div className="text-gray-300 font-pixel text-sm">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Pokemon Features Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Características Principales
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Una experiencia de juego completa con tecnología blockchain
-            </p>
+            <div className="pokemon-menu p-6 inline-block">
+              <h2 className="text-4xl font-pixel text-black mb-4 animate-pixel-step">
+                ► CARACTERISTICAS ◄
+              </h2>
+            </div>
+            <div className="status-window max-w-2xl mx-auto mt-6">
+              <p className="text-lg font-pixel text-black">
+                Una experiencia de juego completa con tecnología blockchain
+              </p>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-blue-600" />
+              <div key={index} className={`pokemon-menu animate-pixel-fade`} style={{animationDelay: `${index * 100}ms`}}>
+                <div className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="pokeball mr-3"></div>
+                    <feature.icon className="w-6 h-6 text-black mr-2" />
+                    <h3 className="text-lg font-pixel text-black">{feature.title}</h3>
                   </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-gray-600">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
+                  <div className="status-window">
+                    <p className="text-black font-pixel text-sm">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+      {/* Pokemon CTA Section */}
+      <section className="py-20 pokecenter-ui">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            ¿Listo para la Batalla?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Conecta tu wallet y comienza tu aventura Pokémon con apuestas reales
-          </p>
-          <Button 
-            size="lg" 
-            onClick={login}
-            className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3"
-          >
-            <Star className="w-5 h-5 mr-2" />
-            Conectar y Jugar
-          </Button>
+          <div className="battle-ui p-8 inline-block">
+            <h2 className="text-4xl font-pixel text-white mb-6">
+              ¿LISTO PARA LA BATALLA?
+            </h2>
+            <p className="text-lg font-pixel text-gray-300 mb-8">
+              ► Conecta tu wallet y comienza tu aventura Pokémon
+            </p>
+            <Button 
+              size="lg" 
+              onClick={login}
+              className="pokemon-yellow-theme border-4 border-black font-pixel text-lg px-8 py-4 hover:bg-pokemon-yellow-accent"
+            >
+              ★ CONECTAR Y JUGAR ★
+            </Button>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      {/* Pokemon Footer */}
+      <footer className="bg-black border-t-8 border-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <Sword className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold">PokeBattle</span>
+              <div className="flex items-center space-x-3 mb-4">
+                <span className="text-2xl font-pixel text-white">POKEDOTDUEL</span>
               </div>
-              <p className="text-gray-400">
-                El primer criptojuego PvP de Pokémon con apuestas en SOL
-              </p>
+              <div className="status-window">
+                <p className="text-black font-pixel text-sm">
+                  El primer criptojuego PvP de Pokémon con apuestas en SOL
+                </p>
+              </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Juego</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="/how-to-play" className="hover:text-white">Cómo Jugar</a></li>
-                <li><a href="/marketplace" className="hover:text-white">Marketplace</a></li>
-                <li><a href="/leaderboard" className="hover:text-white">Rankings</a></li>
-              </ul>
+              <h3 className="font-pixel text-white mb-4 border-b-2 border-white pb-2">► JUEGO</h3>
+              <div className="pokemon-menu">
+                <div className="pokemon-menu-item"><a href="/how-to-play">Cómo Jugar</a></div>
+                <div className="pokemon-menu-item"><a href="/marketplace">Marketplace</a></div>
+                <div className="pokemon-menu-item"><a href="/leaderboard">Rankings</a></div>
+              </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Recursos</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="/docs" className="hover:text-white">Documentación</a></li>
-                <li><a href="/whitepaper" className="hover:text-white">Whitepaper</a></li>
-                <li><a href="/faq" className="hover:text-white">FAQ</a></li>
-              </ul>
+              <h3 className="font-pixel text-white mb-4 border-b-2 border-white pb-2">► RECURSOS</h3>
+              <div className="pokemon-menu">
+                <div className="pokemon-menu-item"><a href="/docs">Documentación</a></div>
+                <div className="pokemon-menu-item"><a href="/whitepaper">Whitepaper</a></div>
+                <div className="pokemon-menu-item"><a href="/faq">FAQ</a></div>
+              </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="/terms" className="hover:text-white">Términos</a></li>
-                <li><a href="/privacy" className="hover:text-white">Privacidad</a></li>
-                <li><a href="/contact" className="hover:text-white">Contacto</a></li>
-              </ul>
+              <h3 className="font-pixel text-white mb-4 border-b-2 border-white pb-2">► LEGAL</h3>
+              <div className="pokemon-menu">
+                <div className="pokemon-menu-item"><a href="/terms">Términos</a></div>
+                <div className="pokemon-menu-item"><a href="/privacy">Privacidad</a></div>
+                <div className="pokemon-menu-item"><a href="/contact">Contacto</a></div>
+              </div>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 PokeBattle. Todos los derechos reservados.</p>
+          <div className="border-t-4 border-white mt-8 pt-8 text-center">
+            <p className="font-pixel text-white">&copy; 2024 POKEDOTDUEL. TODOS LOS DERECHOS RESERVADOS.</p>
           </div>
         </div>
       </footer>

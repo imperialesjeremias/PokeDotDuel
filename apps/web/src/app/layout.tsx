@@ -1,17 +1,15 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Press_Start_2P, Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
 import { Toaster } from 'react-hot-toast';
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const pixelFont = Press_Start_2P({ 
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-pixel',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -39,10 +37,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className="dark">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-gray-900 text-white`}
-      >
+    <html lang="es" className={`${inter.variable} ${pixelFont.variable}`}>
+      <body className="font-sans">
         <Providers>
           {children}
           <Toaster

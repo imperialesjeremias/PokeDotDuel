@@ -132,8 +132,10 @@ export default function ProfilePage() {
 
   if (!ready || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 to-red-600">
+        <div className="w-32 h-32 border-8 border-orange-800 bg-orange-400 animate-pulse flex items-center justify-center">
+          <div className="w-16 h-16 border-4 border-orange-900 animate-pixel-step"></div>
+        </div>
       </div>
     );
   }
@@ -164,7 +166,7 @@ export default function ProfilePage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
                     <User className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
@@ -286,7 +288,7 @@ export default function ProfilePage() {
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">{profile?.stats.wins || 0}</div>
+                    <div className="text-2xl font-bold text-orange-600">{profile?.stats.wins || 0}</div>
                     <div className="text-sm text-gray-600">Victorias</div>
                   </div>
                   <div className="text-center">
@@ -344,7 +346,7 @@ export default function ProfilePage() {
               <CardContent>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">
+                    <div className="text-2xl font-bold text-orange-600">
                       {(profile?.stats.totalWagered || 0) / 1_000_000_000} SOL
                     </div>
                     <div className="text-sm text-gray-600">Total Apostado</div>
