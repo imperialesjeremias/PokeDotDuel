@@ -60,7 +60,11 @@ export type ServerMessage =
   | { type: 'TURN_RESULT'; turn: number; events: BattleEvent[] }
   | { type: 'CHAT'; from: string; text: string }
   | { type: 'BATTLE_END'; winner: string; reason: 'KO' | 'Timeout' | 'Forfeit' }
-  | { type: 'ERROR'; code: string; message: string };
+  | { type: 'ERROR'; code: string; message: string }
+  | { type: 'MATCH_FOUND'; lobbyId: string }
+  | { type: 'MATCHMAKING_STATUS'; data: MatchmakingStatus }
+  | { type: 'BATTLE_STATE'; state: any }
+  | { type: 'BATTLE_RESULT'; winner: string; data: any };
 
 export interface LobbyState {
   id: string;
@@ -70,6 +74,7 @@ export interface LobbyState {
   creatorId: string;
   opponentId?: string;
   wagerLamports: number;
+  isBot?: boolean;
 }
 
 export interface BattleEvent {
@@ -78,4 +83,15 @@ export interface BattleEvent {
   value?: number;
   status?: string;
   move?: string;
+}
+
+export interface BattleTeam {
+  id: string;
+  name: string;
+  pokemon: any[]; // TODO: Define proper Pokemon interface
+}
+
+export interface MatchmakingStatus {
+  queueLength: number;
+  estimatedWaitTime: number;
 }

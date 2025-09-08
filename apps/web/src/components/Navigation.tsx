@@ -12,7 +12,9 @@ import {
   Trophy,
   Package,
   ShoppingCart,
-  Users
+  Users,
+  Zap,
+  Plus
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -31,10 +33,12 @@ export function Navigation() {
 
   const navItems = [
     { href: '/dashboard', label: 'Dashboard', icon: Home },
+    { href: '/quickmatch', label: 'Partida Rápida', icon: Zap },
+    { href: '/create-lobby', label: 'Crear Lobby', icon: Plus },
     { href: '/battle', label: 'Batalla', icon: Sword },
+    { href: '/team-builder', label: 'Equipo', icon: Users },
     { href: '/packs', label: 'Packs', icon: Package },
     { href: '/marketplace', label: 'Marketplace', icon: ShoppingCart },
-    { href: '/team-builder', label: 'Equipo', icon: Users },
   ];
 
   return (
@@ -46,7 +50,7 @@ export function Navigation() {
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <Sword className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">PokeBattle</span>
+            <span className="text-xl font-bold text-gray-900">PokeDotDuel</span>
           </Link>
 
           {/* Navigation Links */}

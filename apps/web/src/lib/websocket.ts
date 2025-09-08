@@ -1,8 +1,10 @@
-import { io, Socket } from 'socket.io-client';
+import io from 'socket.io-client';
+
+type SocketType = ReturnType<typeof io>;
 import { ClientMessage, ServerMessage } from '../types/shared';
 
 class WebSocketManager {
-  private socket: Socket | null = null;
+  private socket: SocketType | null = null;
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 5;
   private reconnectDelay = 1000;
@@ -26,12 +28,12 @@ class WebSocketManager {
         resolve();
       });
 
-      this.socket.on('connect_error', (error) => {
+      this.socket.on('connect_error', (error: any) => {
         console.error('WebSocket connection error:', error);
         reject(error);
       });
 
-      this.socket.on('disconnect', (reason) => {
+      this.socket.on('disconnect', (reason: string) => {
         console.log('Disconnected from WebSocket server:', reason);
         if (reason === 'io server disconnect') {
           // Server disconnected, try to reconnect
@@ -39,12 +41,12 @@ class WebSocketManager {
         }
       });
 
-      this.socket.on('reconnect', (attemptNumber) => {
+      this.socket.on('reconnect', (attemptNumber: number) => {
         console.log('Reconnected to WebSocket server after', attemptNumber, 'attempts');
         this.reconnectAttempts = 0;
       });
 
-      this.socket.on('reconnect_error', (error) => {
+      this.socket.on('reconnect_error', (error: any) => {
         console.error('WebSocket reconnection error:', error);
         this.handleReconnect();
       });
@@ -60,7 +62,7 @@ class WebSocketManager {
       });
 
       // Handle errors
-      this.socket.on('error', (error) => {
+      this.socket.on('error', (error: any) => {
         console.error('WebSocket error:', error);
         this.notifyListeners('error', error);
       });
@@ -165,8 +167,12 @@ class WebSocketManager {
     return this.socket?.connected || false;
   }
 
-  getSocket(): Socket | null {
+  getSocket(): SocketType | null {
     return this.socket;
+  }
+
+  onMessage(callback: (message: ServerMessage) => void): void {
+    this.on('message', callback);
   }
 }
 

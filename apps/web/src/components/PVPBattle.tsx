@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { usePVP } from '../hooks/usePVP';
-import { LobbyState, ServerMessage } from '../types/shared';
+import { LobbyState, ServerMessage, BattleTeam } from '../types/shared';
 
 export function PVPBattle() {
   const { publicKey } = useWallet();
@@ -25,7 +25,7 @@ export function PVPBattle() {
   const [lobbyId, setLobbyId] = useState('');
   const [bracketId, setBracketId] = useState(1);
   const [wagerAmount, setWagerAmount] = useState(0.01);
-  const [selectedTeam, setSelectedTeam] = useState('');
+  const [selectedTeamId, setSelectedTeamId] = useState('');
   const [battleEvents, setBattleEvents] = useState<any[]>([]);
 
   // Handle WebSocket messages
@@ -65,8 +65,18 @@ export function PVPBattle() {
   };
 
   const handleSelectTeam = async () => {
+    if (!selectedTeamId) {
+      console.error('No team ID entered');
+      return;
+    }
     try {
-      await selectTeam(selectedTeam);
+      // Create a BattleTeam object from the team ID
+      const team: BattleTeam = {
+        id: selectedTeamId,
+        name: `Team ${selectedTeamId}`,
+        pokemon: [] // This should be populated with actual Pokemon data
+      };
+      await selectTeam(team);
     } catch (err) {
       console.error('Failed to select team:', err);
     }
@@ -222,15 +232,15 @@ export function PVPBattle() {
                 <label className="block text-sm font-medium mb-1">Select Team</label>
                 <input
                   type="text"
-                  value={selectedTeam}
-                  onChange={(e) => setSelectedTeam(e.target.value)}
+                  value={selectedTeamId}
+                  onChange={(e) => setSelectedTeamId(e.target.value)}
                   className="w-full p-2 border rounded"
                   placeholder="Enter team ID"
                 />
               </div>
               <button
                 onClick={handleSelectTeam}
-                disabled={loading || !selectedTeam}
+                disabled={loading || !selectedTeamId}
                 className="w-full bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600 disabled:opacity-50"
               >
                 Select Team

@@ -3,10 +3,13 @@
   "private": true,
   "scripts": {
     "dev": "node start-project.js",
-    "build": "npm run build:backend && npm run build:frontend",
+    "dev:ws": "cd apps/websocket-server && npm run dev",
+    "build": "npm run build:backend && npm run build:frontend && npm run build:ws",
     "build:backend": "cd apps/backend && npm run build",
     "build:frontend": "cd apps/web && npm run build",
+    "build:ws": "cd apps/websocket-server && npm run build",
     "start": "node start-project.js",
+    "start:ws": "cd apps/websocket-server && npm run start",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "setup": "node setup-env.js",
     "verify": "node verify-implementation.js"

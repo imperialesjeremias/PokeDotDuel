@@ -172,33 +172,7 @@ export type Pack = z.infer<typeof PackSchema>;
 export type Transaction = z.infer<typeof TransactionSchema>;
 export type Stats = z.infer<typeof StatsSchema>;
 
-// WebSocket message types
-export type ClientMessage = 
-  | { type: 'JOIN_LOBBY'; lobbyId: string }
-  | { type: 'INVITE_ACCEPT'; lobbyId: string }
-  | { type: 'SELECT_TEAM'; teamId: string }
-  | { type: 'READY' }
-  | { 
-      type: 'TURN_ACTION'; 
-      turn: number; 
-      move: {
-        slot: number;
-        action: 'MOVE' | 'SWITCH';
-        moveId?: string;
-        target?: number;
-      };
-      commit?: string;
-      reveal?: string;
-    }
-  | { type: 'FORFEIT' };
-
-export type ServerMessage = 
-  | { type: 'LOBBY_STATE'; state: LobbyState }
-  | { type: 'BATTLE_START'; battleId: string; seed: string }
-  | { type: 'TURN_RESULT'; turn: number; events: BattleEvent[] }
-  | { type: 'CHAT'; from: string; text: string }
-  | { type: 'BATTLE_END'; winner: string; reason: 'KO' | 'Timeout' | 'Forfeit' }
-  | { type: 'ERROR'; code: string; message: string };
+// WebSocket message types (moved to end of file to avoid duplicates)
 
 export interface LobbyState {
   id: string;
@@ -208,6 +182,7 @@ export interface LobbyState {
   creatorId: string;
   opponentId?: string;
   wagerLamports: number;
+  isBot?: boolean;
 }
 
 export interface BattleEvent {
@@ -216,6 +191,79 @@ export interface BattleEvent {
   value?: number;
   status?: string;
   move?: string;
+}
+
+// Battle-related types
+export interface BattleState {
+  id: string;
+  turn: number;
+  phase: 'SELECT' | 'BATTLE' | 'END';
+  player1Id: string;
+  player2Id: string;
+  player1Team: BattlePokemon[];
+  player2Team: BattlePokemon[];
+  players: {
+    [playerId: string]: {
+      team: BattlePokemon[];
+      activePokemon: number;
+      ready: boolean;
+    };
+  };
+  field: {
+    weather?: string;
+    terrain?: string;
+    hazards: Record<string, any>;
+  };
+  log: BattleEvent[];
+}
+
+export interface BattlePokemon {
+  id: string;
+  species: string;
+  level: number;
+  gender?: 'M' | 'F';
+  shiny?: boolean;
+  ability: string;
+  item?: string;
+  nature: string;
+  evs: Stats;
+  ivs: Stats;
+  moves: BattleMove[];
+  hp: number;
+  maxHp: number;
+  status?: string | null;
+  statusTurns?: number;
+  type1: TypeGen1;
+  type2?: TypeGen1;
+  boosts: {
+    atk: number;
+    def: number;
+    spa: number;
+    spd: number;
+    spe: number;
+    accuracy: number;
+    evasion: number;
+  };
+}
+
+export interface BattleMove {
+  id: string;
+  name: string;
+  type: TypeGen1;
+  category: 'PHYSICAL' | 'SPECIAL' | 'STATUS';
+  power: number;
+  accuracy: number;
+  pp: number;
+  maxPp: number;
+  priority: number;
+  flags: string[];
+  target: string;
+}
+
+export interface BattleTeam {
+  id: string;
+  name: string;
+  pokemon: BattlePokemon[];
 }
 
 // API Response types
@@ -385,4 +433,43 @@ export function getRarityColor(rarity: Rarity): string {
     LEGENDARY: '#F59E0B',
   };
   return colors[rarity];
+}
+
+// WebSocket message types
+export type ClientMessage =
+  | { type: 'JOIN_LOBBY'; lobbyId: string }
+  | { type: 'INVITE_ACCEPT'; lobbyId: string }
+  | { type: 'SELECT_TEAM'; teamId: string }
+  | { type: 'READY' }
+  | {
+      type: 'TURN_ACTION';
+      turn: number;
+      move: {
+        slot: number;
+        action: 'MOVE' | 'SWITCH';
+        moveId?: string;
+        target?: number;
+      };
+      commit?: string;
+      reveal?: string;
+    }
+  | { type: 'FORFEIT' };
+
+export type ServerMessage =
+  | { type: 'LOBBY_STATE'; state: LobbyState }
+  | { type: 'BATTLE_START'; battleId: string; seed: string }
+  | { type: 'TURN_RESULT'; turn: number; events: BattleEvent[] }
+  | { type: 'CHAT'; from: string; text: string }
+  | { type: 'BATTLE_END'; winner: string; reason: 'KO' | 'Timeout' | 'Forfeit' }
+  | { type: 'ERROR'; code: string; message: string }
+  | { type: 'MATCH_FOUND'; lobbyId: string }
+  | { type: 'MATCHMAKING_STATUS'; data: MatchmakingStatus }
+  | { type: 'BATTLE_STATE'; state: any }
+  | { type: 'BATTLE_RESULT'; winner: string; data: any; battleId?: string; };
+
+// Duplicate interfaces removed - using definitions from above
+
+export interface MatchmakingStatus {
+  queueLength: number;
+  estimatedWaitTime: number;
 }
