@@ -50,16 +50,6 @@ export function Navigation() {
   return (
     <nav className="bg-gradient-to-r from-orange-600 to-red-600 border-b-4 border-red-800 shadow-[0_4px_0px_0px_#8B0000]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<<<<<<< HEAD
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link href="/dashboard" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Sword className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold text-gray-900">PokeDotDuel</span>
-          </Link>
-=======
         <div className="flex items-center justify-between h-20 gap-4">
           {/* POKEDUEL Logo */}
           <div className="flex-shrink-0">
@@ -73,7 +63,6 @@ export function Navigation() {
               />
             </Link>
           </div>
->>>>>>> frontend-revamp-8bit
 
           {/* Navigation Links */}
           <div className="hidden lg:flex items-center space-x-3 flex-1 justify-center">
