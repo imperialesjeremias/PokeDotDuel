@@ -5,7 +5,7 @@ import { http, createConfig } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 
 // Configure wagmi chains
-const config = createConfig({
+export const config = createConfig({
   chains: [mainnet, sepolia],
   transports: {
     [mainnet.id]: http(),
@@ -49,4 +49,4 @@ export const privyConfig = {
 };
 
 // Export the providers
-export { PrivyProvider, WagmiProvider, config };
+export { PrivyProvider, WagmiProvider };
