@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { initBackgroundMusic, playBackgroundMusic, toggleBackgroundMusic, isBackgroundMusicPlaying } from '@/utils/backgroundMusic';
+import { initializeBackground } from '@/utils/backgroundManager';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -35,7 +36,8 @@ export default function HomePage() {
   }, [ready, authenticated, router]);
 
   useEffect(() => {
-    // Initialize and auto-start background music when component mounts
+    // Initialize background and music systems
+    initializeBackground();
     initBackgroundMusic();
     
     // Auto-start music after a brief delay to ensure proper initialization
@@ -117,7 +119,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-pokemon-blue-bg">
+    <div className="min-h-screen">
       {/* Pokemon Game Style Header */}
       <header className="pokecenter-ui border-b-8 border-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -182,7 +184,7 @@ export default function HomePage() {
       </section>
 
       {/* Pokemon Stats Section */}
-      <section className="py-16 bg-pokemon-yellow-bg border-t-8 border-b-8 border-black">
+      <section className="py-16 bg-pokemon-yellow-bg/80 border-t-8 border-b-8 border-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -252,7 +254,7 @@ export default function HomePage() {
       </section>
 
       {/* Pokemon Footer */}
-      <footer className="bg-black border-t-8 border-white py-12">
+      <footer className="bg-black/90 border-t-8 border-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>

@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Navigation } from '@/components/Navigation';
+import { initializeBackground } from '@/utils/backgroundManager';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -59,6 +60,9 @@ export default function DashboardPage() {
   useEffect(() => {
     if (ready && !authenticated) {
       router.push('/');
+    } else if (authenticated) {
+      // Initialize background system for authenticated users
+      initializeBackground();
     }
   }, [ready, authenticated, router]);
 
@@ -112,7 +116,7 @@ export default function DashboardPage() {
   const winRate = userData ? (userData.stats.wins / (userData.stats.wins + userData.stats.losses) * 100).toFixed(1) : '0';
 
   return (
-    <div className="min-h-screen bg-pokemon-red-bg">
+    <div className="min-h-screen">
       <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

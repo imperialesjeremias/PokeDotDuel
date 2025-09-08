@@ -3,6 +3,7 @@ import { Press_Start_2P, Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
 import { Toaster } from 'react-hot-toast';
+import BackgroundWrapper from '@/components/BackgroundWrapper';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const pixelFont = Press_Start_2P({ 
@@ -40,7 +41,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${pixelFont.variable}`}>
       <body className="font-sans">
         <Providers>
-          {children}
+          <BackgroundWrapper>
+            {children}
+          </BackgroundWrapper>
           <Toaster
             position="top-right"
             toastOptions={{
