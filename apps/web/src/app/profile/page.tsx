@@ -4,6 +4,7 @@ import { usePrivy } from '@privy-io/react-auth';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Navigation } from '@/components/Navigation';
+import { initializeBackground } from '@/utils/backgroundManager';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -59,6 +60,8 @@ export default function ProfilePage() {
     }
 
     if (authenticated) {
+      // Initialize background system for authenticated users
+      initializeBackground();
       fetchProfile();
     }
   }, [ready, authenticated, router]);
@@ -145,13 +148,13 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-transparent">
       <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">My Profile</h1>
-          <p className="text-gray-600">Manage your account and view your statistics</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">My Profile</h1>
+        <p className="text-gray-600 dark:text-gray-300">Manage your account and view your statistics</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -222,7 +225,7 @@ export default function ProfilePage() {
                 <div className="space-y-3">
                   <div className="flex items-center space-x-2">
                     <Wallet className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">
+                    <span className="text-sm text-gray-600 dark:text-gray-300">
                       {user?.wallet?.address ?
                         `${user.wallet.address.slice(0, 8)}...${user.wallet.address.slice(-6)}` :
                         'Wallet not connected'
@@ -232,14 +235,14 @@ export default function ProfilePage() {
 
                   <div className="flex items-center space-x-2">
                     <Crown className="w-4 h-4 text-yellow-500" />
-                    <span className="text-sm text-gray-600">
+                    <span className="text-sm text-gray-600 dark:text-gray-300">
                       Level {profile?.level || 1}
                     </span>
                   </div>
 
                   <div className="flex items-center space-x-2">
                     <Zap className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm text-gray-600">
+                    <span className="text-sm text-gray-600 dark:text-gray-300">
                       {profile?.xp || 0} XP
                     </span>
                   </div>
@@ -270,7 +273,7 @@ export default function ProfilePage() {
                       style={{ width: `${getLevelProgress()}%` }}
                     ></div>
                   </div>
-                  <p className="text-xs text-gray-600">
+                  <p className="text-xs text-gray-600 dark:text-gray-300">
                     {Math.round(getLevelProgress())}% completed to next level
                   </p>
                 </div>
@@ -289,21 +292,21 @@ export default function ProfilePage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-orange-600">{profile?.stats.wins || 0}</div>
-                    <div className="text-sm text-gray-600">Wins</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">Wins</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-red-600">{profile?.stats.losses || 0}</div>
-                    <div className="text-sm text-gray-600">Losses</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">Losses</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-blue-600">{getWinRate()}%</div>
-                    <div className="text-sm text-gray-600">Win Rate</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">Win Rate</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-purple-600">
                       {((profile?.stats.wins || 0) + (profile?.stats.losses || 0))}
                     </div>
-                    <div className="text-sm text-gray-600">Total</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">Total</div>
                   </div>
                 </div>
               </CardContent>
@@ -321,15 +324,15 @@ export default function ProfilePage() {
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-orange-600">{profile?.stats.packsOpened || 0}</div>
-                    <div className="text-sm text-gray-600">Packs Opened</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">Packs Opened</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-indigo-600">{profile?.stats.cardsOwned || 0}</div>
-                    <div className="text-sm text-gray-600">Cards</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">Cards</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-yellow-600">{profile?.pokecoins || 0}</div>
-                    <div className="text-sm text-gray-600">PokéCoins</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">PokéCoins</div>
                   </div>
                 </div>
               </CardContent>
@@ -349,13 +352,13 @@ export default function ProfilePage() {
                     <div className="text-2xl font-bold text-orange-600">
                       {(profile?.stats.totalWagered || 0) / 1_000_000_000} SOL
                     </div>
-                    <div className="text-sm text-gray-600">Total Wagered</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">Total Wagered</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-blue-600">
                       {(profile?.stats.totalWon || 0) / 1_000_000_000} SOL
                     </div>
-                    <div className="text-sm text-gray-600">Total Won</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">Total Won</div>
                   </div>
                 </div>
               </CardContent>

@@ -28,6 +28,11 @@ export const setBackground = (background: BackgroundType): void => {
   console.log(`🎨 Setting background to: ${background}`);
   currentBackground = background;
   
+  // Save to localStorage for persistence
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('pokeduel-background', background);
+  }
+  
   if (typeof document !== 'undefined') {
     const html = document.documentElement;
     
@@ -37,6 +42,15 @@ export const setBackground = (background: BackgroundType): void => {
     // Add the new background class
     const className = `bg-${background}`;
     html.classList.add(className);
+    
+    // Handle dark mode for afternoon background
+    if (background === 'afternoon') {
+      html.classList.add('dark');
+      console.log('🌙 Dark mode activated with afternoon background');
+    } else {
+      html.classList.remove('dark');
+      console.log('☀️ Dark mode deactivated with day background');
+    }
     
     console.log(`🎨 Applied CSS class: ${className}`);
   } else {
@@ -54,9 +68,28 @@ export const toggleBackground = (): void => {
 
 export const initializeBackground = (): void => {
   console.log('🎨 Initializing background system...');
-  // Set initial background
-  setBackground('day');
-  console.log('🎨 Background initialized with day theme');
+  
+  // Load saved background from localStorage or default to 'day'
+  let savedBackground: BackgroundType = 'day';
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem('pokeduel-background');
+    if (saved === 'day' || saved === 'afternoon') {
+      savedBackground = saved;
+    }
+  }
+  
+  // Ensure DOM is ready before applying background
+  if (typeof document !== 'undefined') {
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      setBackground(savedBackground);
+      console.log(`🎨 Background initialized with ${savedBackground} theme`);
+    });
+  } else {
+    // Fallback for SSR
+    setBackground(savedBackground);
+    console.log(`🎨 Background initialized with ${savedBackground} theme`);
+  }
 };
 
 export const addBackgroundChangeListener = (listener: () => void): void => {

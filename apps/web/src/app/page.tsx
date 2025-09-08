@@ -125,7 +125,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center space-x-4">
-              <span className="text-3xl font-pixel text-black">POKEDOTDUEL</span>
+              <span className="text-3xl font-pixel text-black dark:text-white">POKEDOTDUEL</span>
             </div>
             <div className="flex items-center space-x-4">
               <div className="battle-ui px-3 py-1">
@@ -150,14 +150,14 @@ export default function HomePage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="pokemon-menu p-8 mb-12 animate-pixel-fade">
-            <h1 className="text-4xl md:text-6xl font-pixel text-black mb-6">
+            <h1 className="text-4xl md:text-6xl font-pixel text-black dark:text-white mb-6">
               POKEMON BATTLE
               <span className="block text-pokemon-red-primary">
                 ARENA
               </span>
             </h1>
             <div className="status-window max-w-3xl mx-auto mb-8">
-              <p className="text-lg font-pixel text-black">
+              <p className="text-lg font-pixel text-black dark:text-white">
                 ► Turn-based combat with authentic Pokémon Gen 1 mechanics<br/>
                 ► Win real SOL, collect rare cards<br/>
                 ► Build the ultimate team
@@ -202,12 +202,12 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="pokemon-menu p-6 inline-block">
-              <h2 className="text-4xl font-pixel text-black mb-4 animate-pixel-step">
+              <h2 className="text-4xl font-pixel text-black dark:text-white mb-4 animate-pixel-step">
                 ► FEATURES ◄
               </h2>
             </div>
             <div className="status-window max-w-2xl mx-auto mt-6">
-              <p className="text-lg font-pixel text-black">
+              <p className="text-lg font-pixel text-black dark:text-white">
                 A complete gaming experience with blockchain technology
               </p>
             </div>
@@ -218,11 +218,11 @@ export default function HomePage() {
                 <div className="p-6">
                   <div className="flex items-center mb-4">
                     <div className="pokeball mr-3"></div>
-                    <feature.icon className="w-6 h-6 text-black mr-2" />
-                    <h3 className="text-lg font-pixel text-black">{feature.title}</h3>
+                    <feature.icon className="w-6 h-6 text-black dark:text-white mr-2" />
+                    <h3 className="text-lg font-pixel text-black dark:text-white">{feature.title}</h3>
                   </div>
                   <div className="status-window">
-                    <p className="text-black font-pixel text-sm">
+                    <p className="text-black dark:text-white font-pixel text-sm">
                       {feature.description}
                     </p>
                   </div>
@@ -239,7 +239,7 @@ export default function HomePage() {
           <div className="battle-ui p-8 inline-block">            <h2 className="text-4xl font-pixel text-white mb-6">
               READY FOR BATTLE?
             </h2>
-            <p className="text-lg font-pixel text-gray-300 mb-8">
+            <p className="text-lg font-pixel text-gray-300 dark:text-gray-200 mb-8">
               ► Connect your wallet and start your Pokémon adventure
             </p>
             <Button 
@@ -262,7 +262,7 @@ export default function HomePage() {
                 <span className="text-2xl font-pixel text-white">POKEDOTDUEL</span>
               </div>
               <div className="status-window">
-                <p className="text-black font-pixel text-sm">
+                <p className="text-black dark:text-white font-pixel text-sm">
                   The first Pokémon PvP crypto game with SOL betting
                 </p>
               </div>

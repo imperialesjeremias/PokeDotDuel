@@ -124,7 +124,7 @@ export default function DashboardPage() {
         <div className="mb-8">
           <StatusWindow title="TRAINER STATUS" className="mb-4">
             <div className="flex items-center justify-between mb-4">
-              <h1 className="text-2xl font-pixel text-black">
+              <h1 className="text-2xl font-pixel text-black dark:text-white">
                 TRAINER {userData?.username?.toUpperCase()}
               </h1>
               <PokeballSelector count={6} />
@@ -160,8 +160,8 @@ export default function DashboardPage() {
                 <div className="flex items-center space-x-3">
                   <Sword className="w-8 h-8 text-red-600" />
                   <div>
-                    <div className="font-pixel text-black text-sm">BATTLE</div>
-                    <div className="font-pixel text-gray-600 text-xs">PvP Combat</div>
+                    <div className="font-pixel text-black dark:text-white text-sm">BATTLE</div>
+                    <div className="font-pixel text-gray-600 dark:text-gray-300 text-xs">PvP Combat</div>
                   </div>
                 </div>
               </div>
@@ -173,8 +173,8 @@ export default function DashboardPage() {
                 <div className="flex items-center space-x-3">
                   <Users className="w-8 h-8 text-blue-600" />
                   <div>
-                    <div className="font-pixel text-black text-sm">POKEMON</div>
-                    <div className="font-pixel text-gray-600 text-xs">Team Builder</div>
+                    <div className="font-pixel text-black dark:text-white text-sm">POKEMON</div>
+                    <div className="font-pixel text-gray-600 dark:text-gray-300 text-xs">Team Builder</div>
                   </div>
                 </div>
               </div>
@@ -186,8 +186,8 @@ export default function DashboardPage() {
                 <div className="flex items-center space-x-3">
                   <Package className="w-8 h-8 text-orange-600" />
                   <div>
-                    <div className="font-pixel text-black text-sm">PACK</div>
-                    <div className="font-pixel text-gray-600 text-xs">Booster Packs</div>
+                    <div className="font-pixel text-black dark:text-white text-sm">PACK</div>
+                    <div className="font-pixel text-gray-600 dark:text-gray-300 text-xs">Booster Packs</div>
                   </div>
                 </div>
               </div>
@@ -199,8 +199,8 @@ export default function DashboardPage() {
                 <div className="flex items-center space-x-3">
                   <Coins className="w-8 h-8 text-yellow-600" />
                   <div>
-                    <div className="font-pixel text-black text-sm">TRADE</div>
-                    <div className="font-pixel text-gray-600 text-xs">Marketplace</div>
+                    <div className="font-pixel text-black dark:text-white text-sm">TRADE</div>
+                    <div className="font-pixel text-gray-600 dark:text-gray-300 text-xs">Marketplace</div>
                   </div>
                 </div>
               </div>
@@ -271,8 +271,8 @@ export default function DashboardPage() {
                 <div className="flex items-center space-x-3">
                   <Trophy className="w-6 h-6 text-yellow-600" />
                   <div>
-                    <div className="font-pixel text-black text-sm">BATTLE WON vs PIKACHUMASTER</div>
-                    <div className="font-pixel text-gray-600 text-xs">2 HOURS AGO • +0.1 SOL</div>
+                    <div className="font-pixel text-black dark:text-white text-sm">BATTLE WON vs PIKACHUMASTER</div>
+                    <div className="font-pixel text-gray-600 dark:text-gray-300 text-xs">2 HOURS AGO • +0.1 SOL</div>
                   </div>
                 </div>
                 <TypeBadge type="victory" className="bg-orange-600" />
@@ -284,8 +284,8 @@ export default function DashboardPage() {
                 <div className="flex items-center space-x-3">
                   <Package className="w-6 h-6 text-orange-600" />
                   <div>
-                    <div className="font-pixel text-black text-sm">BOOSTER PACK OPENED</div>
-                    <div className="font-pixel text-gray-600 text-xs">4 HOURS AGO • CHARIZARD FOUND</div>
+                    <div className="font-pixel text-black dark:text-white text-sm">BOOSTER PACK OPENED</div>
+                    <div className="font-pixel text-gray-600 dark:text-gray-300 text-xs">4 HOURS AGO • CHARIZARD FOUND</div>
                   </div>
                 </div>
                 <TypeBadge type="fire" />
@@ -297,8 +297,8 @@ export default function DashboardPage() {
                 <div className="flex items-center space-x-3">
                   <Coins className="w-6 h-6 text-yellow-600" />
                   <div>
-                    <div className="font-pixel text-black text-sm">POKEMON TRADED</div>
-                    <div className="font-pixel text-gray-600 text-xs">1 DAY AGO • BLASTOISE • +0.05 SOL</div>
+                    <div className="font-pixel text-black dark:text-white text-sm">POKEMON TRADED</div>
+                    <div className="font-pixel text-gray-600 dark:text-gray-300 text-xs">1 DAY AGO • BLASTOISE • +0.05 SOL</div>
                   </div>
                 </div>
                 <TypeBadge type="water" />

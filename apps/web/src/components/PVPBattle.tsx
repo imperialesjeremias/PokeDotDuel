@@ -145,7 +145,7 @@ export function PVPBattle() {
 
       {/* Create Lobby */}
       {!currentLobby && (
-        <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
           <h2 className="text-xl font-semibold mb-4">Create Lobby</h2>
           <div className="space-y-4">
             <div>
@@ -187,7 +187,7 @@ export function PVPBattle() {
 
       {/* Join Lobby */}
       {!currentLobby && (
-        <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
           <h2 className="text-xl font-semibold mb-4">Join Lobby</h2>
           <div className="space-y-4">
             <div>
@@ -213,7 +213,7 @@ export function PVPBattle() {
 
       {/* Current Lobby */}
       {currentLobby && (
-        <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
           <h2 className="text-xl font-semibold mb-4">Current Lobby</h2>
           <div className="space-y-2">
             <p><strong>ID:</strong> {currentLobby.id}</p>
@@ -265,11 +265,11 @@ export function PVPBattle() {
 
       {/* Current Battle */}
       {currentBattle && (
-        <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-          <h2 className="text-xl font-semibold mb-4">Battle in Progress</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+          <h2 className="text-xl font-semibold mb-4 dark:text-white">Battle in Progress</h2>
           <div className="space-y-2">
-            <p><strong>Battle ID:</strong> {currentBattle.id}</p>
-            <p><strong>Turn:</strong> {currentBattle.turn || 0}</p>
+            <p className="dark:text-gray-200"><strong>Battle ID:</strong> {currentBattle.id}</p>
+            <p className="dark:text-gray-200"><strong>Turn:</strong> {currentBattle.turn || 0}</p>
           </div>
 
           {/* Battle Actions */}
@@ -300,11 +300,11 @@ export function PVPBattle() {
 
       {/* Battle Events */}
       {battleEvents.length > 0 && (
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Battle Events</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-4 dark:text-white">Battle Events</h2>
           <div className="space-y-2 max-h-64 overflow-y-auto">
             {battleEvents.map((event, index) => (
-              <div key={index} className="text-sm bg-gray-50 p-2 rounded">
+              <div key={index} className="text-sm bg-gray-50 dark:bg-gray-700 p-2 rounded dark:text-gray-200">
                 <strong>{event.type}:</strong> {JSON.stringify(event, null, 2)}
               </div>
             ))}

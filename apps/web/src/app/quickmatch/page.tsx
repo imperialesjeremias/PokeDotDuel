@@ -4,6 +4,7 @@ import { usePrivy } from '@privy-io/react-auth';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Navigation } from '@/components/Navigation';
+import { initializeBackground } from '@/utils/backgroundManager';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -97,6 +98,9 @@ export default function QuickMatchPage() {
   useEffect(() => {
     if (ready && !authenticated) {
       router.push('/');
+    } else if (authenticated) {
+      // Initialize background system for authenticated users
+      initializeBackground();
     }
   }, [ready, authenticated, router]);
 
@@ -168,16 +172,16 @@ export default function QuickMatchPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-transparent">
       <Navigation />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
             <Zap className="w-8 h-8 mr-3 text-yellow-500" />
             Quick Match
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             Find an opponent automatically and start battling instantly
           </p>
         </div>
@@ -268,7 +272,7 @@ export default function QuickMatchPage() {
                         <div className="flex items-center justify-between mb-2">
                           <h3 className="font-semibold text-lg">{bracket.name}</h3>
                           <div className="flex items-center space-x-2">
-                            <Badge className={selectedBracket.id === bracket.id ? bracket.color : 'bg-gray-100 text-gray-600'}>
+                            <Badge className={selectedBracket.id === bracket.id ? bracket.color : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'}>
                               {bracket.minWager} - {bracket.maxWager} SOL
                             </Badge>
                             <Badge variant="outline" className="text-xs">
@@ -277,7 +281,7 @@ export default function QuickMatchPage() {
                             </Badge>
                           </div>
                         </div>
-                        <p className="text-sm text-gray-600">{bracket.description}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">{bracket.description}</p>
                       </div>
                     ))}
                   </div>
@@ -302,7 +306,7 @@ export default function QuickMatchPage() {
                   <div className={`p-4 rounded-lg border-2 ${selectedBracket.color}`}>
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-semibold">{selectedBracket.name} League</h3>
-                      <Badge className="bg-white text-gray-700">
+                      <Badge className="bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300">
                         <Clock className="w-3 h-3 mr-1" />
                         {selectedBracket.estimatedWait}
                       </Badge>
@@ -315,7 +319,7 @@ export default function QuickMatchPage() {
 
                   {/* Wager Amount */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Wager Amount (SOL)
                     </label>
                     <input
@@ -339,7 +343,7 @@ export default function QuickMatchPage() {
 
                   {/* Quick Amount Buttons */}
                   <div>
-                    <p className="text-sm font-medium text-gray-700 mb-2">Quick amounts:</p>
+                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Quick amounts:</p>
                     <div className="grid grid-cols-3 gap-2">
                       {[selectedBracket.minWager, ((selectedBracket.maxWager - selectedBracket.minWager) / 2), selectedBracket.maxWager].map(amount => (
                         <Button
@@ -377,7 +381,7 @@ export default function QuickMatchPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3 text-sm text-gray-600">
+                  <div className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
                     <div className="flex items-start">
                       <div className="w-6 h-6 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-xs font-semibold mr-3 mt-0.5">
                         ⚡

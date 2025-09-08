@@ -80,7 +80,7 @@ export function Navigation() {
   ];
 
   return (
-    <nav className="bg-gradient-to-r from-orange-600 to-red-600 border-b-4 border-red-800 shadow-[0_4px_0px_0px_#8B0000]">
+    <nav className="bg-gradient-to-r from-orange-600 to-red-600 dark:from-gray-800 dark:to-gray-900 border-b-4 border-red-800 dark:border-gray-700 shadow-[0_4px_0px_0px_#8B0000] dark:shadow-[0_4px_0px_0px_#374151]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-20">
           {/* POKEDUEL Logo */}
@@ -91,7 +91,7 @@ export function Navigation() {
                 alt="PokeDuel Logo" 
                 width={120} 
                 height={30} 
-                className="drop-shadow-lg" 
+                className="drop-shadow-lg dark:drop-shadow-white" 
               />
             </Link>
           </div>
@@ -102,11 +102,11 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-3 py-2 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all hover:shadow-[1px_1px_0px_0px_#8B0000] hover:translate-x-[1px] hover:translate-y-[1px]"
+                className="px-3 py-2 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all hover:shadow-[1px_1px_0px_0px_#8B0000] dark:hover:shadow-[1px_1px_0px_0px_#374151] hover:translate-x-[1px] hover:translate-y-[1px]"
               >
                 <div className="flex items-center space-x-1">
-                  <item.icon className="w-3 h-3 text-orange-200" />
-                  <span className="font-pixel text-orange-100 text-xs">{item.label.toUpperCase()}</span>
+                  <item.icon className="w-3 h-3 text-orange-200 dark:text-gray-300" />
+                  <span className="font-pixel text-orange-100 dark:text-gray-200 text-xs">{item.label.toUpperCase()}</span>
                 </div>
               </Link>
             ))}
@@ -116,12 +116,12 @@ export function Navigation() {
           <div className="lg:hidden ml-auto">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="px-2 py-1 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all"
+              className="px-2 py-1 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all"
             >
               {mobileMenuOpen ? (
-                <X className="w-4 h-4 text-orange-100" />
+                <X className="w-4 h-4 text-orange-100 dark:text-gray-300" />
               ) : (
-                <Menu className="w-4 h-4 text-orange-100" />
+                <Menu className="w-4 h-4 text-orange-100 dark:text-gray-300" />
               )}
             </button>
           </div>
@@ -131,24 +131,24 @@ export function Navigation() {
               {/* Music Toggle Button */}
               <button
                 onClick={handleMusicToggle}
-                className="px-2 py-1 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all hover:shadow-[1px_1px_0px_0px_#8B0000] hover:translate-x-[1px] hover:translate-y-[1px]"
+                className="px-2 py-1 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all hover:shadow-[1px_1px_0px_0px_#8B0000] dark:hover:shadow-[1px_1px_0px_0px_#374151] hover:translate-x-[1px] hover:translate-y-[1px]"
                 title={isMusicPlaying ? "Mute Music" : "Unmute Music"}
               >
-                {isMusicPlaying ? <Volume2 className="w-3 h-3 text-orange-100" /> : <VolumeX className="w-3 h-3 text-orange-100" />}
+                {isMusicPlaying ? <Volume2 className="w-3 h-3 text-orange-100 dark:text-gray-300" /> : <VolumeX className="w-3 h-3 text-orange-100 dark:text-gray-300" />}
               </button>
 
               {/* Background Toggle Button */}
               <button
                 onClick={handleBackgroundToggle}
-                className="px-2 py-1 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all hover:shadow-[1px_1px_0px_0px_#8B0000] hover:translate-x-[1px] hover:translate-y-[1px]"
+                className="px-2 py-1 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all hover:shadow-[1px_1px_0px_0px_#8B0000] dark:hover:shadow-[1px_1px_0px_0px_#374151] hover:translate-x-[1px] hover:translate-y-[1px]"
                 title={`Switch to ${currentBackground === 'day' ? 'Afternoon' : 'Day'} Background`}
               >
-                {currentBackground === 'day' ? <Sun className="w-3 h-3 text-orange-100" /> : <Sunset className="w-3 h-3 text-orange-100" />}
+                {currentBackground === 'day' ? <Sun className="w-3 h-3 text-orange-100 dark:text-gray-300" /> : <Sunset className="w-3 h-3 text-orange-100 dark:text-gray-300" />}
               </button>
 
               {/* Trainer Info */}
-              <div className="px-2 py-1 bg-orange-600 border-2 border-orange-800 shadow-[2px_2px_0px_0px_#8B0000]">
-                <span className="font-pixel text-white text-xs">
+              <div className="px-2 py-1 bg-orange-600 dark:bg-gray-600 border-2 border-orange-800 dark:border-gray-500 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151]">
+                <span className="font-pixel text-white dark:text-gray-100 text-xs">
                   {user?.wallet?.address ?
                     `${user.wallet.address.slice(0, 4)}...${user.wallet.address.slice(-3)}` :
                     'TRAINER'
@@ -158,24 +158,24 @@ export function Navigation() {
 
               {/* Profile Link */}
               <Link href="/profile">
-                <div className="px-2 py-1 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all hover:shadow-[1px_1px_0px_0px_#8B0000] hover:translate-x-[1px] hover:translate-y-[1px]">
-                  <span className="font-pixel text-orange-100 text-xs">PROFILE</span>
+                <div className="px-2 py-1 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all hover:shadow-[1px_1px_0px_0px_#8B0000] dark:hover:shadow-[1px_1px_0px_0px_#374151] hover:translate-x-[1px] hover:translate-y-[1px]">
+                  <span className="font-pixel text-orange-100 dark:text-gray-200 text-xs">PROFILE</span>
                 </div>
               </Link>
 
               {/* Logout Button */}
               <button
                 onClick={handleLogout}
-                className="px-2 py-1 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all hover:shadow-[1px_1px_0px_0px_#8B0000] hover:translate-x-[1px] hover:translate-y-[1px]"
+                className="px-2 py-1 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all hover:shadow-[1px_1px_0px_0px_#8B0000] dark:hover:shadow-[1px_1px_0px_0px_#374151] hover:translate-x-[1px] hover:translate-y-[1px]"
               >
-                <span className="font-pixel text-orange-100 text-xs">LOGOUT</span>
+                <span className="font-pixel text-orange-100 dark:text-gray-200 text-xs">LOGOUT</span>
               </button>
             </div>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t-2 border-red-800 bg-gradient-to-r from-orange-600 to-red-600">
+          <div className="lg:hidden border-t-2 border-red-800 dark:border-gray-700 bg-gradient-to-r from-orange-600 to-red-600 dark:from-gray-800 dark:to-gray-900">
             <div className="px-4 py-3 space-y-2">
               {/* Mobile Navigation Links */}
               {navItems.map((item) => (
@@ -183,36 +183,36 @@ export function Navigation() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center space-x-2 px-3 py-2 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all"
+                  className="flex items-center space-x-2 px-3 py-2 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all"
                 >
-                  <item.icon className="w-4 h-4 text-orange-200" />
-                  <span className="font-pixel text-orange-100 text-sm">{item.label.toUpperCase()}</span>
+                  <item.icon className="w-4 h-4 text-orange-200 dark:text-gray-300" />
+                  <span className="font-pixel text-orange-100 dark:text-gray-300 text-sm">{item.label.toUpperCase()}</span>
                 </Link>
               ))}
               
               {/* Mobile User Menu */}
-              <div className="pt-2 border-t border-red-800 space-y-2">
+              <div className="pt-2 border-t border-red-800 dark:border-gray-700 space-y-2">
                 {/* Music Toggle Button */}
                 <button
                   onClick={handleMusicToggle}
-                  className="flex items-center space-x-2 w-full px-3 py-2 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all"
+                  className="flex items-center space-x-2 w-full px-3 py-2 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all"
                 >
-                  {isMusicPlaying ? <Volume2 className="w-4 h-4 text-orange-200" /> : <VolumeX className="w-4 h-4 text-orange-200" />}
-                  <span className="font-pixel text-orange-100 text-sm">{isMusicPlaying ? "MUTE MUSIC" : "UNMUTE MUSIC"}</span>
+                  {isMusicPlaying ? <Volume2 className="w-4 h-4 text-orange-200 dark:text-gray-300" /> : <VolumeX className="w-4 h-4 text-orange-200 dark:text-gray-300" />}
+                  <span className="font-pixel text-orange-100 dark:text-gray-300 text-sm">{isMusicPlaying ? "MUTE MUSIC" : "UNMUTE MUSIC"}</span>
                 </button>
 
                 {/* Background Toggle Button */}
                 <button
                   onClick={handleBackgroundToggle}
-                  className="flex items-center space-x-2 w-full px-3 py-2 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all"
+                  className="flex items-center space-x-2 w-full px-3 py-2 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all"
                 >
-                  {currentBackground === 'day' ? <Sun className="w-4 h-4 text-orange-200" /> : <Sunset className="w-4 h-4 text-orange-200" />}
-                  <span className="font-pixel text-orange-100 text-sm">{getBackgroundDisplayName(currentBackground === 'day' ? 'afternoon' : 'day').toUpperCase()} MODE</span>
+                  {currentBackground === 'day' ? <Sun className="w-4 h-4 text-orange-200 dark:text-gray-300" /> : <Sunset className="w-4 h-4 text-orange-200 dark:text-gray-300" />}
+                  <span className="font-pixel text-orange-100 dark:text-gray-300 text-sm">{getBackgroundDisplayName(currentBackground === 'day' ? 'afternoon' : 'day').toUpperCase()} MODE</span>
                 </button>
 
                 {/* Trainer Info */}
-                <div className="px-3 py-2 bg-orange-600 border-2 border-orange-800 shadow-[2px_2px_0px_0px_#8B0000]">
-                  <span className="font-pixel text-white text-xs">
+                <div className="px-3 py-2 bg-orange-600 dark:bg-gray-600 border-2 border-orange-800 dark:border-gray-500 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151]">
+                  <span className="font-pixel text-white dark:text-gray-200 text-xs">
                     {user?.wallet?.address ?
                       `TRAINER ${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)}` :
                       'TRAINER'
@@ -222,9 +222,9 @@ export function Navigation() {
                 
                 {/* Profile Link */}
                 <Link href="/profile" onClick={() => setMobileMenuOpen(false)}>
-                  <div className="flex items-center space-x-2 px-3 py-2 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all">
-                    <User className="w-4 h-4 text-orange-200" />
-                    <span className="font-pixel text-orange-100 text-sm">PROFILE</span>
+                  <div className="flex items-center space-x-2 px-3 py-2 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all">
+                    <User className="w-4 h-4 text-orange-200 dark:text-gray-300" />
+                    <span className="font-pixel text-orange-100 dark:text-gray-300 text-sm">PROFILE</span>
                   </div>
                 </Link>
                 
@@ -234,10 +234,10 @@ export function Navigation() {
                     setMobileMenuOpen(false);
                     handleLogout();
                   }}
-                  className="flex items-center space-x-2 w-full px-3 py-2 bg-red-700 hover:bg-red-800 border-2 border-red-900 shadow-[2px_2px_0px_0px_#8B0000] transition-all"
+                  className="flex items-center space-x-2 w-full px-3 py-2 bg-red-700 hover:bg-red-800 dark:bg-gray-700 dark:hover:bg-gray-600 border-2 border-red-900 dark:border-gray-600 shadow-[2px_2px_0px_0px_#8B0000] dark:shadow-[2px_2px_0px_0px_#374151] transition-all"
                 >
-                  <LogOut className="w-4 h-4 text-orange-200" />
-                  <span className="font-pixel text-orange-100 text-sm">LOGOUT</span>
+                  <LogOut className="w-4 h-4 text-orange-200 dark:text-gray-300" />
+                  <span className="font-pixel text-orange-100 dark:text-gray-300 text-sm">LOGOUT</span>
                 </button>
               </div>
             </div>

@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Navigation } from '@/components/Navigation';
+import { initializeBackground } from '@/utils/backgroundManager';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -54,6 +55,9 @@ export default function BattlePage() {
   useEffect(() => {
     if (ready && !authenticated) {
       router.push('/');
+    } else if (authenticated) {
+      // Initialize background system for authenticated users
+      initializeBackground();
     }
   }, [ready, authenticated, router]);
 
@@ -159,17 +163,17 @@ export default function BattlePage() {
     : lobbies;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-transparent">
       <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            PvP Battles
-          </h1>
-          <p className="text-gray-600">
-            Turn-based combat with SOL betting
-          </p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          PvP Battles
+        </h1>
+        <p className="text-gray-600 dark:text-gray-300">
+          Turn-based combat with SOL betting
+        </p>
         </div>
 
         {/* Quick Actions */}
@@ -257,7 +261,7 @@ export default function BattlePage() {
             {filteredLobbies.length === 0 ? (
               <div className="text-center py-8">
                 <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-4">No lobbies available</p>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">No lobbies available</p>
                 <Button onClick={() => router.push('/battle/create')}>
                   Create First Lobby
                 </Button>
@@ -267,20 +271,20 @@ export default function BattlePage() {
                 {filteredLobbies.map(lobby => (
                   <div
                     key={lobby.id}
-                    className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                   >
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
                         <Sword className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">
+                        <h3 className="font-semibold text-gray-900 dark:text-white">
                           {lobby.bracket.name}
                         </h3>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-600 dark:text-gray-300">
                           Wager: {formatSol(lobby.wagerLamports)} SOL
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
                           Created {Math.floor(Math.random() * 60)} minutes ago
                         </p>
                       </div>
@@ -291,7 +295,7 @@ export default function BattlePage() {
                         {getStatusText(lobby.status)}
                       </Badge>
                       
-                      <div className="flex items-center text-sm text-gray-600">
+                      <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                         <Users className="w-4 h-4 mr-1" />
                         {lobby.opponentId ? '2/2' : '1/2'}
                       </div>
@@ -321,10 +325,10 @@ export default function BattlePage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {lobbies.filter(l => l.status === 'IN_PROGRESS').length}
               </div>
-              <p className="text-sm text-gray-600">Right now</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Right now</p>
             </CardContent>
           </Card>
 
@@ -336,10 +340,10 @@ export default function BattlePage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {lobbies.reduce((acc, lobby) => acc + (lobby.opponentId ? 2 : 1), 0)}
               </div>
-              <p className="text-sm text-gray-600">In lobbies</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">In lobbies</p>
             </CardContent>
           </Card>
 
@@ -351,10 +355,10 @@ export default function BattlePage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {formatSol(lobbies.reduce((acc, lobby) => acc + lobby.wagerLamports, 0))}
               </div>
-              <p className="text-sm text-gray-600">Total wagered</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Total wagered</p>
             </CardContent>
           </Card>
         </div>

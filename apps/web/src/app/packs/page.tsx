@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Navigation } from '@/components/Navigation';
+import { initializeBackground } from '@/utils/backgroundManager';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -39,6 +40,9 @@ export default function PacksPage() {
   useEffect(() => {
     if (ready && !authenticated) {
       router.push('/');
+    } else if (authenticated) {
+      // Initialize background system for authenticated users
+      initializeBackground();
     }
   }, [ready, authenticated, router]);
 
@@ -147,15 +151,15 @@ export default function PacksPage() {
   const openedPacks = packs.filter(pack => pack.opened);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-transparent">
       <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Booster Packs
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             Buy packs with SOL and discover rare cards
           </p>
         </div>
@@ -176,12 +180,12 @@ export default function PacksPage() {
               <div>
                 <div className="flex items-center mb-2">
                   <Coins className="w-5 h-5 text-yellow-500 mr-2" />
-                  <span className="text-2xl font-bold text-gray-900">0.1 SOL</span>
+                  <span className="text-2xl font-bold text-gray-900 dark:text-white">0.1 SOL</span>
                 </div>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Odds: 80% Common, 18% Rare, 2% Legendary
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   + 1/128 Shiny chance per card
                 </p>
               </div>
@@ -232,7 +236,7 @@ export default function PacksPage() {
                             <div className="mt-4 flex justify-center">
                               <Button 
                                 size="sm" 
-                                className="bg-white text-orange-600 hover:bg-gray-100 mx-auto"
+                                className="bg-white dark:bg-gray-800 text-orange-600 dark:text-orange-400 hover:bg-gray-100 dark:hover:bg-gray-700 mx-auto"
                               >
                                 Open Pack
                               </Button>
@@ -263,7 +267,7 @@ export default function PacksPage() {
             {openedPacks.length === 0 ? (
               <div className="text-center py-8">
                 <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-4">You haven't opened any packs yet</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">You haven't opened any packs yet</p>
                 <Button onClick={buyPack}>
                   Buy First Pack
                 </Button>
@@ -273,16 +277,16 @@ export default function PacksPage() {
                 {openedPacks.map(pack => (
                   <div
                     key={pack.id}
-                    className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center">
                         <Package className="w-5 h-5 text-gray-600 mr-2" />
-                        <span className="font-semibold text-gray-900">
+                        <span className="font-semibold text-gray-900 dark:text-white">
                           Pack #{pack.id.slice(-6)}
                         </span>
                       </div>
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-gray-600 dark:text-gray-300">
                         {new Date(pack.createdAt).toLocaleDateString()}
                       </span>
                     </div>
@@ -298,10 +302,10 @@ export default function PacksPage() {
                       ].map((reward, index) => (
                         <div
                           key={index}
-                          className="p-2 bg-white border border-gray-200 rounded text-center"
+                          className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded text-center"
                         >
                           <div className="flex items-center justify-between mb-1">
-                            <span className="text-xs font-semibold text-gray-900">
+                            <span className="text-xs font-semibold text-gray-900 dark:text-white">
                               {reward.name}
                             </span>
                             {reward.isShiny && (
@@ -331,10 +335,10 @@ export default function PacksPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {packs.length}
               </div>
-              <p className="text-sm text-gray-600">Total</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Total</p>
             </CardContent>
           </Card>
 
@@ -346,10 +350,10 @@ export default function PacksPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {Math.floor(packs.length * 5 * 0.0078)} {/* 1/128 chance */}
               </div>
-              <p className="text-sm text-gray-600">Total cards</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Total cards</p>
             </CardContent>
           </Card>
 
@@ -361,10 +365,10 @@ export default function PacksPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {(packs.length * 0.1).toFixed(1)}
               </div>
-              <p className="text-sm text-gray-600">In all packs</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">In all packs</p>
             </CardContent>
           </Card>
         </div>

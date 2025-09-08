@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Navigation } from '@/components/Navigation';
+import { initializeBackground } from '@/utils/backgroundManager';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -59,6 +60,9 @@ export default function MarketplacePage() {
   useEffect(() => {
     if (ready && !authenticated) {
       router.push('/');
+    } else if (authenticated) {
+      // Initialize background system for authenticated users
+      initializeBackground();
     }
   }, [ready, authenticated, router]);
 
@@ -166,7 +170,7 @@ export default function MarketplacePage() {
       'GRASS': 'bg-green-500 text-white',
       'FIRE': 'bg-red-500 text-white',
       'WATER': 'bg-blue-500 text-white',
-      'ELECTRIC': 'bg-yellow-500 text-black',
+      'ELECTRIC': 'bg-yellow-500 text-black dark:text-gray-900',
       'PSYCHIC': 'bg-purple-500 text-white',
       'NORMAL': 'bg-gray-500 text-white',
       'POISON': 'bg-purple-600 text-white',
@@ -211,15 +215,15 @@ export default function MarketplacePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-transparent">
       <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Marketplace
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             Trade your favorite cards with SOLANA
           </p>
         </div>
@@ -235,7 +239,7 @@ export default function MarketplacePage() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Rarity
                 </label>
                 <select
@@ -251,7 +255,7 @@ export default function MarketplacePage() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Minimum Price (SOL)
                 </label>
                 <input
@@ -264,7 +268,7 @@ export default function MarketplacePage() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Maximum Price (SOL)
                 </label>
                 <input
@@ -277,7 +281,7 @@ export default function MarketplacePage() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Shiny
                 </label>
                 <select
@@ -300,7 +304,7 @@ export default function MarketplacePage() {
             <Card key={listing.id} className="hover:shadow-lg transition-shadow">
               <CardHeader className="pb-3">
                 <div className="relative">
-                  <div className="w-full h-48 bg-gradient-to-br from-white to-gray-100 rounded-lg border border-gray-200 p-4 relative overflow-hidden">
+                  <div className="w-full h-48 bg-gradient-to-br from-white to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-lg border border-gray-200 dark:border-gray-600 p-4 relative overflow-hidden">
                     {/* Pokemon Sprite */}
                        <div className="absolute top-8 right-2 w-16 h-16">
                          <img 
@@ -313,7 +317,7 @@ export default function MarketplacePage() {
                     
                     {/* Pokemon Name and Shiny */}
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-lg font-bold text-gray-900 font-pixel">
+                      <span className="text-lg font-bold text-gray-900 dark:text-white font-pixel">
                         {listing.card.name}
                       </span>
                       {listing.card.isShiny && (
@@ -354,7 +358,7 @@ export default function MarketplacePage() {
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center">
                     <Coins className="w-4 h-4 text-yellow-500 mr-1" />
-                    <span className="font-semibold text-gray-900">
+                    <span className="font-semibold text-gray-900 dark:text-white">
                       {formatSol(listing.priceLamports)} SOL
                     </span>
                   </div>
@@ -392,7 +396,7 @@ export default function MarketplacePage() {
             <CardContent className="flex items-center justify-center h-64">
               <div className="text-center">
                 <TrendingUp className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-4">No cards found with these filters</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">No cards found with these filters</p>
                 <Button onClick={() => setFilters({ rarity: '', minPrice: '', maxPrice: '', isShiny: '' })}>
                   Clear Filters
                 </Button>
@@ -411,10 +415,10 @@ export default function MarketplacePage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {listings.length}
               </div>
-              <p className="text-sm text-gray-600">Currently</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Currently</p>
             </CardContent>
           </Card>
 
@@ -426,10 +430,10 @@ export default function MarketplacePage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {formatSol(listings.reduce((acc, listing) => acc + listing.priceLamports, 0) / listings.length || 0)} SOL
               </div>
-              <p className="text-sm text-gray-600">Per card</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Per card</p>
             </CardContent>
           </Card>
 
@@ -441,10 +445,10 @@ export default function MarketplacePage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {listings.filter(l => l.card.isShiny).length}
               </div>
-              <p className="text-sm text-gray-600">Available</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Available</p>
             </CardContent>
           </Card>
         </div>

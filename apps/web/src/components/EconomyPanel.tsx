@@ -101,30 +101,30 @@ export function EconomyPanel() {
 
       {/* Balance Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-2">PokéCoins Balance</h2>
           <p className="text-3xl font-bold text-blue-600">{pokecoinsBalance.toLocaleString()}</p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             ≈ {(pokecoinsToSol(pokecoinsBalance) * 1_000_000_000).toFixed(0)} lamports
           </p>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-2">Exchange Rate</h2>
           <p className="text-lg font-semibold">
             {exchangeRate.pokecoinsPerSol.toLocaleString()} PC = 1 SOL
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             1 PC = {exchangeRate.solPerPokecoin} SOL
           </p>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-2">SOL Equivalent</h2>
           <p className="text-2xl font-bold text-orange-600">
             ≈ {pokecoinsToSol(pokecoinsBalance).toFixed(4)} SOL
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             Current value in SOL
           </p>
         </div>
@@ -133,9 +133,9 @@ export function EconomyPanel() {
       {/* Bridge Operations */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         {/* Deposit SOL */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4">Deposit SOL</h2>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
             Convert SOL to PokéCoins for in-game purchases
           </p>
 
@@ -153,7 +153,7 @@ export function EconomyPanel() {
               />
             </div>
 
-            <div className="bg-gray-50 p-3 rounded">
+            <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded">
               <p className="text-sm">
                 You will receive: <strong>{solToPokecoins(depositAmount).toLocaleString()} PokéCoins</strong>
               </p>
@@ -170,9 +170,9 @@ export function EconomyPanel() {
         </div>
 
         {/* Withdraw SOL */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4">Withdraw SOL</h2>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
             Convert PokéCoins back to SOL
           </p>
 
@@ -190,7 +190,7 @@ export function EconomyPanel() {
               />
             </div>
 
-            <div className="bg-gray-50 p-3 rounded">
+            <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded">
               <p className="text-sm">
                 You will receive: <strong>{pokecoinsToSol(withdrawAmount).toFixed(6)} SOL</strong>
               </p>
@@ -208,18 +208,18 @@ export function EconomyPanel() {
       </div>
 
       {/* Transaction History */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold mb-4">Transaction History</h2>
 
         {transactionHistory.length === 0 ? (
-          <p className="text-gray-500">No transactions yet.</p>
+          <p className="text-gray-500 dark:text-gray-400">No transactions yet.</p>
         ) : (
           <div className="space-y-2">
             {transactionHistory.map((tx) => (
               <div key={tx.id} className="flex justify-between items-center border-b pb-2">
                 <div>
                   <p className="font-medium capitalize">{tx.type.replace('_', ' ')}</p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
                     {tx.timestamp.toLocaleDateString()} {tx.timestamp.toLocaleTimeString()}
                   </p>
                 </div>
@@ -240,9 +240,9 @@ export function EconomyPanel() {
       </div>
 
       {/* Daily Bonus */}
-      <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mt-6">
         <h2 className="text-xl font-semibold mb-4">Daily Bonus</h2>
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
           Claim your daily PokéCoins bonus! Streak bonuses available.
         </p>
 

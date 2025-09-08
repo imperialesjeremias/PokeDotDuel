@@ -81,8 +81,8 @@ export function PackOpener() {
     switch (rarity) {
       case 'LEGENDARY': return 'text-yellow-500 border-yellow-500';
       case 'RARE': return 'text-blue-500 border-blue-500';
-      case 'COMMON': return 'text-gray-500 border-gray-500';
-      default: return 'text-gray-500 border-gray-500';
+      case 'COMMON': return 'text-gray-500 dark:text-gray-400 border-gray-500 dark:border-gray-400';
+        default: return 'text-gray-500 dark:text-gray-400 border-gray-500 dark:border-gray-400';
     }
   };
 
@@ -113,7 +113,7 @@ export function PackOpener() {
       )}
 
       {/* Buy Pack */}
-      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold mb-4">Buy Booster Pack</h2>
         <p className="mb-4">Price: 0.1 SOL</p>
         <button
@@ -137,7 +137,7 @@ export function PackOpener() {
 
       {/* Revealed Rewards */}
       {revealedRewards.length > 0 && (
-        <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
           <h2 className="text-xl font-semibold mb-4">Pack Contents</h2>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             {revealedRewards.map((reward, index) => (
@@ -166,20 +166,20 @@ export function PackOpener() {
       )}
 
       {/* User Packs */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold mb-4">Your Packs</h2>
 
         {userPacks.length === 0 ? (
-          <p className="text-gray-500">No packs yet. Buy your first pack!</p>
+          <p className="text-gray-500 dark:text-gray-400">No packs yet. Buy your first pack!</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {userPacks.map((pack) => (
               <div key={pack.id} className="border rounded-lg p-4">
                 <h3 className="font-semibold">Pack #{pack.id.slice(-8)}</h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Status: {pack.opened ? 'Opened' : 'Unopened'}
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Purchased: {new Date(pack.created_at).toLocaleDateString()}
                 </p>
 
@@ -195,7 +195,7 @@ export function PackOpener() {
 
                 {pack.opened && pack.pack_rewards && (
                   <div className="mt-2">
-                    <p className="text-sm font-medium">Contents:</p>
+                    <p className="text-sm font-medium dark:text-gray-200">Contents:</p>
                     <div className="flex flex-wrap gap-1 mt-1">
                       {pack.pack_rewards.map((reward: PackReward, index: number) => (
                         <span
@@ -215,18 +215,18 @@ export function PackOpener() {
       </div>
 
       {/* Pack Statistics */}
-      <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mt-6">
         <h2 className="text-xl font-semibold mb-4">Pack Statistics</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center">
             <p className="text-2xl font-bold text-blue-600">{userPacks.length}</p>
-            <p className="text-sm text-gray-600">Total Packs</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Total Packs</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-orange-600">
               {userPacks.filter(p => p.opened).length}
             </p>
-            <p className="text-sm text-gray-600">Opened</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Opened</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-yellow-600">
@@ -234,7 +234,7 @@ export function PackOpener() {
                 total + (pack.pack_rewards?.length || 0), 0
               )}
             </p>
-            <p className="text-sm text-gray-600">Cards Collected</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Cards Collected</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-purple-600">
@@ -242,7 +242,7 @@ export function PackOpener() {
                 total + (pack.pack_rewards?.filter((r: any) => r.is_shiny).length || 0), 0
               )}
             </p>
-            <p className="text-sm text-gray-600">Shiny Cards</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Shiny Cards</p>
           </div>
         </div>
       </div>

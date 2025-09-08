@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Navigation } from '@/components/Navigation';
+import { initializeBackground } from '@/utils/backgroundManager';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -60,6 +61,9 @@ export default function TeamBuilderPage() {
   useEffect(() => {
     if (ready && !authenticated) {
       router.push('/');
+    } else if (authenticated) {
+      // Initialize background system for authenticated users
+      initializeBackground();
     }
   }, [ready, authenticated, router]);
 
@@ -209,15 +213,15 @@ export default function TeamBuilderPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-transparent">
       <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Team Builder
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             Build and optimize your team of 6 Pokémon
           </p>
         </div>
@@ -245,15 +249,15 @@ export default function TeamBuilderPage() {
                       key={team.id}
                       className={`p-3 border rounded-lg cursor-pointer transition-colors ${
                         selectedTeam?.id === team.id 
-                          ? 'border-blue-500 bg-blue-50' 
-                          : 'border-gray-200 hover:bg-gray-50'
+                          ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-400' 
+                          : 'border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
                       }`}
                       onClick={() => setSelectedTeam(team)}
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="font-semibold text-gray-900">{team.name}</h3>
-                          <p className="text-sm text-gray-600">
+                          <h3 className="font-semibold text-gray-900 dark:text-white">{team.name}</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">
                             {team.slots.length}/6 Pokémon
                           </p>
                         </div>
@@ -307,7 +311,7 @@ export default function TeamBuilderPage() {
                               <div className="relative">
                                 <div className="w-full h-24 bg-gradient-to-br from-white to-gray-100 rounded-lg border border-gray-200 p-2">
                                   <div className="flex items-center justify-between mb-1">
-                                    <span className="text-xs font-semibold text-gray-900">
+                                    <span className="text-xs font-semibold text-gray-900 dark:text-white">
                                       {card.name}
                                     </span>
                                     {card.isShiny && (
@@ -328,7 +332,7 @@ export default function TeamBuilderPage() {
                                     <Badge className={`text-xs ${getRarityColor(card.rarity)}`}>
                                       {card.rarity}
                                     </Badge>
-                                    <span className="text-xs text-gray-600">
+                                    <span className="text-xs text-gray-600 dark:text-gray-300">
                                       Lv.{card.level}
                                     </span>
                                   </div>
@@ -338,7 +342,7 @@ export default function TeamBuilderPage() {
                           ) : (
                             <div className="text-center">
                               <Plus className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                              <p className="text-sm text-gray-500">Add Pokémon</p>
+                              <p className="text-sm text-gray-500 dark:text-gray-400">Add Pokémon</p>
                             </div>
                           )}
                         </div>
@@ -352,7 +356,7 @@ export default function TeamBuilderPage() {
                 <CardContent className="flex items-center justify-center h-64">
                   <div className="text-center">
                     <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-600 mb-4">Select a team to edit it</p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">Select a team to edit it</p>
                     <Button onClick={() => router.push('/team-builder/create')}>
                       Create New Team
                     </Button>
@@ -375,11 +379,11 @@ export default function TeamBuilderPage() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Type Coverage</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Type Coverage</h3>
                   <div className="space-y-1">
                     {['FIRE', 'WATER', 'GRASS', 'ELECTRIC', 'PSYCHIC'].map(type => (
                       <div key={type} className="flex items-center justify-between">
-                        <span className="text-sm text-gray-600">{type}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-300">{type}</span>
                         <Badge className={getTypeColor(type)}>
                           {Math.random() > 0.5 ? 'Covered' : 'Weak'}
                         </Badge>
@@ -389,25 +393,25 @@ export default function TeamBuilderPage() {
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Statistics</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Statistics</h3>
                   <div className="space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Average Attack</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-300">Average Attack</span>
                       <span className="text-sm font-semibold">85</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Average Defense</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-300">Average Defense</span>
                       <span className="text-sm font-semibold">78</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Average Speed</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-300">Average Speed</span>
                       <span className="text-sm font-semibold">92</span>
                     </div>
                   </div>
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Suggestions</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Suggestions</h3>
                   <div className="space-y-2">
                     <div className="p-2 bg-yellow-50 border border-yellow-200 rounded">
                       <p className="text-sm text-yellow-800">

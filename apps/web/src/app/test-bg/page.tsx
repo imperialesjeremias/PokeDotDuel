@@ -8,6 +8,7 @@ export default function TestBackgroundPage() {
 
   useEffect(() => {
     console.log('🧪 Test page mounted, initializing background...');
+    // Initialize background system
     initializeBackground();
     setCurrentBg(getCurrentBackground());
   }, []);
@@ -29,7 +30,7 @@ export default function TestBackgroundPage() {
         >
           Toggle Background
         </button>
-        <div className="mt-4 text-sm text-gray-600">
+        <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">
           <p>Check the browser console for debug messages.</p>
           <p>The background should be visible behind this white box.</p>
         </div>
