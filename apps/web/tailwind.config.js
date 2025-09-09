@@ -18,6 +18,9 @@ module.exports = {
     fontFamily: {
       sans: ['var(--font-inter)', 'sans-serif'],
       pixel: ['var(--font-pixel)', 'monospace'],
+      'pokemon-solid': ['Pokemon Solid', 'monospace'],
+      'pokemon-hollow': ['Pokemon Hollow', 'monospace'],
+      'pokemon-classic': ['Pokemon Classic', 'monospace'],
     },
     extend: {
       colors: {
