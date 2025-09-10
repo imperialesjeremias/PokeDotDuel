@@ -1,8 +1,7 @@
 import { TypeGen1, Stats } from '@pokebattle/shared';
+import { GEN1_POKEMON } from '../data/gen1-pokemon';
 
-// Import the Pokemon data from the websocket server
-// Note: In a real implementation, you might want to copy this data to the web app
-// or create a shared package for it
+// Pokemon entry interface that matches the data structure
 interface PokemonEntry {
   dexNumber: number;
   name: string;
@@ -17,110 +16,28 @@ interface PokemonEntry {
   };
 }
 
-// This would be imported from the actual data file
-// For now, we'll create a sample structure
-const POKEMON_DATA: Record<string, PokemonEntry> = {
-  "bulbasaur": {
-    dexNumber: 1,
-    name: "Bulbasaur",
-    types: ["GRASS", "POISON"],
-    baseStats: { hp: 45, atk: 49, def: 49, spa: 65, spd: 65, spe: 45 },
-    height: 0.7,
-    weight: 6.9,
-    color: "Green",
-    evolutions: { to: ["Ivysaur"] }
-  },
-  "ivysaur": {
-    dexNumber: 2,
-    name: "Ivysaur",
-    types: ["GRASS", "POISON"],
-    baseStats: { hp: 60, atk: 62, def: 63, spa: 80, spd: 80, spe: 60 },
-    height: 1.0,
-    weight: 13.0,
-    color: "Green",
-    evolutions: { from: "Bulbasaur", to: ["Venusaur"] }
-  },
-  "venusaur": {
-    dexNumber: 3,
-    name: "Venusaur",
-    types: ["GRASS", "POISON"],
-    baseStats: { hp: 80, atk: 82, def: 83, spa: 100, spd: 100, spe: 80 },
-    height: 2.0,
-    weight: 100.0,
-    color: "Green",
-    evolutions: { from: "Ivysaur" }
-  },
-  "charmander": {
-    dexNumber: 4,
-    name: "Charmander",
-    types: ["FIRE"],
-    baseStats: { hp: 39, atk: 52, def: 43, spa: 60, spd: 50, spe: 65 },
-    height: 0.6,
-    weight: 8.5,
-    color: "Red",
-    evolutions: { to: ["Charmeleon"] }
-  },
-  "charmeleon": {
-    dexNumber: 5,
-    name: "Charmeleon",
-    types: ["FIRE"],
-    baseStats: { hp: 58, atk: 64, def: 58, spa: 80, spd: 65, spe: 80 },
-    height: 1.1,
-    weight: 19.0,
-    color: "Red",
-    evolutions: { from: "Charmander", to: ["Charizard"] }
-  },
-  "charizard": {
-    dexNumber: 6,
-    name: "Charizard",
-    types: ["FIRE", "FLYING"],
-    baseStats: { hp: 78, atk: 84, def: 78, spa: 109, spd: 85, spe: 100 },
-    height: 1.7,
-    weight: 90.5,
-    color: "Red",
-    evolutions: { from: "Charmeleon" }
-  },
-  "squirtle": {
-    dexNumber: 7,
-    name: "Squirtle",
-    types: ["WATER"],
-    baseStats: { hp: 44, atk: 48, def: 65, spa: 50, spd: 64, spe: 43 },
-    height: 0.5,
-    weight: 9.0,
-    color: "Blue",
-    evolutions: { to: ["Wartortle"] }
-  },
-  "wartortle": {
-    dexNumber: 8,
-    name: "Wartortle",
-    types: ["WATER"],
-    baseStats: { hp: 59, atk: 63, def: 80, spa: 65, spd: 80, spe: 58 },
-    height: 1.0,
-    weight: 22.5,
-    color: "Blue",
-    evolutions: { from: "Squirtle", to: ["Blastoise"] }
-  },
-  "blastoise": {
-    dexNumber: 9,
-    name: "Blastoise",
-    types: ["WATER"],
-    baseStats: { hp: 79, atk: 83, def: 100, spa: 85, spd: 105, spe: 78 },
-    height: 1.6,
-    weight: 85.5,
-    color: "Blue",
-    evolutions: { from: "Wartortle" }
-  },
-  "pikachu": {
-    dexNumber: 25,
-    name: "Pikachu",
-    types: ["ELECTRIC"],
-    baseStats: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 90 },
-    height: 0.4,
-    weight: 6.0,
-    color: "Yellow",
-    evolutions: { from: "Pichu", to: ["Raichu"] }
-  }
-};
+// Transform the imported data to match our interface
+const POKEMON_DATA: Record<string, PokemonEntry> = Object.fromEntries(
+  Object.entries(GEN1_POKEMON)
+    .filter(([key, pokemon]) => {
+      // Filter out mega evolutions and other variants for marketplace
+      // Keep only base forms and regular evolutions
+      return !key.includes('mega') && !key.includes('gmax') && !key.includes('alola') && !key.includes('galar');
+    })
+    .map(([key, pokemon]) => [
+      key,
+      {
+        dexNumber: pokemon.dexNumber,
+        name: pokemon.name,
+        types: pokemon.types as TypeGen1[],
+        baseStats: pokemon.baseStats,
+        height: pokemon.height,
+        weight: pokemon.weight,
+        color: pokemon.color,
+        evolutions: pokemon.evolutions
+      }
+    ])
+);
 
 /**
  * Pokemon data utility class for retrieving Pokemon information
@@ -227,6 +144,13 @@ export class PokemonDataUtil {
     }
     
     return chain;
+  }
+
+  /**
+   * Get sprite URL for a Pokemon by dex number
+   */
+  static getSpriteUrl(dexNumber: number): string {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${dexNumber}.png`;
   }
 }
 

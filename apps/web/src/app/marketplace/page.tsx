@@ -20,6 +20,8 @@ import {
   ShoppingCart,
   Eye
 } from 'lucide-react';
+import { PokemonDataUtil, PokemonEntry } from '@/lib/pokemon-data';
+import { TypeGen1 } from '@pokebattle/shared';
 
 interface Listing {
   id: string;
@@ -41,7 +43,7 @@ interface Listing {
       spd: number;
       spe: number;
     };
-    types: string[];
+    types: TypeGen1[];
   };
 }
 
@@ -74,73 +76,65 @@ export default function MarketplacePage() {
 
   const fetchListings = async () => {
     try {
-      // Mock data - in real implementation, fetch from API
-      setListings([
-        {
-          id: '1',
-          priceLamports: 5000000, // 0.005 SOL
-          status: 'ACTIVE',
-          createdAt: new Date().toISOString(),
-          card: {
-            id: 'card1',
-            dexNumber: 25,
-            name: 'Pikachu',
-            isShiny: false,
-            rarity: 'RARE',
-            level: 25,
-            stats: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 90 },
-            types: ['ELECTRIC'],
-          },
-        },
-        {
-          id: '2',
-          priceLamports: 15000000, // 0.015 SOL
-          status: 'ACTIVE',
-          createdAt: new Date().toISOString(),
-          card: {
-            id: 'card2',
-            dexNumber: 150,
-            name: 'Mewtwo',
-            isShiny: true,
-            rarity: 'LEGENDARY',
-            level: 50,
-            stats: { hp: 106, atk: 110, def: 90, spa: 154, spd: 90, spe: 130 },
-            types: ['PSYCHIC'],
-          },
-        },
-        {
-          id: '3',
-          priceLamports: 2000000, // 0.002 SOL
-          status: 'ACTIVE',
-          createdAt: new Date().toISOString(),
-          card: {
-            id: 'card3',
-            dexNumber: 1,
-            name: 'Bulbasaur',
-            isShiny: false,
-            rarity: 'COMMON',
-            level: 15,
-            stats: { hp: 45, atk: 49, def: 49, spa: 65, spd: 65, spe: 45 },
-            types: ['GRASS', 'POISON'],
-          },
-        },
-        {
-          id: '4',
-          priceLamports: 8000000, // 0.008 SOL
-          status: 'ACTIVE',
-          createdAt: new Date().toISOString(),
-          card: {
-            id: 'card4',
-            dexNumber: 4,
-            name: 'Charmander',
-            isShiny: true,
-            rarity: 'RARE',
-            level: 20,
-            stats: { hp: 39, atk: 52, def: 43, spa: 60, spd: 50, spe: 65 },
-            types: ['FIRE'],
-          },
-        },
-      ]);
+      // Generate dynamic listings from Pokemon data
+      const allPokemon = PokemonDataUtil.getAllPokemon();
+      const generatedListings: Listing[] = [];
+      
+      // Create multiple listings with different variations
+      allPokemon.forEach((pokemon, index) => {
+        // Generate 1-3 listings per Pokemon with different levels and shiny status
+        const numListings = Math.floor(Math.random() * 3) + 1;
+        
+        for (let i = 0; i < numListings; i++) {
+          const isShiny = Math.random() < 0.15; // 15% chance for shiny
+          const level = Math.floor(Math.random() * 80) + 20; // Level 20-100
+          const cardClass = PokemonDataUtil.getPokemonCardClass(pokemon);
+          
+          // Convert card class to rarity
+          let rarity: 'COMMON' | 'RARE' | 'LEGENDARY';
+          switch (cardClass) {
+            case 'legendary':
+              rarity = 'LEGENDARY';
+              break;
+            case 'rare':
+              rarity = 'RARE';
+              break;
+            default:
+              rarity = 'COMMON';
+              break;
+          }
+          
+          // Calculate price based on rarity, level, and shiny status
+          let basePrice = 1000000; // 0.001 SOL base
+          if (rarity === 'RARE') basePrice *= 5;
+          if (rarity === 'LEGENDARY') basePrice *= 15;
+          if (isShiny) basePrice *= 4;
+          basePrice += (level - 20) * 50000; // Add for higher levels
+          
+          const listing: Listing = {
+            id: `${pokemon.dexNumber}-${i}`,
+            priceLamports: Math.floor(basePrice + (Math.random() * basePrice * 0.3)), // ±30% variation
+            status: 'ACTIVE',
+            createdAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(), // Random time in last week
+            card: {
+              id: `card-${pokemon.dexNumber}-${i}`,
+              dexNumber: pokemon.dexNumber,
+              name: pokemon.name,
+              isShiny,
+              rarity,
+              level,
+              stats: pokemon.baseStats,
+              types: pokemon.types,
+            },
+          };
+          
+          generatedListings.push(listing);
+        }
+      });
+      
+      // Shuffle and limit to reasonable number for demo
+      const shuffled = generatedListings.sort(() => Math.random() - 0.5);
+      setListings(shuffled.slice(0, 20)); // Show 20 random listings
     } catch (error) {
       console.error('Error fetching listings:', error);
     } finally {
@@ -165,28 +159,44 @@ export default function MarketplacePage() {
     }
   };
 
-  const getTypeColor = (type: string) => {
-    const colors: Record<string, string> = {
-      'GRASS': 'bg-green-500 text-white',
+  const getTypeColor = (type: TypeGen1) => {
+    const colors: Record<TypeGen1, string> = {
+      'NORMAL': 'bg-gray-500 text-white',
       'FIRE': 'bg-red-500 text-white',
       'WATER': 'bg-blue-500 text-white',
       'ELECTRIC': 'bg-yellow-500 text-black dark:text-gray-900',
-      'PSYCHIC': 'bg-purple-500 text-white',
-      'NORMAL': 'bg-gray-500 text-white',
+      'GRASS': 'bg-green-500 text-white',
+      'ICE': 'bg-blue-200 text-gray-900',
+      'FIGHTING': 'bg-red-700 text-white',
       'POISON': 'bg-purple-600 text-white',
+      'GROUND': 'bg-yellow-600 text-white',
+      'FLYING': 'bg-indigo-400 text-white',
+      'PSYCHIC': 'bg-purple-500 text-white',
+      'BUG': 'bg-green-400 text-gray-900',
+      'ROCK': 'bg-yellow-800 text-white',
+      'GHOST': 'bg-purple-700 text-white',
+      'DRAGON': 'bg-indigo-700 text-white',
     };
     return colors[type] || 'bg-gray-500 text-white';
   };
 
-  const getTypeIcon = (type: string) => {
-    const icons: Record<string, string> = {
-      'GRASS': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/12.png',
+  const getTypeIcon = (type: TypeGen1) => {
+    const icons: Record<TypeGen1, string> = {
+      'NORMAL': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/1.png',
       'FIRE': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/10.png',
       'WATER': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/11.png',
       'ELECTRIC': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/13.png',
-      'PSYCHIC': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/14.png',
-      'NORMAL': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/1.png',
+      'GRASS': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/12.png',
+      'ICE': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/15.png',
+      'FIGHTING': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/2.png',
       'POISON': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/4.png',
+      'GROUND': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/5.png',
+      'FLYING': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/3.png',
+      'PSYCHIC': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/14.png',
+      'BUG': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/7.png',
+      'ROCK': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/6.png',
+      'GHOST': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/8.png',
+      'DRAGON': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/16.png',
     };
     return icons[type] || 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/1.png';
   };
@@ -308,7 +318,7 @@ export default function MarketplacePage() {
                     {/* Pokemon Sprite */}
                        <div className="absolute top-6 right-2 w-20 h-20">
                          <img 
-                           src={`https://play.pokemonshowdown.com/sprites/gen1/${listing.card.name.toLowerCase()}.png`}
+                           src={PokemonDataUtil.getSpriteUrl(listing.card.dexNumber)}
                            alt={listing.card.name}
                            className="w-full h-full object-contain pixelated"
                            style={{ imageRendering: 'pixelated' }}
