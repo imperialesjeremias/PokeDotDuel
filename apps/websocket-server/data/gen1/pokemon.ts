@@ -1,0 +1,5103 @@
+// Generated from Showdown data
+export const GEN1_POKEMON = {
+  "bulbasaur": {
+    "dexNumber": 1,
+    "name": "Bulbasaur",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 45,
+      "atk": 49,
+      "def": 49,
+      "spa": 65,
+      "spd": 65,
+      "spe": 45
+    },
+    "height": 0.7,
+    "weight": 6.9,
+    "color": "Green",
+    "evolutions": {
+      "to": [
+        "Ivysaur"
+      ]
+    }
+  },
+  "ivysaur": {
+    "dexNumber": 2,
+    "name": "Ivysaur",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 62,
+      "def": 63,
+      "spa": 80,
+      "spd": 80,
+      "spe": 60
+    },
+    "height": 1,
+    "weight": 13,
+    "color": "Green",
+    "evolutions": {
+      "from": "Bulbasaur",
+      "to": [
+        "Venusaur"
+      ]
+    }
+  },
+  "venusaur": {
+    "dexNumber": 3,
+    "name": "Venusaur",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 82,
+      "def": 83,
+      "spa": 100,
+      "spd": 100,
+      "spe": 80
+    },
+    "height": 2,
+    "weight": 100,
+    "color": "Green",
+    "evolutions": {
+      "from": "Ivysaur"
+    }
+  },
+  "venusaurmega": {
+    "dexNumber": 3,
+    "name": "Venusaur-Mega",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 100,
+      "def": 123,
+      "spa": 122,
+      "spd": 120,
+      "spe": 80
+    },
+    "height": 2.4,
+    "weight": 155.5,
+    "color": "Green",
+    "evolutions": {}
+  },
+  "venusaurgmax": {
+    "dexNumber": 3,
+    "name": "Venusaur-Gmax",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 82,
+      "def": 83,
+      "spa": 100,
+      "spd": 100,
+      "spe": 80
+    },
+    "height": 24,
+    "weight": 0,
+    "color": "Green",
+    "evolutions": {}
+  },
+  "charmander": {
+    "dexNumber": 4,
+    "name": "Charmander",
+    "types": [
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 39,
+      "atk": 52,
+      "def": 43,
+      "spa": 50,
+      "spd": 50,
+      "spe": 65
+    },
+    "height": 0.6,
+    "weight": 8.5,
+    "color": "Red",
+    "evolutions": {
+      "to": [
+        "Charmeleon"
+      ]
+    }
+  },
+  "charmeleon": {
+    "dexNumber": 5,
+    "name": "Charmeleon",
+    "types": [
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 58,
+      "atk": 64,
+      "def": 58,
+      "spa": 65,
+      "spd": 65,
+      "spe": 80
+    },
+    "height": 1.1,
+    "weight": 19,
+    "color": "Red",
+    "evolutions": {
+      "from": "Charmander",
+      "to": [
+        "Charizard"
+      ]
+    }
+  },
+  "charizard": {
+    "dexNumber": 6,
+    "name": "Charizard",
+    "types": [
+      "FIRE",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 78,
+      "atk": 84,
+      "def": 78,
+      "spa": 85,
+      "spd": 85,
+      "spe": 100
+    },
+    "height": 1.7,
+    "weight": 90.5,
+    "color": "Red",
+    "evolutions": {
+      "from": "Charmeleon"
+    }
+  },
+  "charizardmegax": {
+    "dexNumber": 6,
+    "name": "Charizard-Mega-X",
+    "types": [
+      "FIRE",
+      "DRAGON"
+    ],
+    "baseStats": {
+      "hp": 78,
+      "atk": 130,
+      "def": 111,
+      "spa": 130,
+      "spd": 85,
+      "spe": 100
+    },
+    "height": 1.7,
+    "weight": 110.5,
+    "color": "Black",
+    "evolutions": {}
+  },
+  "charizardmegay": {
+    "dexNumber": 6,
+    "name": "Charizard-Mega-Y",
+    "types": [
+      "FIRE",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 78,
+      "atk": 104,
+      "def": 78,
+      "spa": 159,
+      "spd": 115,
+      "spe": 100
+    },
+    "height": 1.7,
+    "weight": 100.5,
+    "color": "Red",
+    "evolutions": {}
+  },
+  "charizardgmax": {
+    "dexNumber": 6,
+    "name": "Charizard-Gmax",
+    "types": [
+      "FIRE",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 78,
+      "atk": 84,
+      "def": 78,
+      "spa": 109,
+      "spd": 85,
+      "spe": 100
+    },
+    "height": 28,
+    "weight": 0,
+    "color": "Red",
+    "evolutions": {}
+  },
+  "squirtle": {
+    "dexNumber": 7,
+    "name": "Squirtle",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 44,
+      "atk": 48,
+      "def": 65,
+      "spa": 50,
+      "spd": 50,
+      "spe": 43
+    },
+    "height": 0.5,
+    "weight": 9,
+    "color": "Blue",
+    "evolutions": {
+      "to": [
+        "Wartortle"
+      ]
+    }
+  },
+  "wartortle": {
+    "dexNumber": 8,
+    "name": "Wartortle",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 59,
+      "atk": 63,
+      "def": 80,
+      "spa": 65,
+      "spd": 65,
+      "spe": 58
+    },
+    "height": 1,
+    "weight": 22.5,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Squirtle",
+      "to": [
+        "Blastoise"
+      ]
+    }
+  },
+  "blastoise": {
+    "dexNumber": 9,
+    "name": "Blastoise",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 79,
+      "atk": 83,
+      "def": 100,
+      "spa": 85,
+      "spd": 85,
+      "spe": 78
+    },
+    "height": 1.6,
+    "weight": 85.5,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Wartortle"
+    }
+  },
+  "blastoisemega": {
+    "dexNumber": 9,
+    "name": "Blastoise-Mega",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 79,
+      "atk": 103,
+      "def": 120,
+      "spa": 135,
+      "spd": 115,
+      "spe": 78
+    },
+    "height": 1.6,
+    "weight": 101.1,
+    "color": "Blue",
+    "evolutions": {}
+  },
+  "blastoisegmax": {
+    "dexNumber": 9,
+    "name": "Blastoise-Gmax",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 79,
+      "atk": 83,
+      "def": 100,
+      "spa": 85,
+      "spd": 105,
+      "spe": 78
+    },
+    "height": 25,
+    "weight": 0,
+    "color": "Blue",
+    "evolutions": {}
+  },
+  "caterpie": {
+    "dexNumber": 10,
+    "name": "Caterpie",
+    "types": [
+      "BUG"
+    ],
+    "baseStats": {
+      "hp": 45,
+      "atk": 30,
+      "def": 35,
+      "spa": 20,
+      "spd": 20,
+      "spe": 45
+    },
+    "height": 0.3,
+    "weight": 2.9,
+    "color": "Green",
+    "evolutions": {
+      "to": [
+        "Metapod"
+      ]
+    }
+  },
+  "metapod": {
+    "dexNumber": 11,
+    "name": "Metapod",
+    "types": [
+      "BUG"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 20,
+      "def": 55,
+      "spa": 25,
+      "spd": 25,
+      "spe": 30
+    },
+    "height": 0.7,
+    "weight": 9.9,
+    "color": "Green",
+    "evolutions": {
+      "from": "Caterpie",
+      "to": [
+        "Butterfree"
+      ]
+    }
+  },
+  "butterfree": {
+    "dexNumber": 12,
+    "name": "Butterfree",
+    "types": [
+      "BUG",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 45,
+      "def": 50,
+      "spa": 80,
+      "spd": 80,
+      "spe": 70
+    },
+    "height": 1.1,
+    "weight": 32,
+    "color": "White",
+    "evolutions": {
+      "from": "Metapod"
+    }
+  },
+  "butterfreegmax": {
+    "dexNumber": 12,
+    "name": "Butterfree-Gmax",
+    "types": [
+      "BUG",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 45,
+      "def": 50,
+      "spa": 90,
+      "spd": 80,
+      "spe": 70
+    },
+    "height": 17,
+    "weight": 0,
+    "color": "White",
+    "evolutions": {}
+  },
+  "weedle": {
+    "dexNumber": 13,
+    "name": "Weedle",
+    "types": [
+      "BUG",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 35,
+      "def": 30,
+      "spa": 20,
+      "spd": 20,
+      "spe": 50
+    },
+    "height": 0.3,
+    "weight": 3.2,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Kakuna"
+      ]
+    }
+  },
+  "kakuna": {
+    "dexNumber": 14,
+    "name": "Kakuna",
+    "types": [
+      "BUG",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 45,
+      "atk": 25,
+      "def": 50,
+      "spa": 25,
+      "spd": 25,
+      "spe": 35
+    },
+    "height": 0.6,
+    "weight": 10,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Weedle",
+      "to": [
+        "Beedrill"
+      ]
+    }
+  },
+  "beedrill": {
+    "dexNumber": 15,
+    "name": "Beedrill",
+    "types": [
+      "BUG",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 80,
+      "def": 40,
+      "spa": 45,
+      "spd": 45,
+      "spe": 75
+    },
+    "height": 1,
+    "weight": 29.5,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Kakuna"
+    }
+  },
+  "beedrillmega": {
+    "dexNumber": 15,
+    "name": "Beedrill-Mega",
+    "types": [
+      "BUG",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 150,
+      "def": 40,
+      "spa": 15,
+      "spd": 80,
+      "spe": 145
+    },
+    "height": 1.4,
+    "weight": 40.5,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pidgey": {
+    "dexNumber": 16,
+    "name": "Pidgey",
+    "types": [
+      "NORMAL",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 40,
+      "spa": 35,
+      "spd": 35,
+      "spe": 56
+    },
+    "height": 0.3,
+    "weight": 1.8,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Pidgeotto"
+      ]
+    }
+  },
+  "pidgeotto": {
+    "dexNumber": 17,
+    "name": "Pidgeotto",
+    "types": [
+      "NORMAL",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 63,
+      "atk": 60,
+      "def": 55,
+      "spa": 50,
+      "spd": 50,
+      "spe": 71
+    },
+    "height": 1.1,
+    "weight": 30,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Pidgey",
+      "to": [
+        "Pidgeot"
+      ]
+    }
+  },
+  "pidgeot": {
+    "dexNumber": 18,
+    "name": "Pidgeot",
+    "types": [
+      "NORMAL",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 83,
+      "atk": 80,
+      "def": 75,
+      "spa": 70,
+      "spd": 70,
+      "spe": 91
+    },
+    "height": 1.5,
+    "weight": 39.5,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Pidgeotto"
+    }
+  },
+  "pidgeotmega": {
+    "dexNumber": 18,
+    "name": "Pidgeot-Mega",
+    "types": [
+      "NORMAL",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 83,
+      "atk": 80,
+      "def": 80,
+      "spa": 135,
+      "spd": 80,
+      "spe": 121
+    },
+    "height": 2.2,
+    "weight": 50.5,
+    "color": "Brown",
+    "evolutions": {}
+  },
+  "rattata": {
+    "dexNumber": 19,
+    "name": "Rattata",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 30,
+      "atk": 56,
+      "def": 35,
+      "spa": 25,
+      "spd": 25,
+      "spe": 72
+    },
+    "height": 0.3,
+    "weight": 3.5,
+    "color": "Purple",
+    "evolutions": {
+      "to": [
+        "Raticate"
+      ]
+    }
+  },
+  "rattataalola": {
+    "dexNumber": 19,
+    "name": "Rattata-Alola",
+    "types": [
+      "DARK",
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 30,
+      "atk": 56,
+      "def": 35,
+      "spa": 25,
+      "spd": 35,
+      "spe": 72
+    },
+    "height": 0.3,
+    "weight": 3.8,
+    "color": "Black",
+    "evolutions": {
+      "to": [
+        "Raticate-Alola"
+      ]
+    }
+  },
+  "raticate": {
+    "dexNumber": 20,
+    "name": "Raticate",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 81,
+      "def": 60,
+      "spa": 50,
+      "spd": 50,
+      "spe": 97
+    },
+    "height": 0.7,
+    "weight": 18.5,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Rattata"
+    }
+  },
+  "raticatealola": {
+    "dexNumber": 20,
+    "name": "Raticate-Alola",
+    "types": [
+      "DARK",
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 71,
+      "def": 70,
+      "spa": 40,
+      "spd": 80,
+      "spe": 77
+    },
+    "height": 0.7,
+    "weight": 25.5,
+    "color": "Black",
+    "evolutions": {
+      "from": "Rattata-Alola"
+    }
+  },
+  "raticatealolatotem": {
+    "dexNumber": 20,
+    "name": "Raticate-Alola-Totem",
+    "types": [
+      "DARK",
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 71,
+      "def": 70,
+      "spa": 40,
+      "spd": 80,
+      "spe": 77
+    },
+    "height": 1.4,
+    "weight": 105,
+    "color": "Black",
+    "evolutions": {}
+  },
+  "spearow": {
+    "dexNumber": 21,
+    "name": "Spearow",
+    "types": [
+      "NORMAL",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 60,
+      "def": 30,
+      "spa": 31,
+      "spd": 31,
+      "spe": 70
+    },
+    "height": 0.3,
+    "weight": 2,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Fearow"
+      ]
+    }
+  },
+  "fearow": {
+    "dexNumber": 22,
+    "name": "Fearow",
+    "types": [
+      "NORMAL",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 90,
+      "def": 65,
+      "spa": 61,
+      "spd": 61,
+      "spe": 100
+    },
+    "height": 1.2,
+    "weight": 38,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Spearow"
+    }
+  },
+  "ekans": {
+    "dexNumber": 23,
+    "name": "Ekans",
+    "types": [
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 60,
+      "def": 44,
+      "spa": 40,
+      "spd": 40,
+      "spe": 55
+    },
+    "height": 2,
+    "weight": 6.9,
+    "color": "Purple",
+    "evolutions": {
+      "to": [
+        "Arbok"
+      ]
+    }
+  },
+  "arbok": {
+    "dexNumber": 24,
+    "name": "Arbok",
+    "types": [
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 85,
+      "def": 69,
+      "spa": 65,
+      "spd": 65,
+      "spe": 80
+    },
+    "height": 3.5,
+    "weight": 65,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Ekans"
+    }
+  },
+  "pikachu": {
+    "dexNumber": 25,
+    "name": "Pikachu",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 30,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Pichu",
+      "to": [
+        "Raichu",
+        "Raichu-Alola"
+      ]
+    }
+  },
+  "pikachucosplay": {
+    "dexNumber": 25,
+    "name": "Pikachu-Cosplay",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachurockstar": {
+    "dexNumber": 25,
+    "name": "Pikachu-Rock-Star",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachubelle": {
+    "dexNumber": 25,
+    "name": "Pikachu-Belle",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachupopstar": {
+    "dexNumber": 25,
+    "name": "Pikachu-Pop-Star",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachuphd": {
+    "dexNumber": 25,
+    "name": "Pikachu-PhD",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachulibre": {
+    "dexNumber": 25,
+    "name": "Pikachu-Libre",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachuoriginal": {
+    "dexNumber": 25,
+    "name": "Pikachu-Original",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachuhoenn": {
+    "dexNumber": 25,
+    "name": "Pikachu-Hoenn",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachusinnoh": {
+    "dexNumber": 25,
+    "name": "Pikachu-Sinnoh",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachuunova": {
+    "dexNumber": 25,
+    "name": "Pikachu-Unova",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachukalos": {
+    "dexNumber": 25,
+    "name": "Pikachu-Kalos",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachualola": {
+    "dexNumber": 25,
+    "name": "Pikachu-Alola",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachupartner": {
+    "dexNumber": 25,
+    "name": "Pikachu-Partner",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachustarter": {
+    "dexNumber": 25,
+    "name": "Pikachu-Starter",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 45,
+      "atk": 80,
+      "def": 50,
+      "spa": 75,
+      "spd": 60,
+      "spe": 120
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachugmax": {
+    "dexNumber": 25,
+    "name": "Pikachu-Gmax",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 21,
+    "weight": 0,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "pikachuworld": {
+    "dexNumber": 25,
+    "name": "Pikachu-World",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "raichu": {
+    "dexNumber": 26,
+    "name": "Raichu",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 90,
+      "def": 55,
+      "spa": 90,
+      "spd": 90,
+      "spe": 100
+    },
+    "height": 0.8,
+    "weight": 30,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Pikachu"
+    }
+  },
+  "raichualola": {
+    "dexNumber": 26,
+    "name": "Raichu-Alola",
+    "types": [
+      "ELECTRIC",
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 85,
+      "def": 50,
+      "spa": 95,
+      "spd": 85,
+      "spe": 110
+    },
+    "height": 0.7,
+    "weight": 21,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Pikachu"
+    }
+  },
+  "sandshrew": {
+    "dexNumber": 27,
+    "name": "Sandshrew",
+    "types": [
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 75,
+      "def": 85,
+      "spa": 30,
+      "spd": 30,
+      "spe": 40
+    },
+    "height": 0.6,
+    "weight": 12,
+    "color": "Yellow",
+    "evolutions": {
+      "to": [
+        "Sandslash"
+      ]
+    }
+  },
+  "sandshrewalola": {
+    "dexNumber": 27,
+    "name": "Sandshrew-Alola",
+    "types": [
+      "ICE",
+      "STEEL"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 75,
+      "def": 90,
+      "spa": 10,
+      "spd": 35,
+      "spe": 40
+    },
+    "height": 0.7,
+    "weight": 40,
+    "color": "White",
+    "evolutions": {
+      "to": [
+        "Sandslash-Alola"
+      ]
+    }
+  },
+  "sandslash": {
+    "dexNumber": 28,
+    "name": "Sandslash",
+    "types": [
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 100,
+      "def": 110,
+      "spa": 55,
+      "spd": 55,
+      "spe": 65
+    },
+    "height": 1,
+    "weight": 29.5,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Sandshrew"
+    }
+  },
+  "sandslashalola": {
+    "dexNumber": 28,
+    "name": "Sandslash-Alola",
+    "types": [
+      "ICE",
+      "STEEL"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 100,
+      "def": 120,
+      "spa": 25,
+      "spd": 65,
+      "spe": 65
+    },
+    "height": 1.2,
+    "weight": 55,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Sandshrew-Alola"
+    }
+  },
+  "nidoranf": {
+    "dexNumber": 29,
+    "name": "Nidoran-F",
+    "types": [
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 47,
+      "def": 52,
+      "spa": 40,
+      "spd": 40,
+      "spe": 41
+    },
+    "height": 0.4,
+    "weight": 7,
+    "color": "Blue",
+    "evolutions": {
+      "to": [
+        "Nidorina"
+      ]
+    }
+  },
+  "nidorina": {
+    "dexNumber": 30,
+    "name": "Nidorina",
+    "types": [
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 70,
+      "atk": 62,
+      "def": 67,
+      "spa": 55,
+      "spd": 55,
+      "spe": 56
+    },
+    "height": 0.8,
+    "weight": 20,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Nidoran-F",
+      "to": [
+        "Nidoqueen"
+      ]
+    }
+  },
+  "nidoqueen": {
+    "dexNumber": 31,
+    "name": "Nidoqueen",
+    "types": [
+      "POISON",
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 82,
+      "def": 87,
+      "spa": 75,
+      "spd": 75,
+      "spe": 76
+    },
+    "height": 1.3,
+    "weight": 60,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Nidorina"
+    }
+  },
+  "nidoranm": {
+    "dexNumber": 32,
+    "name": "Nidoran-M",
+    "types": [
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 46,
+      "atk": 57,
+      "def": 40,
+      "spa": 40,
+      "spd": 40,
+      "spe": 50
+    },
+    "height": 0.5,
+    "weight": 9,
+    "color": "Purple",
+    "evolutions": {
+      "to": [
+        "Nidorino"
+      ]
+    }
+  },
+  "nidorino": {
+    "dexNumber": 33,
+    "name": "Nidorino",
+    "types": [
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 61,
+      "atk": 72,
+      "def": 57,
+      "spa": 55,
+      "spd": 55,
+      "spe": 65
+    },
+    "height": 0.9,
+    "weight": 19.5,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Nidoran-M",
+      "to": [
+        "Nidoking"
+      ]
+    }
+  },
+  "nidoking": {
+    "dexNumber": 34,
+    "name": "Nidoking",
+    "types": [
+      "POISON",
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 81,
+      "atk": 92,
+      "def": 77,
+      "spa": 75,
+      "spd": 75,
+      "spe": 85
+    },
+    "height": 1.4,
+    "weight": 62,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Nidorino"
+    }
+  },
+  "clefairy": {
+    "dexNumber": 35,
+    "name": "Clefairy",
+    "types": [
+      "FAIRY"
+    ],
+    "baseStats": {
+      "hp": 70,
+      "atk": 45,
+      "def": 48,
+      "spa": 60,
+      "spd": 60,
+      "spe": 35
+    },
+    "height": 0.6,
+    "weight": 7.5,
+    "color": "Pink",
+    "evolutions": {
+      "from": "Cleffa",
+      "to": [
+        "Clefable"
+      ]
+    }
+  },
+  "clefable": {
+    "dexNumber": 36,
+    "name": "Clefable",
+    "types": [
+      "FAIRY"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 70,
+      "def": 73,
+      "spa": 85,
+      "spd": 85,
+      "spe": 60
+    },
+    "height": 1.3,
+    "weight": 40,
+    "color": "Pink",
+    "evolutions": {
+      "from": "Clefairy"
+    }
+  },
+  "vulpix": {
+    "dexNumber": 37,
+    "name": "Vulpix",
+    "types": [
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 38,
+      "atk": 41,
+      "def": 40,
+      "spa": 65,
+      "spd": 65,
+      "spe": 65
+    },
+    "height": 0.6,
+    "weight": 9.9,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Ninetales"
+      ]
+    }
+  },
+  "vulpixalola": {
+    "dexNumber": 37,
+    "name": "Vulpix-Alola",
+    "types": [
+      "ICE"
+    ],
+    "baseStats": {
+      "hp": 38,
+      "atk": 41,
+      "def": 40,
+      "spa": 50,
+      "spd": 65,
+      "spe": 65
+    },
+    "height": 0.6,
+    "weight": 9.9,
+    "color": "White",
+    "evolutions": {
+      "to": [
+        "Ninetales-Alola"
+      ]
+    }
+  },
+  "ninetales": {
+    "dexNumber": 38,
+    "name": "Ninetales",
+    "types": [
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 73,
+      "atk": 76,
+      "def": 75,
+      "spa": 100,
+      "spd": 100,
+      "spe": 100
+    },
+    "height": 1.1,
+    "weight": 19.9,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Vulpix"
+    }
+  },
+  "ninetalesalola": {
+    "dexNumber": 38,
+    "name": "Ninetales-Alola",
+    "types": [
+      "ICE",
+      "FAIRY"
+    ],
+    "baseStats": {
+      "hp": 73,
+      "atk": 67,
+      "def": 75,
+      "spa": 81,
+      "spd": 100,
+      "spe": 109
+    },
+    "height": 1.1,
+    "weight": 19.9,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Vulpix-Alola"
+    }
+  },
+  "jigglypuff": {
+    "dexNumber": 39,
+    "name": "Jigglypuff",
+    "types": [
+      "NORMAL",
+      "FAIRY"
+    ],
+    "baseStats": {
+      "hp": 115,
+      "atk": 45,
+      "def": 20,
+      "spa": 25,
+      "spd": 25,
+      "spe": 20
+    },
+    "height": 0.5,
+    "weight": 5.5,
+    "color": "Pink",
+    "evolutions": {
+      "from": "Igglybuff",
+      "to": [
+        "Wigglytuff"
+      ]
+    }
+  },
+  "wigglytuff": {
+    "dexNumber": 40,
+    "name": "Wigglytuff",
+    "types": [
+      "NORMAL",
+      "FAIRY"
+    ],
+    "baseStats": {
+      "hp": 140,
+      "atk": 70,
+      "def": 45,
+      "spa": 50,
+      "spd": 50,
+      "spe": 45
+    },
+    "height": 1,
+    "weight": 12,
+    "color": "Pink",
+    "evolutions": {
+      "from": "Jigglypuff"
+    }
+  },
+  "zubat": {
+    "dexNumber": 41,
+    "name": "Zubat",
+    "types": [
+      "POISON",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 35,
+      "spa": 40,
+      "spd": 40,
+      "spe": 55
+    },
+    "height": 0.8,
+    "weight": 7.5,
+    "color": "Purple",
+    "evolutions": {
+      "to": [
+        "Golbat"
+      ]
+    }
+  },
+  "golbat": {
+    "dexNumber": 42,
+    "name": "Golbat",
+    "types": [
+      "POISON",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 80,
+      "def": 70,
+      "spa": 75,
+      "spd": 75,
+      "spe": 90
+    },
+    "height": 1.6,
+    "weight": 55,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Zubat",
+      "to": [
+        "Crobat"
+      ]
+    }
+  },
+  "oddish": {
+    "dexNumber": 43,
+    "name": "Oddish",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 45,
+      "atk": 50,
+      "def": 55,
+      "spa": 75,
+      "spd": 75,
+      "spe": 30
+    },
+    "height": 0.5,
+    "weight": 5.4,
+    "color": "Blue",
+    "evolutions": {
+      "to": [
+        "Gloom"
+      ]
+    }
+  },
+  "gloom": {
+    "dexNumber": 44,
+    "name": "Gloom",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 70,
+      "spa": 85,
+      "spd": 85,
+      "spe": 40
+    },
+    "height": 0.8,
+    "weight": 8.6,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Oddish",
+      "to": [
+        "Vileplume",
+        "Bellossom"
+      ]
+    }
+  },
+  "vileplume": {
+    "dexNumber": 45,
+    "name": "Vileplume",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 80,
+      "def": 85,
+      "spa": 100,
+      "spd": 100,
+      "spe": 50
+    },
+    "height": 1.2,
+    "weight": 18.6,
+    "color": "Red",
+    "evolutions": {
+      "from": "Gloom"
+    }
+  },
+  "paras": {
+    "dexNumber": 46,
+    "name": "Paras",
+    "types": [
+      "BUG",
+      "GRASS"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 70,
+      "def": 55,
+      "spa": 55,
+      "spd": 55,
+      "spe": 25
+    },
+    "height": 0.3,
+    "weight": 5.4,
+    "color": "Red",
+    "evolutions": {
+      "to": [
+        "Parasect"
+      ]
+    }
+  },
+  "parasect": {
+    "dexNumber": 47,
+    "name": "Parasect",
+    "types": [
+      "BUG",
+      "GRASS"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 95,
+      "def": 80,
+      "spa": 80,
+      "spd": 80,
+      "spe": 30
+    },
+    "height": 1,
+    "weight": 29.5,
+    "color": "Red",
+    "evolutions": {
+      "from": "Paras"
+    }
+  },
+  "venonat": {
+    "dexNumber": 48,
+    "name": "Venonat",
+    "types": [
+      "BUG",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 55,
+      "def": 50,
+      "spa": 40,
+      "spd": 40,
+      "spe": 45
+    },
+    "height": 1,
+    "weight": 30,
+    "color": "Purple",
+    "evolutions": {
+      "to": [
+        "Venomoth"
+      ]
+    }
+  },
+  "venomoth": {
+    "dexNumber": 49,
+    "name": "Venomoth",
+    "types": [
+      "BUG",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 70,
+      "atk": 65,
+      "def": 60,
+      "spa": 90,
+      "spd": 90,
+      "spe": 90
+    },
+    "height": 1.5,
+    "weight": 12.5,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Venonat"
+    }
+  },
+  "diglett": {
+    "dexNumber": 50,
+    "name": "Diglett",
+    "types": [
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 10,
+      "atk": 55,
+      "def": 25,
+      "spa": 45,
+      "spd": 45,
+      "spe": 95
+    },
+    "height": 0.2,
+    "weight": 0.8,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Dugtrio"
+      ]
+    }
+  },
+  "diglettalola": {
+    "dexNumber": 50,
+    "name": "Diglett-Alola",
+    "types": [
+      "GROUND",
+      "STEEL"
+    ],
+    "baseStats": {
+      "hp": 10,
+      "atk": 55,
+      "def": 30,
+      "spa": 35,
+      "spd": 45,
+      "spe": 90
+    },
+    "height": 0.2,
+    "weight": 1,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Dugtrio-Alola"
+      ]
+    }
+  },
+  "dugtrio": {
+    "dexNumber": 51,
+    "name": "Dugtrio",
+    "types": [
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 80,
+      "def": 50,
+      "spa": 70,
+      "spd": 70,
+      "spe": 120
+    },
+    "height": 0.7,
+    "weight": 33.3,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Diglett"
+    }
+  },
+  "dugtrioalola": {
+    "dexNumber": 51,
+    "name": "Dugtrio-Alola",
+    "types": [
+      "GROUND",
+      "STEEL"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 100,
+      "def": 60,
+      "spa": 50,
+      "spd": 70,
+      "spe": 110
+    },
+    "height": 0.7,
+    "weight": 66.6,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Diglett-Alola"
+    }
+  },
+  "meowth": {
+    "dexNumber": 52,
+    "name": "Meowth",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 35,
+      "spa": 40,
+      "spd": 40,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 4.2,
+    "color": "Yellow",
+    "evolutions": {
+      "to": [
+        "Persian"
+      ]
+    }
+  },
+  "meowthalola": {
+    "dexNumber": 52,
+    "name": "Meowth-Alola",
+    "types": [
+      "DARK"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 35,
+      "def": 35,
+      "spa": 50,
+      "spd": 40,
+      "spe": 90
+    },
+    "height": 0.4,
+    "weight": 4.2,
+    "color": "Blue",
+    "evolutions": {
+      "to": [
+        "Persian-Alola"
+      ]
+    }
+  },
+  "meowthgalar": {
+    "dexNumber": 52,
+    "name": "Meowth-Galar",
+    "types": [
+      "STEEL"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 55,
+      "spa": 40,
+      "spd": 40,
+      "spe": 40
+    },
+    "height": 0.4,
+    "weight": 7.5,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Perrserker"
+      ]
+    }
+  },
+  "meowthgmax": {
+    "dexNumber": 52,
+    "name": "Meowth-Gmax",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 35,
+      "spa": 40,
+      "spd": 40,
+      "spe": 90
+    },
+    "height": 33,
+    "weight": 0,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "persian": {
+    "dexNumber": 53,
+    "name": "Persian",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 70,
+      "def": 60,
+      "spa": 65,
+      "spd": 65,
+      "spe": 115
+    },
+    "height": 1,
+    "weight": 32,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Meowth"
+    }
+  },
+  "persianalola": {
+    "dexNumber": 53,
+    "name": "Persian-Alola",
+    "types": [
+      "DARK"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 60,
+      "def": 60,
+      "spa": 75,
+      "spd": 65,
+      "spe": 115
+    },
+    "height": 1.1,
+    "weight": 33,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Meowth-Alola"
+    }
+  },
+  "psyduck": {
+    "dexNumber": 54,
+    "name": "Psyduck",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 52,
+      "def": 48,
+      "spa": 50,
+      "spd": 50,
+      "spe": 55
+    },
+    "height": 0.8,
+    "weight": 19.6,
+    "color": "Yellow",
+    "evolutions": {
+      "to": [
+        "Golduck"
+      ]
+    }
+  },
+  "golduck": {
+    "dexNumber": 55,
+    "name": "Golduck",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 82,
+      "def": 78,
+      "spa": 80,
+      "spd": 80,
+      "spe": 85
+    },
+    "height": 1.7,
+    "weight": 76.6,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Psyduck"
+    }
+  },
+  "mankey": {
+    "dexNumber": 56,
+    "name": "Mankey",
+    "types": [
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 80,
+      "def": 35,
+      "spa": 35,
+      "spd": 35,
+      "spe": 70
+    },
+    "height": 0.5,
+    "weight": 28,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Primeape"
+      ]
+    }
+  },
+  "primeape": {
+    "dexNumber": 57,
+    "name": "Primeape",
+    "types": [
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 105,
+      "def": 60,
+      "spa": 60,
+      "spd": 60,
+      "spe": 95
+    },
+    "height": 1,
+    "weight": 32,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Mankey",
+      "to": [
+        "Annihilape"
+      ]
+    }
+  },
+  "growlithe": {
+    "dexNumber": 58,
+    "name": "Growlithe",
+    "types": [
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 70,
+      "def": 45,
+      "spa": 50,
+      "spd": 50,
+      "spe": 60
+    },
+    "height": 0.7,
+    "weight": 19,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Arcanine"
+      ]
+    }
+  },
+  "growlithehisui": {
+    "dexNumber": 58,
+    "name": "Growlithe-Hisui",
+    "types": [
+      "FIRE",
+      "ROCK"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 75,
+      "def": 45,
+      "spa": 65,
+      "spd": 50,
+      "spe": 55
+    },
+    "height": 0.8,
+    "weight": 22.7,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Arcanine-Hisui"
+      ]
+    }
+  },
+  "arcanine": {
+    "dexNumber": 59,
+    "name": "Arcanine",
+    "types": [
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 110,
+      "def": 80,
+      "spa": 80,
+      "spd": 80,
+      "spe": 95
+    },
+    "height": 1.9,
+    "weight": 155,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Growlithe"
+    }
+  },
+  "arcaninehisui": {
+    "dexNumber": 59,
+    "name": "Arcanine-Hisui",
+    "types": [
+      "FIRE",
+      "ROCK"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 115,
+      "def": 80,
+      "spa": 95,
+      "spd": 80,
+      "spe": 90
+    },
+    "height": 2,
+    "weight": 168,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Growlithe-Hisui"
+    }
+  },
+  "poliwag": {
+    "dexNumber": 60,
+    "name": "Poliwag",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 50,
+      "def": 40,
+      "spa": 40,
+      "spd": 40,
+      "spe": 90
+    },
+    "height": 0.6,
+    "weight": 12.4,
+    "color": "Blue",
+    "evolutions": {
+      "to": [
+        "Poliwhirl"
+      ]
+    }
+  },
+  "poliwhirl": {
+    "dexNumber": 61,
+    "name": "Poliwhirl",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 65,
+      "def": 65,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "height": 1,
+    "weight": 20,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Poliwag",
+      "to": [
+        "Poliwrath",
+        "Politoed"
+      ]
+    }
+  },
+  "poliwrath": {
+    "dexNumber": 62,
+    "name": "Poliwrath",
+    "types": [
+      "WATER",
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 85,
+      "def": 95,
+      "spa": 70,
+      "spd": 70,
+      "spe": 70
+    },
+    "height": 1.3,
+    "weight": 54,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Poliwhirl"
+    }
+  },
+  "abra": {
+    "dexNumber": 63,
+    "name": "Abra",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 25,
+      "atk": 20,
+      "def": 15,
+      "spa": 105,
+      "spd": 105,
+      "spe": 90
+    },
+    "height": 0.9,
+    "weight": 19.5,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Kadabra"
+      ]
+    }
+  },
+  "kadabra": {
+    "dexNumber": 64,
+    "name": "Kadabra",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 35,
+      "def": 30,
+      "spa": 120,
+      "spd": 120,
+      "spe": 105
+    },
+    "height": 1.3,
+    "weight": 56.5,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Abra",
+      "to": [
+        "Alakazam"
+      ]
+    }
+  },
+  "alakazam": {
+    "dexNumber": 65,
+    "name": "Alakazam",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 50,
+      "def": 45,
+      "spa": 135,
+      "spd": 135,
+      "spe": 120
+    },
+    "height": 1.5,
+    "weight": 48,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Kadabra"
+    }
+  },
+  "alakazammega": {
+    "dexNumber": 65,
+    "name": "Alakazam-Mega",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 50,
+      "def": 65,
+      "spa": 175,
+      "spd": 105,
+      "spe": 150
+    },
+    "height": 1.2,
+    "weight": 48,
+    "color": "Brown",
+    "evolutions": {}
+  },
+  "machop": {
+    "dexNumber": 66,
+    "name": "Machop",
+    "types": [
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 70,
+      "atk": 80,
+      "def": 50,
+      "spa": 35,
+      "spd": 35,
+      "spe": 35
+    },
+    "height": 0.8,
+    "weight": 19.5,
+    "color": "Gray",
+    "evolutions": {
+      "to": [
+        "Machoke"
+      ]
+    }
+  },
+  "machoke": {
+    "dexNumber": 67,
+    "name": "Machoke",
+    "types": [
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 100,
+      "def": 70,
+      "spa": 50,
+      "spd": 50,
+      "spe": 45
+    },
+    "height": 1.5,
+    "weight": 70.5,
+    "color": "Gray",
+    "evolutions": {
+      "from": "Machop",
+      "to": [
+        "Machamp"
+      ]
+    }
+  },
+  "machamp": {
+    "dexNumber": 68,
+    "name": "Machamp",
+    "types": [
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 130,
+      "def": 80,
+      "spa": 65,
+      "spd": 65,
+      "spe": 55
+    },
+    "height": 1.6,
+    "weight": 130,
+    "color": "Gray",
+    "evolutions": {
+      "from": "Machoke"
+    }
+  },
+  "machampgmax": {
+    "dexNumber": 68,
+    "name": "Machamp-Gmax",
+    "types": [
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 130,
+      "def": 80,
+      "spa": 65,
+      "spd": 85,
+      "spe": 55
+    },
+    "height": 25,
+    "weight": 0,
+    "color": "Gray",
+    "evolutions": {}
+  },
+  "bellsprout": {
+    "dexNumber": 69,
+    "name": "Bellsprout",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 75,
+      "def": 35,
+      "spa": 70,
+      "spd": 70,
+      "spe": 40
+    },
+    "height": 0.7,
+    "weight": 4,
+    "color": "Green",
+    "evolutions": {
+      "to": [
+        "Weepinbell"
+      ]
+    }
+  },
+  "weepinbell": {
+    "dexNumber": 70,
+    "name": "Weepinbell",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 90,
+      "def": 50,
+      "spa": 85,
+      "spd": 85,
+      "spe": 55
+    },
+    "height": 1,
+    "weight": 6.4,
+    "color": "Green",
+    "evolutions": {
+      "from": "Bellsprout",
+      "to": [
+        "Victreebel"
+      ]
+    }
+  },
+  "victreebel": {
+    "dexNumber": 71,
+    "name": "Victreebel",
+    "types": [
+      "GRASS",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 105,
+      "def": 65,
+      "spa": 100,
+      "spd": 100,
+      "spe": 70
+    },
+    "height": 1.7,
+    "weight": 15.5,
+    "color": "Green",
+    "evolutions": {
+      "from": "Weepinbell"
+    }
+  },
+  "tentacool": {
+    "dexNumber": 72,
+    "name": "Tentacool",
+    "types": [
+      "WATER",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 40,
+      "def": 35,
+      "spa": 100,
+      "spd": 100,
+      "spe": 70
+    },
+    "height": 0.9,
+    "weight": 45.5,
+    "color": "Blue",
+    "evolutions": {
+      "to": [
+        "Tentacruel"
+      ]
+    }
+  },
+  "tentacruel": {
+    "dexNumber": 73,
+    "name": "Tentacruel",
+    "types": [
+      "WATER",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 70,
+      "def": 65,
+      "spa": 120,
+      "spd": 120,
+      "spe": 100
+    },
+    "height": 1.6,
+    "weight": 55,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Tentacool"
+    }
+  },
+  "geodude": {
+    "dexNumber": 74,
+    "name": "Geodude",
+    "types": [
+      "ROCK",
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 80,
+      "def": 100,
+      "spa": 30,
+      "spd": 30,
+      "spe": 20
+    },
+    "height": 0.4,
+    "weight": 20,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Graveler"
+      ]
+    }
+  },
+  "geodudealola": {
+    "dexNumber": 74,
+    "name": "Geodude-Alola",
+    "types": [
+      "ROCK",
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 80,
+      "def": 100,
+      "spa": 30,
+      "spd": 30,
+      "spe": 20
+    },
+    "height": 0.4,
+    "weight": 20.3,
+    "color": "Gray",
+    "evolutions": {
+      "to": [
+        "Graveler-Alola"
+      ]
+    }
+  },
+  "graveler": {
+    "dexNumber": 75,
+    "name": "Graveler",
+    "types": [
+      "ROCK",
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 95,
+      "def": 115,
+      "spa": 45,
+      "spd": 45,
+      "spe": 35
+    },
+    "height": 1,
+    "weight": 105,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Geodude",
+      "to": [
+        "Golem"
+      ]
+    }
+  },
+  "graveleralola": {
+    "dexNumber": 75,
+    "name": "Graveler-Alola",
+    "types": [
+      "ROCK",
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 95,
+      "def": 115,
+      "spa": 45,
+      "spd": 45,
+      "spe": 35
+    },
+    "height": 1,
+    "weight": 110,
+    "color": "Gray",
+    "evolutions": {
+      "from": "Geodude-Alola",
+      "to": [
+        "Golem-Alola"
+      ]
+    }
+  },
+  "golem": {
+    "dexNumber": 76,
+    "name": "Golem",
+    "types": [
+      "ROCK",
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 110,
+      "def": 130,
+      "spa": 55,
+      "spd": 55,
+      "spe": 45
+    },
+    "height": 1.4,
+    "weight": 300,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Graveler"
+    }
+  },
+  "golemalola": {
+    "dexNumber": 76,
+    "name": "Golem-Alola",
+    "types": [
+      "ROCK",
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 130,
+      "spa": 55,
+      "spd": 65,
+      "spe": 45
+    },
+    "height": 1.7,
+    "weight": 316,
+    "color": "Gray",
+    "evolutions": {
+      "from": "Graveler-Alola"
+    }
+  },
+  "ponyta": {
+    "dexNumber": 77,
+    "name": "Ponyta",
+    "types": [
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 85,
+      "def": 55,
+      "spa": 65,
+      "spd": 65,
+      "spe": 90
+    },
+    "height": 1,
+    "weight": 30,
+    "color": "Yellow",
+    "evolutions": {
+      "to": [
+        "Rapidash"
+      ]
+    }
+  },
+  "ponytagalar": {
+    "dexNumber": 77,
+    "name": "Ponyta-Galar",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 85,
+      "def": 55,
+      "spa": 65,
+      "spd": 65,
+      "spe": 90
+    },
+    "height": 0.8,
+    "weight": 24,
+    "color": "White",
+    "evolutions": {
+      "to": [
+        "Rapidash-Galar"
+      ]
+    }
+  },
+  "rapidash": {
+    "dexNumber": 78,
+    "name": "Rapidash",
+    "types": [
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 100,
+      "def": 70,
+      "spa": 80,
+      "spd": 80,
+      "spe": 105
+    },
+    "height": 1.7,
+    "weight": 95,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Ponyta"
+    }
+  },
+  "rapidashgalar": {
+    "dexNumber": 78,
+    "name": "Rapidash-Galar",
+    "types": [
+      "PSYCHIC",
+      "FAIRY"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 100,
+      "def": 70,
+      "spa": 80,
+      "spd": 80,
+      "spe": 105
+    },
+    "height": 1.7,
+    "weight": 80,
+    "color": "White",
+    "evolutions": {
+      "from": "Ponyta-Galar"
+    }
+  },
+  "slowpoke": {
+    "dexNumber": 79,
+    "name": "Slowpoke",
+    "types": [
+      "WATER",
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 65,
+      "def": 65,
+      "spa": 40,
+      "spd": 40,
+      "spe": 15
+    },
+    "height": 1.2,
+    "weight": 36,
+    "color": "Pink",
+    "evolutions": {
+      "to": [
+        "Slowbro",
+        "Slowking"
+      ]
+    }
+  },
+  "slowpokegalar": {
+    "dexNumber": 79,
+    "name": "Slowpoke-Galar",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 65,
+      "def": 65,
+      "spa": 40,
+      "spd": 40,
+      "spe": 15
+    },
+    "height": 1.2,
+    "weight": 36,
+    "color": "Pink",
+    "evolutions": {
+      "to": [
+        "Slowbro-Galar",
+        "Slowking-Galar"
+      ]
+    }
+  },
+  "slowbro": {
+    "dexNumber": 80,
+    "name": "Slowbro",
+    "types": [
+      "WATER",
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 75,
+      "def": 110,
+      "spa": 80,
+      "spd": 80,
+      "spe": 30
+    },
+    "height": 1.6,
+    "weight": 78.5,
+    "color": "Pink",
+    "evolutions": {
+      "from": "Slowpoke"
+    }
+  },
+  "slowbromega": {
+    "dexNumber": 80,
+    "name": "Slowbro-Mega",
+    "types": [
+      "WATER",
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 75,
+      "def": 180,
+      "spa": 130,
+      "spd": 80,
+      "spe": 30
+    },
+    "height": 2,
+    "weight": 120,
+    "color": "Pink",
+    "evolutions": {}
+  },
+  "slowbrogalar": {
+    "dexNumber": 80,
+    "name": "Slowbro-Galar",
+    "types": [
+      "POISON",
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 100,
+      "def": 95,
+      "spa": 100,
+      "spd": 70,
+      "spe": 30
+    },
+    "height": 1.6,
+    "weight": 70.5,
+    "color": "Pink",
+    "evolutions": {
+      "from": "Slowpoke-Galar"
+    }
+  },
+  "magnemite": {
+    "dexNumber": 81,
+    "name": "Magnemite",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 25,
+      "atk": 35,
+      "def": 70,
+      "spa": 95,
+      "spd": 95,
+      "spe": 45
+    },
+    "height": 0.3,
+    "weight": 6,
+    "color": "Gray",
+    "evolutions": {
+      "to": [
+        "Magneton"
+      ]
+    }
+  },
+  "magneton": {
+    "dexNumber": 82,
+    "name": "Magneton",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 60,
+      "def": 95,
+      "spa": 120,
+      "spd": 120,
+      "spe": 70
+    },
+    "height": 1,
+    "weight": 60,
+    "color": "Gray",
+    "evolutions": {
+      "from": "Magnemite",
+      "to": [
+        "Magnezone"
+      ]
+    }
+  },
+  "farfetchd": {
+    "dexNumber": 83,
+    "name": "Farfetch’d",
+    "types": [
+      "NORMAL",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 52,
+      "atk": 65,
+      "def": 55,
+      "spa": 58,
+      "spd": 58,
+      "spe": 60
+    },
+    "height": 0.8,
+    "weight": 15,
+    "color": "Brown",
+    "evolutions": {}
+  },
+  "farfetchdgalar": {
+    "dexNumber": 83,
+    "name": "Farfetch’d-Galar",
+    "types": [
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 52,
+      "atk": 95,
+      "def": 55,
+      "spa": 58,
+      "spd": 62,
+      "spe": 55
+    },
+    "height": 0.8,
+    "weight": 42,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Sirfetch’d"
+      ]
+    }
+  },
+  "doduo": {
+    "dexNumber": 84,
+    "name": "Doduo",
+    "types": [
+      "NORMAL",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 85,
+      "def": 45,
+      "spa": 35,
+      "spd": 35,
+      "spe": 75
+    },
+    "height": 1.4,
+    "weight": 39.2,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Dodrio"
+      ]
+    }
+  },
+  "dodrio": {
+    "dexNumber": 85,
+    "name": "Dodrio",
+    "types": [
+      "NORMAL",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 110,
+      "def": 70,
+      "spa": 60,
+      "spd": 60,
+      "spe": 100
+    },
+    "height": 1.8,
+    "weight": 85.2,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Doduo"
+    }
+  },
+  "seel": {
+    "dexNumber": 86,
+    "name": "Seel",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 45,
+      "def": 55,
+      "spa": 70,
+      "spd": 70,
+      "spe": 45
+    },
+    "height": 1.1,
+    "weight": 90,
+    "color": "White",
+    "evolutions": {
+      "to": [
+        "Dewgong"
+      ]
+    }
+  },
+  "dewgong": {
+    "dexNumber": 87,
+    "name": "Dewgong",
+    "types": [
+      "WATER",
+      "ICE"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 70,
+      "def": 80,
+      "spa": 95,
+      "spd": 95,
+      "spe": 70
+    },
+    "height": 1.7,
+    "weight": 120,
+    "color": "White",
+    "evolutions": {
+      "from": "Seel"
+    }
+  },
+  "grimer": {
+    "dexNumber": 88,
+    "name": "Grimer",
+    "types": [
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 80,
+      "def": 50,
+      "spa": 40,
+      "spd": 40,
+      "spe": 25
+    },
+    "height": 0.9,
+    "weight": 30,
+    "color": "Purple",
+    "evolutions": {
+      "to": [
+        "Muk"
+      ]
+    }
+  },
+  "grimeralola": {
+    "dexNumber": 88,
+    "name": "Grimer-Alola",
+    "types": [
+      "POISON",
+      "DARK"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 80,
+      "def": 50,
+      "spa": 40,
+      "spd": 50,
+      "spe": 25
+    },
+    "height": 0.7,
+    "weight": 42,
+    "color": "Green",
+    "evolutions": {
+      "to": [
+        "Muk-Alola"
+      ]
+    }
+  },
+  "muk": {
+    "dexNumber": 89,
+    "name": "Muk",
+    "types": [
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 105,
+      "atk": 105,
+      "def": 75,
+      "spa": 65,
+      "spd": 65,
+      "spe": 50
+    },
+    "height": 1.2,
+    "weight": 30,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Grimer"
+    }
+  },
+  "mukalola": {
+    "dexNumber": 89,
+    "name": "Muk-Alola",
+    "types": [
+      "POISON",
+      "DARK"
+    ],
+    "baseStats": {
+      "hp": 105,
+      "atk": 105,
+      "def": 75,
+      "spa": 65,
+      "spd": 100,
+      "spe": 50
+    },
+    "height": 1,
+    "weight": 52,
+    "color": "Green",
+    "evolutions": {
+      "from": "Grimer-Alola"
+    }
+  },
+  "shellder": {
+    "dexNumber": 90,
+    "name": "Shellder",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 30,
+      "atk": 65,
+      "def": 100,
+      "spa": 45,
+      "spd": 45,
+      "spe": 40
+    },
+    "height": 0.3,
+    "weight": 4,
+    "color": "Purple",
+    "evolutions": {
+      "to": [
+        "Cloyster"
+      ]
+    }
+  },
+  "cloyster": {
+    "dexNumber": 91,
+    "name": "Cloyster",
+    "types": [
+      "WATER",
+      "ICE"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 95,
+      "def": 180,
+      "spa": 85,
+      "spd": 85,
+      "spe": 70
+    },
+    "height": 1.5,
+    "weight": 132.5,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Shellder"
+    }
+  },
+  "gastly": {
+    "dexNumber": 92,
+    "name": "Gastly",
+    "types": [
+      "GHOST",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 30,
+      "atk": 35,
+      "def": 30,
+      "spa": 100,
+      "spd": 100,
+      "spe": 80
+    },
+    "height": 1.3,
+    "weight": 0.1,
+    "color": "Purple",
+    "evolutions": {
+      "to": [
+        "Haunter"
+      ]
+    }
+  },
+  "haunter": {
+    "dexNumber": 93,
+    "name": "Haunter",
+    "types": [
+      "GHOST",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 45,
+      "atk": 50,
+      "def": 45,
+      "spa": 115,
+      "spd": 115,
+      "spe": 95
+    },
+    "height": 1.6,
+    "weight": 0.1,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Gastly",
+      "to": [
+        "Gengar"
+      ]
+    }
+  },
+  "gengar": {
+    "dexNumber": 94,
+    "name": "Gengar",
+    "types": [
+      "GHOST",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 60,
+      "spa": 130,
+      "spd": 130,
+      "spe": 110
+    },
+    "height": 1.5,
+    "weight": 40.5,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Haunter"
+    }
+  },
+  "gengarmega": {
+    "dexNumber": 94,
+    "name": "Gengar-Mega",
+    "types": [
+      "GHOST",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 80,
+      "spa": 170,
+      "spd": 95,
+      "spe": 130
+    },
+    "height": 1.4,
+    "weight": 40.5,
+    "color": "Purple",
+    "evolutions": {}
+  },
+  "gengargmax": {
+    "dexNumber": 94,
+    "name": "Gengar-Gmax",
+    "types": [
+      "GHOST",
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 60,
+      "spa": 130,
+      "spd": 75,
+      "spe": 110
+    },
+    "height": 20,
+    "weight": 0,
+    "color": "Purple",
+    "evolutions": {}
+  },
+  "onix": {
+    "dexNumber": 95,
+    "name": "Onix",
+    "types": [
+      "ROCK",
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 45,
+      "def": 160,
+      "spa": 30,
+      "spd": 30,
+      "spe": 70
+    },
+    "height": 8.8,
+    "weight": 210,
+    "color": "Gray",
+    "evolutions": {
+      "to": [
+        "Steelix"
+      ]
+    }
+  },
+  "drowzee": {
+    "dexNumber": 96,
+    "name": "Drowzee",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 48,
+      "def": 45,
+      "spa": 90,
+      "spd": 90,
+      "spe": 42
+    },
+    "height": 1,
+    "weight": 32.4,
+    "color": "Yellow",
+    "evolutions": {
+      "to": [
+        "Hypno"
+      ]
+    }
+  },
+  "hypno": {
+    "dexNumber": 97,
+    "name": "Hypno",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 85,
+      "atk": 73,
+      "def": 70,
+      "spa": 115,
+      "spd": 115,
+      "spe": 67
+    },
+    "height": 1.6,
+    "weight": 75.6,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Drowzee"
+    }
+  },
+  "krabby": {
+    "dexNumber": 98,
+    "name": "Krabby",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 30,
+      "atk": 105,
+      "def": 90,
+      "spa": 25,
+      "spd": 25,
+      "spe": 50
+    },
+    "height": 0.4,
+    "weight": 6.5,
+    "color": "Red",
+    "evolutions": {
+      "to": [
+        "Kingler"
+      ]
+    }
+  },
+  "kingler": {
+    "dexNumber": 99,
+    "name": "Kingler",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 130,
+      "def": 115,
+      "spa": 50,
+      "spd": 50,
+      "spe": 75
+    },
+    "height": 1.3,
+    "weight": 60,
+    "color": "Red",
+    "evolutions": {
+      "from": "Krabby"
+    }
+  },
+  "kinglergmax": {
+    "dexNumber": 99,
+    "name": "Kingler-Gmax",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 130,
+      "def": 115,
+      "spa": 50,
+      "spd": 50,
+      "spe": 75
+    },
+    "height": 19,
+    "weight": 0,
+    "color": "Red",
+    "evolutions": {}
+  },
+  "voltorb": {
+    "dexNumber": 100,
+    "name": "Voltorb",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 30,
+      "def": 50,
+      "spa": 55,
+      "spd": 55,
+      "spe": 100
+    },
+    "height": 0.5,
+    "weight": 10.4,
+    "color": "Red",
+    "evolutions": {
+      "to": [
+        "Electrode"
+      ]
+    }
+  },
+  "voltorbhisui": {
+    "dexNumber": 100,
+    "name": "Voltorb-Hisui",
+    "types": [
+      "ELECTRIC",
+      "GRASS"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 30,
+      "def": 50,
+      "spa": 55,
+      "spd": 55,
+      "spe": 100
+    },
+    "height": 0.5,
+    "weight": 13,
+    "color": "Red",
+    "evolutions": {
+      "to": [
+        "Electrode-Hisui"
+      ]
+    }
+  },
+  "electrode": {
+    "dexNumber": 101,
+    "name": "Electrode",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 50,
+      "def": 70,
+      "spa": 80,
+      "spd": 80,
+      "spe": 140
+    },
+    "height": 1.2,
+    "weight": 66.6,
+    "color": "Red",
+    "evolutions": {
+      "from": "Voltorb"
+    }
+  },
+  "electrodehisui": {
+    "dexNumber": 101,
+    "name": "Electrode-Hisui",
+    "types": [
+      "ELECTRIC",
+      "GRASS"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 50,
+      "def": 70,
+      "spa": 80,
+      "spd": 80,
+      "spe": 150
+    },
+    "height": 1.2,
+    "weight": 71,
+    "color": "Red",
+    "evolutions": {
+      "from": "Voltorb-Hisui"
+    }
+  },
+  "exeggcute": {
+    "dexNumber": 102,
+    "name": "Exeggcute",
+    "types": [
+      "GRASS",
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 40,
+      "def": 80,
+      "spa": 60,
+      "spd": 60,
+      "spe": 40
+    },
+    "height": 0.4,
+    "weight": 2.5,
+    "color": "Pink",
+    "evolutions": {
+      "to": [
+        "Exeggutor",
+        "Exeggutor-Alola"
+      ]
+    }
+  },
+  "exeggutor": {
+    "dexNumber": 103,
+    "name": "Exeggutor",
+    "types": [
+      "GRASS",
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 85,
+      "spa": 125,
+      "spd": 125,
+      "spe": 55
+    },
+    "height": 2,
+    "weight": 120,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Exeggcute"
+    }
+  },
+  "exeggutoralola": {
+    "dexNumber": 103,
+    "name": "Exeggutor-Alola",
+    "types": [
+      "GRASS",
+      "DRAGON"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 105,
+      "def": 85,
+      "spa": 125,
+      "spd": 75,
+      "spe": 45
+    },
+    "height": 10.9,
+    "weight": 415.6,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Exeggcute"
+    }
+  },
+  "cubone": {
+    "dexNumber": 104,
+    "name": "Cubone",
+    "types": [
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 50,
+      "def": 95,
+      "spa": 40,
+      "spd": 40,
+      "spe": 35
+    },
+    "height": 0.4,
+    "weight": 6.5,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Marowak",
+        "Marowak-Alola"
+      ]
+    }
+  },
+  "marowak": {
+    "dexNumber": 105,
+    "name": "Marowak",
+    "types": [
+      "GROUND"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 80,
+      "def": 110,
+      "spa": 50,
+      "spd": 50,
+      "spe": 45
+    },
+    "height": 1,
+    "weight": 45,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Cubone"
+    }
+  },
+  "marowakalola": {
+    "dexNumber": 105,
+    "name": "Marowak-Alola",
+    "types": [
+      "FIRE",
+      "GHOST"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 80,
+      "def": 110,
+      "spa": 50,
+      "spd": 80,
+      "spe": 45
+    },
+    "height": 1,
+    "weight": 34,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Cubone"
+    }
+  },
+  "marowakalolatotem": {
+    "dexNumber": 105,
+    "name": "Marowak-Alola-Totem",
+    "types": [
+      "FIRE",
+      "GHOST"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 80,
+      "def": 110,
+      "spa": 50,
+      "spd": 80,
+      "spe": 45
+    },
+    "height": 1.7,
+    "weight": 98,
+    "color": "Purple",
+    "evolutions": {}
+  },
+  "hitmonlee": {
+    "dexNumber": 106,
+    "name": "Hitmonlee",
+    "types": [
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 120,
+      "def": 53,
+      "spa": 35,
+      "spd": 35,
+      "spe": 87
+    },
+    "height": 1.5,
+    "weight": 49.8,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Tyrogue"
+    }
+  },
+  "hitmonchan": {
+    "dexNumber": 107,
+    "name": "Hitmonchan",
+    "types": [
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 105,
+      "def": 79,
+      "spa": 35,
+      "spd": 35,
+      "spe": 76
+    },
+    "height": 1.4,
+    "weight": 50.2,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Tyrogue"
+    }
+  },
+  "lickitung": {
+    "dexNumber": 108,
+    "name": "Lickitung",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 55,
+      "def": 75,
+      "spa": 60,
+      "spd": 60,
+      "spe": 30
+    },
+    "height": 1.2,
+    "weight": 65.5,
+    "color": "Pink",
+    "evolutions": {
+      "to": [
+        "Lickilicky"
+      ]
+    }
+  },
+  "koffing": {
+    "dexNumber": 109,
+    "name": "Koffing",
+    "types": [
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 65,
+      "def": 95,
+      "spa": 60,
+      "spd": 60,
+      "spe": 35
+    },
+    "height": 0.6,
+    "weight": 1,
+    "color": "Purple",
+    "evolutions": {
+      "to": [
+        "Weezing",
+        "Weezing-Galar"
+      ]
+    }
+  },
+  "weezing": {
+    "dexNumber": 110,
+    "name": "Weezing",
+    "types": [
+      "POISON"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 90,
+      "def": 120,
+      "spa": 85,
+      "spd": 85,
+      "spe": 60
+    },
+    "height": 1.2,
+    "weight": 9.5,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Koffing"
+    }
+  },
+  "weezinggalar": {
+    "dexNumber": 110,
+    "name": "Weezing-Galar",
+    "types": [
+      "POISON",
+      "FAIRY"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 90,
+      "def": 120,
+      "spa": 85,
+      "spd": 70,
+      "spe": 60
+    },
+    "height": 3,
+    "weight": 16,
+    "color": "Gray",
+    "evolutions": {
+      "from": "Koffing"
+    }
+  },
+  "rhyhorn": {
+    "dexNumber": 111,
+    "name": "Rhyhorn",
+    "types": [
+      "GROUND",
+      "ROCK"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 85,
+      "def": 95,
+      "spa": 30,
+      "spd": 30,
+      "spe": 25
+    },
+    "height": 1,
+    "weight": 115,
+    "color": "Gray",
+    "evolutions": {
+      "to": [
+        "Rhydon"
+      ]
+    }
+  },
+  "rhydon": {
+    "dexNumber": 112,
+    "name": "Rhydon",
+    "types": [
+      "GROUND",
+      "ROCK"
+    ],
+    "baseStats": {
+      "hp": 105,
+      "atk": 130,
+      "def": 120,
+      "spa": 45,
+      "spd": 45,
+      "spe": 40
+    },
+    "height": 1.9,
+    "weight": 120,
+    "color": "Gray",
+    "evolutions": {
+      "from": "Rhyhorn",
+      "to": [
+        "Rhyperior"
+      ]
+    }
+  },
+  "chansey": {
+    "dexNumber": 113,
+    "name": "Chansey",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 250,
+      "atk": 5,
+      "def": 5,
+      "spa": 105,
+      "spd": 105,
+      "spe": 50
+    },
+    "height": 1.1,
+    "weight": 34.6,
+    "color": "Pink",
+    "evolutions": {
+      "from": "Happiny",
+      "to": [
+        "Blissey"
+      ]
+    }
+  },
+  "tangela": {
+    "dexNumber": 114,
+    "name": "Tangela",
+    "types": [
+      "GRASS"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 55,
+      "def": 115,
+      "spa": 100,
+      "spd": 100,
+      "spe": 60
+    },
+    "height": 1,
+    "weight": 35,
+    "color": "Blue",
+    "evolutions": {
+      "to": [
+        "Tangrowth"
+      ]
+    }
+  },
+  "kangaskhan": {
+    "dexNumber": 115,
+    "name": "Kangaskhan",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 105,
+      "atk": 95,
+      "def": 80,
+      "spa": 40,
+      "spd": 40,
+      "spe": 90
+    },
+    "height": 2.2,
+    "weight": 80,
+    "color": "Brown",
+    "evolutions": {}
+  },
+  "kangaskhanmega": {
+    "dexNumber": 115,
+    "name": "Kangaskhan-Mega",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 105,
+      "atk": 125,
+      "def": 100,
+      "spa": 60,
+      "spd": 100,
+      "spe": 100
+    },
+    "height": 2.2,
+    "weight": 100,
+    "color": "Brown",
+    "evolutions": {}
+  },
+  "horsea": {
+    "dexNumber": 116,
+    "name": "Horsea",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 30,
+      "atk": 40,
+      "def": 70,
+      "spa": 70,
+      "spd": 70,
+      "spe": 60
+    },
+    "height": 0.4,
+    "weight": 8,
+    "color": "Blue",
+    "evolutions": {
+      "to": [
+        "Seadra"
+      ]
+    }
+  },
+  "seadra": {
+    "dexNumber": 117,
+    "name": "Seadra",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 65,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 85
+    },
+    "height": 1.2,
+    "weight": 25,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Horsea",
+      "to": [
+        "Kingdra"
+      ]
+    }
+  },
+  "goldeen": {
+    "dexNumber": 118,
+    "name": "Goldeen",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 45,
+      "atk": 67,
+      "def": 60,
+      "spa": 50,
+      "spd": 50,
+      "spe": 63
+    },
+    "height": 0.6,
+    "weight": 15,
+    "color": "Red",
+    "evolutions": {
+      "to": [
+        "Seaking"
+      ]
+    }
+  },
+  "seaking": {
+    "dexNumber": 119,
+    "name": "Seaking",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 92,
+      "def": 65,
+      "spa": 80,
+      "spd": 80,
+      "spe": 68
+    },
+    "height": 1.3,
+    "weight": 39,
+    "color": "Red",
+    "evolutions": {
+      "from": "Goldeen"
+    }
+  },
+  "staryu": {
+    "dexNumber": 120,
+    "name": "Staryu",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 30,
+      "atk": 45,
+      "def": 55,
+      "spa": 70,
+      "spd": 70,
+      "spe": 85
+    },
+    "height": 0.8,
+    "weight": 34.5,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Starmie"
+      ]
+    }
+  },
+  "starmie": {
+    "dexNumber": 121,
+    "name": "Starmie",
+    "types": [
+      "WATER",
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 75,
+      "def": 85,
+      "spa": 100,
+      "spd": 100,
+      "spe": 115
+    },
+    "height": 1.1,
+    "weight": 80,
+    "color": "Purple",
+    "evolutions": {
+      "from": "Staryu"
+    }
+  },
+  "mrmime": {
+    "dexNumber": 122,
+    "name": "Mr. Mime",
+    "types": [
+      "PSYCHIC",
+      "FAIRY"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 65,
+      "spa": 100,
+      "spd": 100,
+      "spe": 90
+    },
+    "height": 1.3,
+    "weight": 54.5,
+    "color": "Pink",
+    "evolutions": {
+      "from": "Mime Jr."
+    }
+  },
+  "mrmimegalar": {
+    "dexNumber": 122,
+    "name": "Mr. Mime-Galar",
+    "types": [
+      "ICE",
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 65,
+      "spa": 90,
+      "spd": 90,
+      "spe": 100
+    },
+    "height": 1.4,
+    "weight": 56.8,
+    "color": "White",
+    "evolutions": {
+      "from": "Mime Jr.",
+      "to": [
+        "Mr. Rime"
+      ]
+    }
+  },
+  "scyther": {
+    "dexNumber": 123,
+    "name": "Scyther",
+    "types": [
+      "BUG",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 70,
+      "atk": 110,
+      "def": 80,
+      "spa": 55,
+      "spd": 55,
+      "spe": 105
+    },
+    "height": 1.5,
+    "weight": 56,
+    "color": "Green",
+    "evolutions": {
+      "to": [
+        "Scizor",
+        "Kleavor"
+      ]
+    }
+  },
+  "jynx": {
+    "dexNumber": 124,
+    "name": "Jynx",
+    "types": [
+      "ICE",
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 50,
+      "def": 35,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    },
+    "height": 1.4,
+    "weight": 40.6,
+    "color": "Red",
+    "evolutions": {
+      "from": "Smoochum"
+    }
+  },
+  "electabuzz": {
+    "dexNumber": 125,
+    "name": "Electabuzz",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 83,
+      "def": 57,
+      "spa": 85,
+      "spd": 85,
+      "spe": 105
+    },
+    "height": 1.1,
+    "weight": 30,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Elekid",
+      "to": [
+        "Electivire"
+      ]
+    }
+  },
+  "magmar": {
+    "dexNumber": 126,
+    "name": "Magmar",
+    "types": [
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 95,
+      "def": 57,
+      "spa": 85,
+      "spd": 85,
+      "spe": 93
+    },
+    "height": 1.3,
+    "weight": 44.5,
+    "color": "Red",
+    "evolutions": {
+      "from": "Magby",
+      "to": [
+        "Magmortar"
+      ]
+    }
+  },
+  "pinsir": {
+    "dexNumber": 127,
+    "name": "Pinsir",
+    "types": [
+      "BUG"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 125,
+      "def": 100,
+      "spa": 55,
+      "spd": 55,
+      "spe": 85
+    },
+    "height": 1.5,
+    "weight": 55,
+    "color": "Brown",
+    "evolutions": {}
+  },
+  "pinsirmega": {
+    "dexNumber": 127,
+    "name": "Pinsir-Mega",
+    "types": [
+      "BUG",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 155,
+      "def": 120,
+      "spa": 65,
+      "spd": 90,
+      "spe": 105
+    },
+    "height": 1.7,
+    "weight": 59,
+    "color": "Brown",
+    "evolutions": {}
+  },
+  "tauros": {
+    "dexNumber": 128,
+    "name": "Tauros",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 100,
+      "def": 95,
+      "spa": 70,
+      "spd": 70,
+      "spe": 110
+    },
+    "height": 1.4,
+    "weight": 88.4,
+    "color": "Brown",
+    "evolutions": {}
+  },
+  "taurospaldeacombat": {
+    "dexNumber": 128,
+    "name": "Tauros-Paldea-Combat",
+    "types": [
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 110,
+      "def": 105,
+      "spa": 30,
+      "spd": 70,
+      "spe": 100
+    },
+    "height": 1.4,
+    "weight": 115,
+    "color": "Black",
+    "evolutions": {}
+  },
+  "taurospaldeablaze": {
+    "dexNumber": 128,
+    "name": "Tauros-Paldea-Blaze",
+    "types": [
+      "FIGHTING",
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 110,
+      "def": 105,
+      "spa": 30,
+      "spd": 70,
+      "spe": 100
+    },
+    "height": 1.4,
+    "weight": 85,
+    "color": "Black",
+    "evolutions": {}
+  },
+  "taurospaldeaaqua": {
+    "dexNumber": 128,
+    "name": "Tauros-Paldea-Aqua",
+    "types": [
+      "FIGHTING",
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 110,
+      "def": 105,
+      "spa": 30,
+      "spd": 70,
+      "spe": 100
+    },
+    "height": 1.4,
+    "weight": 110,
+    "color": "Black",
+    "evolutions": {}
+  },
+  "magikarp": {
+    "dexNumber": 129,
+    "name": "Magikarp",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 20,
+      "atk": 10,
+      "def": 55,
+      "spa": 20,
+      "spd": 20,
+      "spe": 80
+    },
+    "height": 0.9,
+    "weight": 10,
+    "color": "Red",
+    "evolutions": {
+      "to": [
+        "Gyarados"
+      ]
+    }
+  },
+  "gyarados": {
+    "dexNumber": 130,
+    "name": "Gyarados",
+    "types": [
+      "WATER",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 125,
+      "def": 79,
+      "spa": 100,
+      "spd": 100,
+      "spe": 81
+    },
+    "height": 6.5,
+    "weight": 235,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Magikarp"
+    }
+  },
+  "gyaradosmega": {
+    "dexNumber": 130,
+    "name": "Gyarados-Mega",
+    "types": [
+      "WATER",
+      "DARK"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 155,
+      "def": 109,
+      "spa": 70,
+      "spd": 130,
+      "spe": 81
+    },
+    "height": 6.5,
+    "weight": 305,
+    "color": "Blue",
+    "evolutions": {}
+  },
+  "lapras": {
+    "dexNumber": 131,
+    "name": "Lapras",
+    "types": [
+      "WATER",
+      "ICE"
+    ],
+    "baseStats": {
+      "hp": 130,
+      "atk": 85,
+      "def": 80,
+      "spa": 95,
+      "spd": 95,
+      "spe": 60
+    },
+    "height": 2.5,
+    "weight": 220,
+    "color": "Blue",
+    "evolutions": {}
+  },
+  "laprasgmax": {
+    "dexNumber": 131,
+    "name": "Lapras-Gmax",
+    "types": [
+      "WATER",
+      "ICE"
+    ],
+    "baseStats": {
+      "hp": 130,
+      "atk": 85,
+      "def": 80,
+      "spa": 85,
+      "spd": 95,
+      "spe": 60
+    },
+    "height": 24,
+    "weight": 0,
+    "color": "Blue",
+    "evolutions": {}
+  },
+  "ditto": {
+    "dexNumber": 132,
+    "name": "Ditto",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "atk": 48,
+      "def": 48,
+      "spa": 48,
+      "spd": 48,
+      "spe": 48
+    },
+    "height": 0.3,
+    "weight": 4,
+    "color": "Purple",
+    "evolutions": {}
+  },
+  "eevee": {
+    "dexNumber": 133,
+    "name": "Eevee",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 55,
+      "def": 50,
+      "spa": 65,
+      "spd": 65,
+      "spe": 55
+    },
+    "height": 0.3,
+    "weight": 6.5,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Vaporeon",
+        "Jolteon",
+        "Flareon",
+        "Espeon",
+        "Umbreon",
+        "Leafeon",
+        "Glaceon",
+        "Sylveon"
+      ]
+    }
+  },
+  "eeveestarter": {
+    "dexNumber": 133,
+    "name": "Eevee-Starter",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 75,
+      "def": 70,
+      "spa": 65,
+      "spd": 85,
+      "spe": 75
+    },
+    "height": 0.3,
+    "weight": 6.5,
+    "color": "Brown",
+    "evolutions": {}
+  },
+  "eeveegmax": {
+    "dexNumber": 133,
+    "name": "Eevee-Gmax",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 55,
+      "def": 50,
+      "spa": 45,
+      "spd": 65,
+      "spe": 55
+    },
+    "height": 18,
+    "weight": 0,
+    "color": "Brown",
+    "evolutions": {}
+  },
+  "vaporeon": {
+    "dexNumber": 134,
+    "name": "Vaporeon",
+    "types": [
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 130,
+      "atk": 65,
+      "def": 60,
+      "spa": 110,
+      "spd": 110,
+      "spe": 65
+    },
+    "height": 1,
+    "weight": 29,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Eevee"
+    }
+  },
+  "jolteon": {
+    "dexNumber": 135,
+    "name": "Jolteon",
+    "types": [
+      "ELECTRIC"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 65,
+      "def": 60,
+      "spa": 110,
+      "spd": 110,
+      "spe": 130
+    },
+    "height": 0.8,
+    "weight": 24.5,
+    "color": "Yellow",
+    "evolutions": {
+      "from": "Eevee"
+    }
+  },
+  "flareon": {
+    "dexNumber": 136,
+    "name": "Flareon",
+    "types": [
+      "FIRE"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 130,
+      "def": 60,
+      "spa": 110,
+      "spd": 110,
+      "spe": 65
+    },
+    "height": 0.9,
+    "weight": 25,
+    "color": "Red",
+    "evolutions": {
+      "from": "Eevee"
+    }
+  },
+  "porygon": {
+    "dexNumber": 137,
+    "name": "Porygon",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 60,
+      "def": 70,
+      "spa": 75,
+      "spd": 75,
+      "spe": 40
+    },
+    "height": 0.8,
+    "weight": 36.5,
+    "color": "Pink",
+    "evolutions": {
+      "to": [
+        "Porygon2"
+      ]
+    }
+  },
+  "omanyte": {
+    "dexNumber": 138,
+    "name": "Omanyte",
+    "types": [
+      "ROCK",
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 40,
+      "def": 100,
+      "spa": 90,
+      "spd": 90,
+      "spe": 35
+    },
+    "height": 0.4,
+    "weight": 7.5,
+    "color": "Blue",
+    "evolutions": {
+      "to": [
+        "Omastar"
+      ]
+    }
+  },
+  "omastar": {
+    "dexNumber": 139,
+    "name": "Omastar",
+    "types": [
+      "ROCK",
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 70,
+      "atk": 60,
+      "def": 125,
+      "spa": 115,
+      "spd": 115,
+      "spe": 55
+    },
+    "height": 1,
+    "weight": 35,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Omanyte"
+    }
+  },
+  "kabuto": {
+    "dexNumber": 140,
+    "name": "Kabuto",
+    "types": [
+      "ROCK",
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 30,
+      "atk": 80,
+      "def": 90,
+      "spa": 45,
+      "spd": 45,
+      "spe": 55
+    },
+    "height": 0.5,
+    "weight": 11.5,
+    "color": "Brown",
+    "evolutions": {
+      "to": [
+        "Kabutops"
+      ]
+    }
+  },
+  "kabutops": {
+    "dexNumber": 141,
+    "name": "Kabutops",
+    "types": [
+      "ROCK",
+      "WATER"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 115,
+      "def": 105,
+      "spa": 70,
+      "spd": 70,
+      "spe": 80
+    },
+    "height": 1.3,
+    "weight": 40.5,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Kabuto"
+    }
+  },
+  "aerodactyl": {
+    "dexNumber": 142,
+    "name": "Aerodactyl",
+    "types": [
+      "ROCK",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 105,
+      "def": 65,
+      "spa": 60,
+      "spd": 60,
+      "spe": 130
+    },
+    "height": 1.8,
+    "weight": 59,
+    "color": "Purple",
+    "evolutions": {}
+  },
+  "aerodactylmega": {
+    "dexNumber": 142,
+    "name": "Aerodactyl-Mega",
+    "types": [
+      "ROCK",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 135,
+      "def": 85,
+      "spa": 70,
+      "spd": 95,
+      "spe": 150
+    },
+    "height": 2.1,
+    "weight": 79,
+    "color": "Purple",
+    "evolutions": {}
+  },
+  "snorlax": {
+    "dexNumber": 143,
+    "name": "Snorlax",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 160,
+      "atk": 110,
+      "def": 65,
+      "spa": 65,
+      "spd": 65,
+      "spe": 30
+    },
+    "height": 2.1,
+    "weight": 460,
+    "color": "Black",
+    "evolutions": {
+      "from": "Munchlax"
+    }
+  },
+  "snorlaxgmax": {
+    "dexNumber": 143,
+    "name": "Snorlax-Gmax",
+    "types": [
+      "NORMAL"
+    ],
+    "baseStats": {
+      "hp": 160,
+      "atk": 110,
+      "def": 65,
+      "spa": 65,
+      "spd": 110,
+      "spe": 30
+    },
+    "height": 35,
+    "weight": 0,
+    "color": "Black",
+    "evolutions": {}
+  },
+  "articuno": {
+    "dexNumber": 144,
+    "name": "Articuno",
+    "types": [
+      "ICE",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 85,
+      "def": 100,
+      "spa": 125,
+      "spd": 125,
+      "spe": 85
+    },
+    "height": 1.7,
+    "weight": 55.4,
+    "color": "Blue",
+    "evolutions": {}
+  },
+  "articunogalar": {
+    "dexNumber": 144,
+    "name": "Articuno-Galar",
+    "types": [
+      "PSYCHIC",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 85,
+      "def": 85,
+      "spa": 125,
+      "spd": 100,
+      "spe": 95
+    },
+    "height": 1.7,
+    "weight": 50.9,
+    "color": "Purple",
+    "evolutions": {}
+  },
+  "zapdos": {
+    "dexNumber": 145,
+    "name": "Zapdos",
+    "types": [
+      "ELECTRIC",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 90,
+      "def": 85,
+      "spa": 125,
+      "spd": 125,
+      "spe": 100
+    },
+    "height": 1.6,
+    "weight": 52.6,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "zapdosgalar": {
+    "dexNumber": 145,
+    "name": "Zapdos-Galar",
+    "types": [
+      "FIGHTING",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 125,
+      "def": 90,
+      "spa": 85,
+      "spd": 90,
+      "spe": 100
+    },
+    "height": 1.6,
+    "weight": 58.2,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "moltres": {
+    "dexNumber": 146,
+    "name": "Moltres",
+    "types": [
+      "FIRE",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 100,
+      "def": 90,
+      "spa": 125,
+      "spd": 125,
+      "spe": 90
+    },
+    "height": 2,
+    "weight": 60,
+    "color": "Yellow",
+    "evolutions": {}
+  },
+  "moltresgalar": {
+    "dexNumber": 146,
+    "name": "Moltres-Galar",
+    "types": [
+      "DARK",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 85,
+      "def": 90,
+      "spa": 100,
+      "spd": 125,
+      "spe": 90
+    },
+    "height": 2,
+    "weight": 66,
+    "color": "Red",
+    "evolutions": {}
+  },
+  "dratini": {
+    "dexNumber": 147,
+    "name": "Dratini",
+    "types": [
+      "DRAGON"
+    ],
+    "baseStats": {
+      "hp": 41,
+      "atk": 64,
+      "def": 45,
+      "spa": 50,
+      "spd": 50,
+      "spe": 50
+    },
+    "height": 1.8,
+    "weight": 3.3,
+    "color": "Blue",
+    "evolutions": {
+      "to": [
+        "Dragonair"
+      ]
+    }
+  },
+  "dragonair": {
+    "dexNumber": 148,
+    "name": "Dragonair",
+    "types": [
+      "DRAGON"
+    ],
+    "baseStats": {
+      "hp": 61,
+      "atk": 84,
+      "def": 65,
+      "spa": 70,
+      "spd": 70,
+      "spe": 70
+    },
+    "height": 4,
+    "weight": 16.5,
+    "color": "Blue",
+    "evolutions": {
+      "from": "Dratini",
+      "to": [
+        "Dragonite"
+      ]
+    }
+  },
+  "dragonite": {
+    "dexNumber": 149,
+    "name": "Dragonite",
+    "types": [
+      "DRAGON",
+      "FLYING"
+    ],
+    "baseStats": {
+      "hp": 91,
+      "atk": 134,
+      "def": 95,
+      "spa": 100,
+      "spd": 100,
+      "spe": 80
+    },
+    "height": 2.2,
+    "weight": 210,
+    "color": "Brown",
+    "evolutions": {
+      "from": "Dragonair"
+    }
+  },
+  "mewtwo": {
+    "dexNumber": 150,
+    "name": "Mewtwo",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 106,
+      "atk": 110,
+      "def": 90,
+      "spa": 154,
+      "spd": 154,
+      "spe": 130
+    },
+    "height": 2,
+    "weight": 122,
+    "color": "Purple",
+    "evolutions": {}
+  },
+  "mewtwomegax": {
+    "dexNumber": 150,
+    "name": "Mewtwo-Mega-X",
+    "types": [
+      "PSYCHIC",
+      "FIGHTING"
+    ],
+    "baseStats": {
+      "hp": 106,
+      "atk": 190,
+      "def": 100,
+      "spa": 154,
+      "spd": 100,
+      "spe": 130
+    },
+    "height": 2.3,
+    "weight": 127,
+    "color": "Purple",
+    "evolutions": {}
+  },
+  "mewtwomegay": {
+    "dexNumber": 150,
+    "name": "Mewtwo-Mega-Y",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 106,
+      "atk": 150,
+      "def": 70,
+      "spa": 194,
+      "spd": 120,
+      "spe": 140
+    },
+    "height": 1.5,
+    "weight": 33,
+    "color": "Purple",
+    "evolutions": {}
+  },
+  "mew": {
+    "dexNumber": 151,
+    "name": "Mew",
+    "types": [
+      "PSYCHIC"
+    ],
+    "baseStats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 100,
+      "spa": 100,
+      "spd": 100,
+      "spe": 100
+    },
+    "height": 0.4,
+    "weight": 4,
+    "color": "Pink",
+    "evolutions": {}
+  }
+} as const;
+
+export type Gen1PokemonId = keyof typeof GEN1_POKEMON;
