@@ -1,8 +1,10 @@
 import { PokemonData, TypeGen1, Move } from '@pokebattle/shared';
+import { GEN1_POKEMON } from '../../data/gen1/pokemon';
+import { GEN1_MOVES } from '../../data/gen1/moves';
 
 /**
  * Clase Pokedex que almacena y proporciona acceso a los datos de los Pokémon
- * Basada en la estructura de Pokémon Showdown
+ * Basada en la estructura de Pokémon Showdown con datos extraídos automáticamente
  */
 export class Pokedex {
   private pokemon: Map<number, PokemonData>;
@@ -15,11 +17,27 @@ export class Pokedex {
   }
 
   /**
-   * Obtiene los datos de un Pokémon por su número de Pokédex
+   * Obtiene un Pokémon por su número de dex
    */
-  public getPokemon(dexNumber: number): PokemonData | undefined {
-    return this.pokemon.get(dexNumber);
-  }
+  public getPokemon(dexNumber: number): PokemonData | undefined;
+  /**
+   * Obtiene un Pokémon por su nombre o ID
+   */
+  public getPokemon(identifier: string): PokemonData | undefined;
+  public getPokemon(identifier: number | string): PokemonData | undefined {
+    if (typeof identifier === 'number') {
+      return this.pokemon.get(identifier);
+    }
+    
+    // Buscar por nombre o ID de string
+    const lowerIdentifier = identifier.toLowerCase();
+    for (const pokemon of this.pokemon.values()) {
+      if (pokemon.name.toLowerCase() === lowerIdentifier) {
+        return pokemon;
+      }
+    }
+     return undefined;
+   }
 
   /**
    * Obtiene los datos de un movimiento por su ID
@@ -44,17 +62,40 @@ export class Pokedex {
 
   /**
    * Inicializa los datos del Pokédex con los Pokémon y movimientos de la primera generación
+   * Usa datos extraídos automáticamente de Pokémon Showdown
    */
   private initializeData(): void {
-    // Inicializar movimientos
-    this.initializeMoves();
-    
-    // Inicializar Pokémon
-    this.initializePokemon();
+    // Inicializar movimientos desde datos de Showdown
+    this.initializeMovesFromShowdown();
+    // Inicializar Pokémon desde datos de Showdown
+    this.initializePokemonFromShowdown();
   }
 
   /**
-   * Inicializa los datos de los movimientos
+   * Inicializa los movimientos desde los datos extraídos de Showdown
+   */
+  private initializeMovesFromShowdown(): void {
+    Object.entries(GEN1_MOVES).forEach(([moveId, moveData]) => {
+      const move: Move = {
+        id: moveData.id,
+        name: moveData.name,
+        type: moveData.type as TypeGen1,
+        power: moveData.power,
+        accuracy: moveData.accuracy,
+        pp: moveData.pp,
+        category: moveData.category as 'PHYSICAL' | 'SPECIAL' | 'STATUS',
+        priority: moveData.priority,
+        effects: moveData.effects?.map(effect => ({
+          type: 'DAMAGE' as const,
+          value: effect.chance || 0
+        })) || []
+      };
+      this.moves.set(moveId, move);
+    });
+  }
+
+  /**
+   * Inicializa los datos de los movimientos (método legacy)
    */
   private initializeMoves(): void {
     // Movimientos básicos para la primera generación
@@ -178,7 +219,28 @@ export class Pokedex {
   }
 
   /**
-   * Inicializa los datos de los Pokémon
+   * Inicializa los Pokémon desde los datos extraídos de Showdown
+   */
+  private initializePokemonFromShowdown(): void {
+    Object.entries(GEN1_POKEMON).forEach(([pokemonId, pokemonData]) => {
+      const pokemon: PokemonData = {
+        dexNumber: pokemonData.dexNumber,
+        name: pokemonData.name,
+        types: [...pokemonData.types] as TypeGen1[],
+        baseStats: pokemonData.baseStats,
+        moves: {
+          levelUp: [], // TODO: Extract from learnsets
+          tm: [],
+          egg: [],
+          tutor: []
+        }
+      };
+      this.pokemon.set(pokemonData.dexNumber, pokemon);
+    });
+  }
+
+  /**
+   * Inicializa los datos de los Pokémon (método legacy)
    */
   private initializePokemon(): void {
     // Datos básicos de los Pokémon iniciales y algunos otros populares

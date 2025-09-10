@@ -12,12 +12,16 @@ const pixelFont = Press_Start_2P({
   display: 'swap',
 });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: 'PokeDotDuel - Criptojuego PvP con Apuestas en SOL',
   description: 'Juega batallas Pokémon PvP con apuestas en SOL. Colecciona cartas, construye equipos y compite por premios reales.',
   keywords: ['Pokemon', 'PvP', 'Solana', 'Crypto', 'Gaming', 'NFT', 'Trading', 'battles', 'lobby'],
   authors: [{ name: 'PokeDotDuel Team' }],
-  viewport: "width=device-width, initial-scale=1",
   openGraph: {
     title: 'PokeDotDuel - Criptojuego PvP con Apuestas en SOL',
     description: 'Juega batallas Pokémon PvP con apuestas en SOL. Colecciona cartas, construye equipos y compite por premios reales.',
