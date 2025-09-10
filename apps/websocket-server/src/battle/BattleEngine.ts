@@ -1,4 +1,5 @@
 import { TypeGen1, calculateTypeEffectiveness, BattleEvent, BattleTeam as SharedBattleTeam, BattlePokemon } from '@pokebattle/shared';
+import { pokedex } from '../dex/Pokedex';
 
 // Extended BattleTeam with activeIndex for battle engine
 interface BattleTeam extends SharedBattleTeam {
@@ -215,6 +216,16 @@ export class BattleEngine {
     attackerTeam: 'A' | 'B',
     defenderTeam: 'A' | 'B'
   ): void {
+    // Get move data from Pokedex for accurate calculations
+    const moveData = pokedex.getMove(move.id);
+    if (!moveData) {
+      console.warn(`Move ${move.id} not found in Pokedex, using basic data`);
+    }
+    
+    // Use Showdown data if available, otherwise fallback to move data
+    const actualPower = moveData?.power ?? move.power;
+    const actualAccuracy = moveData?.accuracy ?? move.accuracy;
+    const actualCategory = moveData?.category ?? move.category;
     // Add move event
     this.events.push({
       type: 'MOVE',
@@ -222,39 +233,48 @@ export class BattleEngine {
       move: move.name
     });
 
-    // Check if move hits (based on accuracy)
+    // Check if move hits (based on accuracy using Showdown data)
     const accuracyRoll = Math.random() * 100;
-    if (accuracyRoll > move.accuracy) {
+    if (accuracyRoll > actualAccuracy) {
       // Move missed
+      this.events.push({
+        type: 'MOVE',
+        target: defenderTeam === 'A' ? 0 : 1,
+        move: `${move.name} missed!`
+      });
       return;
     }
 
-    // Calculate damage for damaging moves
-    if (move.power > 0) {
-      // Determine if it's a critical hit (6.25% chance in Gen 1)
-      const isCritical = Math.random() < 0.0625;
-
-      // Calculate type effectiveness
+    // Calculate damage for damaging moves using Showdown data
+    if (actualCategory !== 'STATUS' && actualPower > 0) {
+      // Calculate type effectiveness using Showdown logic
+      const moveType = moveData?.type ?? move.type;
       const defenderTypes = [defender.type1, defender.type2].filter(type => type !== null && type !== undefined) as TypeGen1[];
-      const effectiveness = calculateTypeEffectiveness(move.type, defenderTypes);
+      const effectiveness = calculateTypeEffectiveness(moveType, defenderTypes);
 
-      // Calculate STAB (Same Type Attack Bonus)
+      // Calculate STAB (Same Type Attack Bonus) - Showdown standard
       const attackerTypes = [attacker.type1, attacker.type2].filter(Boolean);
-      const stab = attackerTypes.includes(move.type) ? 1.5 : 1;
+      const stab = attackerTypes.includes(moveType) ? 1.5 : 1;
 
-      // Calculate damage
-      let damage: number;
-      if (move.category === 'PHYSICAL') {
-        // Physical damage formula
-        const attackStat = isCritical ? attacker.boosts.atk * 2 : attacker.boosts.atk;
-        const defenseStat = defender.boosts.def;
-        damage = this.calculateDamage(attackStat, defenseStat, move.power, stab, effectiveness, isCritical);
-      } else {
-        // Special damage formula
-        const attackStat = isCritical ? attacker.boosts.spa * 2 : attacker.boosts.spa;
-        const defenseStat = defender.boosts.spd;
-        damage = this.calculateDamage(attackStat, defenseStat, move.power, stab, effectiveness, isCritical);
-      }
+      // Use improved critical hit calculation
+      const isCritical = Math.random() < this.getCriticalHitRatio(attacker, moveData);
+
+      // Calculate stats using Showdown formulas
+      const attackStat = actualCategory === 'PHYSICAL' ? 
+        this.calculateStat(attacker, 'atk') : 
+        this.calculateStat(attacker, 'spa');
+      const defenseStat = actualCategory === 'PHYSICAL' ? 
+        this.calculateStat(defender, 'def') : 
+        this.calculateStat(defender, 'spd');
+
+      // Apply boosts (Gen 1 style: +1 stage = 1.5x, +2 = 2x, etc.)
+      const attackBoost = actualCategory === 'PHYSICAL' ? attacker.boosts.atk : attacker.boosts.spa;
+      const defenseBoost = actualCategory === 'PHYSICAL' ? defender.boosts.def : defender.boosts.spd;
+      
+      const boostedAttack = this.applyStatBoost(attackStat, attackBoost);
+      const boostedDefense = this.applyStatBoost(defenseStat, defenseBoost);
+
+      const damage = this.calculateDamage(boostedAttack, boostedDefense, actualPower, stab, effectiveness, isCritical, attacker.level);
 
       // Apply damage
       defender.hp = Math.max(0, defender.hp - damage);
@@ -268,26 +288,72 @@ export class BattleEngine {
     }
   }
 
+  private calculateStat(pokemon: BattlePokemon, stat: 'atk' | 'def' | 'spa' | 'spd' | 'spe'): number {
+    // Showdown stat calculation: ((Base + IV) * 2 + EV/4) * Level/100 + 5
+    const pokemonData = pokedex.getPokemon(pokemon.species);
+    const baseStat = pokemonData?.baseStats?.[stat] ?? 50; // fallback
+    const iv = pokemon.ivs[stat] ?? 15;
+    const ev = pokemon.evs[stat] ?? 0;
+    const level = pokemon.level;
+    
+    return Math.floor(((baseStat + iv) * 2 + Math.floor(ev / 4)) * level / 100) + 5;
+  }
+
+  private getCriticalHitRatio(attacker: BattlePokemon, moveData: any): number {
+    // Gen 1 critical hit mechanics - base rate is speed/512
+    const speed = this.calculateStat(attacker, 'spe');
+    let critRate = speed / 512;
+    
+    // High critical hit moves (like Slash, Razor Leaf)
+    if (moveData?.critRatio && moveData.critRatio > 1) {
+      critRate *= moveData.critRatio;
+    }
+    
+    return Math.min(critRate, 0.99); // Cap at 99%
+  }
+
+  private applyStatBoost(baseStat: number, boost: number): number {
+    // Gen 1 stat boost mechanics
+    // Boosts range from -6 to +6
+    // Each boost stage multiplies by (2+boost)/2 for positive, 2/(2-boost) for negative
+    if (boost === 0) return baseStat;
+    
+    if (boost > 0) {
+      return Math.floor(baseStat * (2 + boost) / 2);
+    } else {
+      return Math.floor(baseStat * 2 / (2 - boost));
+    }
+  }
+
   private calculateDamage(
     attackStat: number,
     defenseStat: number,
     power: number,
     stab: number,
     typeEffectiveness: number,
-    isCritical: boolean
+    isCritical: boolean,
+    level: number = 50
   ): number {
-    // Base damage formula
-    const level = 50; // Assuming level 50 battles
-    const baseDamage = Math.floor((2 * level) / 5 + 2);
-    const attackDefenseRatio = attackStat / defenseStat;
-    const damageBeforeModifiers = Math.floor(baseDamage * power * attackDefenseRatio / 50);
-
-    // Apply modifiers
-    const criticalModifier = isCritical ? 1.5 : 1;
-    const randomModifier = (Math.random() * 0.15 + 0.85); // Random factor between 0.85 and 1.0
-
-    // Final damage calculation
-    const finalDamage = Math.floor(damageBeforeModifiers * stab * typeEffectiveness * criticalModifier * randomModifier);
-    return Math.max(1, finalDamage); // Minimum 1 damage
+    // Gen 1 damage formula (Showdown accurate)
+    // Damage = (((2 * Level + 10) / 250) * (Attack / Defense) * Power + 2) * Modifiers
+    let damage = Math.floor(((2 * level + 10) / 250) * (attackStat / defenseStat) * power + 2);
+    
+    // Apply critical hit multiplier (Gen 1: doubles the damage before other modifiers)
+    if (isCritical) {
+      damage *= 2;
+    }
+    
+    // Apply STAB (Same Type Attack Bonus)
+    damage = Math.floor(damage * stab);
+    
+    // Apply type effectiveness
+    damage = Math.floor(damage * typeEffectiveness);
+    
+    // Add random factor (217-255)/255 in Gen 1 (approximately 85-100%)
+    const randomFactor = (217 + Math.floor(Math.random() * 39)) / 255;
+    damage = Math.floor(damage * randomFactor);
+    
+    // Minimum damage is 1
+    return Math.max(1, damage);
   }
 }
