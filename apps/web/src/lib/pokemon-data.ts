@@ -173,8 +173,8 @@ export class PokemonDataUtil {
     // Base the class on the Pokemon's base stat total
     const statTotal = Object.values(pokemon.baseStats).reduce((sum, stat) => sum + stat, 0);
     
-    if (statTotal >= 500) return 'legendary';
-    if (statTotal >= 400) return 'rare';
+    if ((statTotal as number) >= 500) return 'legendary';
+    if ((statTotal as number) >= 400) return 'rare';
     return 'common';
   }
 
