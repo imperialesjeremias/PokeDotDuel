@@ -505,6 +505,7 @@ export type Database = {
           created_at?: string;
         };
       };
+
     };
     Views: {
       [_ in never]: never;

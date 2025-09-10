@@ -4,8 +4,15 @@ export const BACKEND_WS_URL = process.env.NEXT_PUBLIC_BACKEND_WS_URL || 'http://
 
 // API endpoints
 export const API_ENDPOINTS = {
-  HEALTH: '/health',
-  // Add more endpoints as needed
+  USERS: '/api/users',
+  CARDS: '/api/cards',
+  TEAMS: '/api/teams',
+  LOBBIES: '/api/lobbies',
+  BATTLES: '/api/battles',
+  MARKETPLACE: '/api/marketplace',
+  AUCTIONS: '/api/auctions',
+  PACKS: '/api/packs',
+  TRANSACTIONS: '/api/transactions',
 } as const;
 
 // WebSocket events
