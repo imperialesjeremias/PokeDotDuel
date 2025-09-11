@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
-import { GEN1_POKEMON } from '../data/gen1/pokemon';
-import { GEN1_MOVES } from '../data/gen1/moves';
+import { GEN1_POKEMON } from '../apps/websocket-server/data/gen1/pokemon';
+import { GEN1_MOVES } from '../apps/websocket-server/data/gen1/moves';
 import dotenv from 'dotenv';
 
 // Load environment variables
@@ -59,7 +59,7 @@ async function populatePokedexCache() {
         pokedexEntries.push({
           dex_number: pokemonData.dexNumber,
           name: pokemonData.name,
-          types: pokemonData.types,
+          types: [...pokemonData.types], // Convert readonly array to mutable array
           base_stats: pokemonData.baseStats,
           moves: {
             levelUp: [], // TODO: Extract from learnsets when available

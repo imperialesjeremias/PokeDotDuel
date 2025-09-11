@@ -99,12 +99,54 @@ BEGIN
   INSERT INTO public.cards (
     owner_id, dex_number, name, is_shiny, rarity, level, stats, types
   ) VALUES (
-    owner_id, final_dex_number, pokemon_data.name, is_shiny, final_rarity, 1, card_stats, pokemon_data.types
+    owner_id, final_dex_number, pokemon_data.name, is_shiny, final_rarity, 50, card_stats, pokemon_data.types
   ) RETURNING id INTO card_id;
   
   RETURN card_id;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Test data: Add a test user with fixed ID and generate cards for testing
+INSERT INTO public.users (
+    id,
+    wallet_address,
+    generated_wallet_address,
+    level,
+    xp,
+    badges,
+    pokecoins,
+    sol_balance,
+    stats
+) VALUES (
+    '550e8400-e29b-41d4-a716-446655440000'::UUID,
+    'test-wallet-address-123',
+    'generated-test-wallet-123',
+    5,
+    1250,
+    '["starter", "collector"]'::jsonb,
+    5000,
+    100000,
+    '{
+        "wins": 8,
+        "losses": 3,
+        "packs_opened": 15,
+        "cards_owned": 20,
+        "total_wagered": 50000,
+        "total_won": 75000
+    }'::jsonb
+) ON CONFLICT (id) DO NOTHING;
+
+-- Generate 20 random cards for the test user
+DO $$
+DECLARE
+    i INTEGER;
+    card_result RECORD;
+BEGIN
+    FOR i IN 1..20 LOOP
+        SELECT * INTO card_result FROM generate_random_card('550e8400-e29b-41d4-a716-446655440000'::UUID);
+        RAISE NOTICE 'Generated card % for test user', card_result.id;
+    END LOOP;
+END $$;
 
 -- Create a function to open a booster pack
 CREATE OR REPLACE FUNCTION open_booster_pack(pack_id UUID)

@@ -43,7 +43,7 @@ interface Listing {
       spd: number;
       spe: number;
     };
-    types: TypeGen1[];
+    types: readonly TypeGen1[];
   };
 }
 

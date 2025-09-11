@@ -36,7 +36,7 @@ interface PackReward {
   isShiny: boolean;
   dexNumber: number;
   level: number;
-  types: TypeGen1[];
+  types: readonly TypeGen1[];
 }
 
 export default function PacksPage() {

@@ -49,12 +49,15 @@ export const CardSchema = z.object({
 export const UserSchema = z.object({
   id: z.string().uuid(),
   walletAddress: z.string(),
+  generatedWalletAddress: z.string().optional(),
   username: z.string().optional(),
   createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
   level: z.number().min(1),
   xp: z.number().min(0),
   badges: z.array(z.any()),
   pokecoins: z.number().min(0),
+  solBalance: z.number().min(0),
   stats: z.object({
     wins: z.number().min(0),
     losses: z.number().min(0),
@@ -146,6 +149,7 @@ export const PackSchema = z.object({
 export const TransactionSchema = z.object({
   id: z.string().uuid(),
   userId: z.string().uuid().optional(),
+  cardId: z.string().uuid().optional(),
   kind: z.enum([
     'DEPOSIT_SOL', 'WITHDRAW_SOL', 'BUY_POKECOINS', 'SELL_CARD',
     'BUY_CARD', 'BID', 'WAGER_DEPOSIT', 'WAGER_PAYOUT',

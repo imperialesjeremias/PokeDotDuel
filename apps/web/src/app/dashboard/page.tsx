@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { EconomyPanel } from '@/components/EconomyPanel';
+import { useUser, useUserStats } from '@/hooks/useUser';
 import { 
   PokemonStatus, 
   HPBar, 
@@ -32,30 +33,16 @@ import {
   Zap
 } from 'lucide-react';
 
-interface UserStats {
-  wins: number;
-  losses: number;
-  packsOpened: number;
-  cardsOwned: number;
-  totalWagered: number;
-  totalWon: number;
-}
-
-interface User {
-  id: string;
-  walletAddress: string;
-  username: string;
-  level: number;
-  xp: number;
-  pokecoins: number;
-  stats: UserStats;
-}
+// Removed interfaces as they are now imported from useUser hook
 
 export default function DashboardPage() {
   const { ready, authenticated, user } = usePrivy();
   const router = useRouter();
-  const [userData, setUserData] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Get user data from database
+  const { user: userData, loading: userLoading, error: userError } = useUser();
+  const userStats = useUserStats(userData);
 
   useEffect(() => {
     if (ready && !authenticated) {
@@ -67,39 +54,12 @@ export default function DashboardPage() {
   }, [ready, authenticated, router]);
 
   useEffect(() => {
-    if (authenticated && user) {
-      fetchUserData();
+    if (ready) {
+      setIsLoading(false);
     }
-  }, [authenticated, user]);
+  }, [ready]);
 
-  const fetchUserData = async () => {
-    try {
-      // In a real implementation, you would fetch from your API
-      // For now, we'll use mock data
-      setUserData({
-        id: '1',
-        walletAddress: user?.wallet?.address || '',
-        username: 'PokemonMaster',
-        level: 15,
-        xp: 2500,
-        pokecoins: 5000,
-        stats: {
-          wins: 45,
-          losses: 12,
-          packsOpened: 23,
-          cardsOwned: 156,
-          totalWagered: 2.5,
-          totalWon: 3.2,
-        },
-      });
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (!ready || loading) {
+  if (!ready || isLoading || userLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 to-red-600">
         <div className="w-32 h-32 border-8 border-orange-800 bg-orange-400 animate-pulse flex items-center justify-center">
@@ -113,19 +73,25 @@ export default function DashboardPage() {
     return null;
   }
 
-  const winRate = userData ? (userData.stats.wins / (userData.stats.wins + userData.stats.losses) * 100).toFixed(1) : '0';
+  const winRate = userData && userStats ? userStats.winRate.toFixed(1) : '0';
 
   return (
     <div className="min-h-screen">
       <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Economy Panel */}
+        <EconomyPanel
+          pokecoinsBalance={userData?.pokecoins || 0}
+          solBalance={userData?.solBalance || 0}
+        />
+
         {/* Pokemon Trainer Status */}
         <div className="mb-8 dark:text-white">
           <StatusWindow title="TRAINER STATUS" className="mb-4">
             <div className="flex items-center justify-between mb-4">
               <h1 className="text-2xl font-pixel text-black dark:text-white">
-                TRAINER {userData?.username?.toUpperCase()}
+                TRAINER {userData?.walletAddress?.slice(0, 6).toUpperCase()}...{userData?.walletAddress?.slice(-4).toUpperCase()}
               </h1>
             </div>
             
@@ -212,11 +178,11 @@ export default function DashboardPage() {
           <StatusWindow title="BATTLE RECORD">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="battle-ui p-3 text-center">
-                <div className="font-pixel text-white text-lg">{userData?.stats.wins}</div>
+                <div className="font-pixel text-white text-lg">{userData?.stats.wins || 0}</div>
                 <div className="font-pixel text-white text-xs">WINS</div>
               </div>
               <div className="battle-ui p-3 text-center">
-                <div className="font-pixel text-white text-lg">{userData?.stats.losses}</div>
+                <div className="font-pixel text-white text-lg">{userData?.stats.losses || 0}</div>
                 <div className="font-pixel text-white text-xs">LOSSES</div>
               </div>
               <div className="battle-ui p-3 text-center">
@@ -224,7 +190,7 @@ export default function DashboardPage() {
                 <div className="font-pixel text-white text-xs">WIN RATE</div>
               </div>
               <div className="battle-ui p-3 text-center">
-                <div className="font-pixel text-white text-lg">{userData?.stats.cardsOwned}</div>
+                <div className="font-pixel text-white text-lg">{userData?.stats.cards_owned || 0}</div>
                 <div className="font-pixel text-white text-xs">POKEMON</div>
               </div>
             </div>
@@ -240,7 +206,7 @@ export default function DashboardPage() {
                   <span className="font-pixel text-white text-sm">TOTAL POKEMON</span>
                   <div className="pokeball w-6 h-6" />
                 </div>
-                <div className="font-pixel text-white text-2xl">{userData?.stats.cardsOwned}</div>
+                <div className="font-pixel text-white text-2xl">{userData?.stats.cards_owned || 0}</div>
               </div>
               
               <div className="battle-ui p-4">
@@ -248,7 +214,7 @@ export default function DashboardPage() {
                   <span className="font-pixel text-white text-sm">PACKS OPENED</span>
                   <div className="pokeball w-6 h-6" />
                 </div>
-                <div className="font-pixel text-white text-2xl">{userData?.stats.packsOpened}</div>
+                <div className="font-pixel text-white text-2xl">{userData?.stats.packs_opened || 0}</div>
               </div>
               
               <div className="battle-ui p-4">
@@ -256,7 +222,7 @@ export default function DashboardPage() {
                   <span className="font-pixel text-white text-sm">SOL EARNED</span>
                   <div className="pokeball w-6 h-6" />
                 </div>
-                <div className="font-pixel text-white text-2xl">{userData?.stats.totalWon}</div>
+                <div className="font-pixel text-white text-2xl">{userData?.stats.total_won || 0}</div>
               </div>
             </div>
           </StatusWindow>

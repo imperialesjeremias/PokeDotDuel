@@ -21,7 +21,8 @@ import {
   Volume2,
   VolumeX,
   Sun,
-  Sunset
+  Sunset,
+  BookOpen
 } from 'lucide-react';
 import { toggleBackgroundMusic, isBackgroundMusicPlaying } from '@/utils/backgroundMusic';
 import { toggleBackground, getCurrentBackground, getBackgroundDisplayName, addBackgroundChangeListener, removeBackgroundChangeListener } from '@/utils/backgroundManager';
@@ -75,6 +76,7 @@ export function Navigation() {
     { href: '/create-lobby', label: 'Create Lobby', icon: Plus },
     { href: '/battle', label: 'Battle', icon: Sword },
     { href: '/team-builder', label: 'Team', icon: Users },
+    { href: '/collection', label: 'Collection', icon: BookOpen },
     { href: '/packs', label: 'Packs', icon: Package },
     { href: '/marketplace', label: 'Marketplace', icon: ShoppingCart },
   ];

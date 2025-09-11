@@ -5,16 +5,23 @@ import { GEN1_POKEMON } from '../data/gen1-pokemon';
 interface PokemonEntry {
   dexNumber: number;
   name: string;
-  types: TypeGen1[];
+  types: readonly TypeGen1[];
   baseStats: Stats;
   height: number;
   weight: number;
   color: string;
   evolutions?: {
     from?: string;
-    to?: string[];
+    to?: readonly string[];
   };
 }
+
+// Valid Gen1 types
+const VALID_GEN1_TYPES: TypeGen1[] = [
+  'NORMAL', 'FIRE', 'WATER', 'ELECTRIC', 'GRASS', 'ICE',
+  'FIGHTING', 'POISON', 'GROUND', 'FLYING', 'PSYCHIC',
+  'BUG', 'ROCK', 'GHOST', 'DRAGON'
+];
 
 // Transform the imported data to match our interface
 const POKEMON_DATA: Record<string, PokemonEntry> = Object.fromEntries(
@@ -22,14 +29,20 @@ const POKEMON_DATA: Record<string, PokemonEntry> = Object.fromEntries(
     .filter(([key, pokemon]) => {
       // Filter out mega evolutions and other variants for marketplace
       // Keep only base forms and regular evolutions
-      return !key.includes('mega') && !key.includes('gmax') && !key.includes('alola') && !key.includes('galar');
+      const keyLower = key.toLowerCase();
+      const isValidVariant = !keyLower.includes('mega') && !keyLower.includes('gmax') && !keyLower.includes('alola') && !keyLower.includes('galar');
+      
+      // Filter out Pokemon with non-Gen1 types
+      const hasValidTypes = pokemon.types.every(type => VALID_GEN1_TYPES.includes(type as TypeGen1));
+      
+      return isValidVariant && hasValidTypes;
     })
     .map(([key, pokemon]) => [
       key,
       {
         dexNumber: pokemon.dexNumber,
         name: pokemon.name,
-        types: pokemon.types as TypeGen1[],
+        types: pokemon.types as readonly TypeGen1[],
         baseStats: pokemon.baseStats,
         height: pokemon.height,
         weight: pokemon.weight,
@@ -98,7 +111,7 @@ export class PokemonDataUtil {
   /**
    * Get Pokemon types as array
    */
-  static getPokemonTypes(pokemon: PokemonEntry): TypeGen1[] {
+  static getPokemonTypes(pokemon: PokemonEntry): readonly TypeGen1[] {
     return pokemon.types;
   }
 
