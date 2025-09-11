@@ -16,7 +16,7 @@ export interface Pack {
 export interface User {
   id: string;
   walletAddress: string;
-  username?: string;
+
 }
 
 export interface Lobby {

@@ -37,7 +37,6 @@ export async function POST(request: NextRequest) {
         .from('users')
         .insert({
           wallet_address: walletAddress,
-          username: `Player_${Date.now()}`,
           level: 1,
           xp: 0,
           pokecoins: 1000, // Starting PokéCoins
@@ -69,7 +68,6 @@ export async function POST(request: NextRequest) {
       user: {
         id: user.id,
         walletAddress: user.wallet_address,
-        username: user.username,
         level: user.level,
         xp: user.xp,
         pokecoins: user.pokecoins,

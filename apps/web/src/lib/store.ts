@@ -6,7 +6,7 @@ import { useToast } from './useToast';
 export interface User {
   id: string;
   walletAddress: string;
-  username?: string;
+
 }
 
 export interface Lobby {

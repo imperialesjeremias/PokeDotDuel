@@ -16,16 +16,17 @@ CREATE TYPE transaction_kind AS ENUM (
 CREATE TABLE public.users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   wallet_address TEXT NOT NULL UNIQUE,
-  username TEXT UNIQUE,
+  generated_wallet_address TEXT UNIQUE,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   level INTEGER DEFAULT 1 CHECK (level >= 1),
   xp BIGINT DEFAULT 0 CHECK (xp >= 0),
   badges JSONB DEFAULT '[]'::jsonb,
   pokecoins BIGINT DEFAULT 0 CHECK (pokecoins >= 0),
+  sol_balance BIGINT DEFAULT 0 CHECK (sol_balance >= 0),
   stats JSONB DEFAULT '{
-    "wins": 0,
-    "losses": 0,
-    "packs_opened": 0,
+    "wins": 3,
+    "losses": 1,
+    "packs_opened": 10,
     "cards_owned": 0,
     "total_wagered": 0,
     "total_won": 0
@@ -158,6 +159,7 @@ CREATE TABLE public.pack_rewards (
 CREATE TABLE public.transactions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES public.users(id),
+  card_id UUID REFERENCES public.cards(id),
   kind transaction_kind NOT NULL,
   sol_lamports BIGINT DEFAULT 0,
   pokecoins_delta BIGINT DEFAULT 0,

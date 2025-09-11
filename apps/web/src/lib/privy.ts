@@ -34,7 +34,7 @@ export const privyConfig = {
       logo: 'https://your-domain.com/logo.png',
     },
     // Configure login methods
-    loginMethods: ['wallet', 'email', 'google', 'twitter'],
+    loginMethods: ['wallet'],
     // Configure embedded wallets
     embeddedWallets: {
       createOnLogin: 'users-without-wallets',

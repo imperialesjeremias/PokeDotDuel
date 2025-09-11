@@ -19,8 +19,7 @@ export type Database = {
         Row: {
           id: string;
           wallet_address: string;
-          username: string | null;
-          created_at: string;
+      
           level: number;
           xp: number;
           badges: any[];
@@ -38,8 +37,7 @@ export type Database = {
         Insert: {
           id?: string;
           wallet_address: string;
-          username?: string | null;
-          created_at?: string;
+      
           level?: number;
           xp?: number;
           badges?: any[];
@@ -57,8 +55,7 @@ export type Database = {
         Update: {
           id?: string;
           wallet_address?: string;
-          username?: string | null;
-          created_at?: string;
+      
           level?: number;
           xp?: number;
           badges?: any[];

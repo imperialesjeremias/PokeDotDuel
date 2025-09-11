@@ -8,8 +8,7 @@ import { initializeBackground } from '@/utils/backgroundManager';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { useUser, useUserStats } from '@/hooks/useUser';
 import {
   User,
   Wallet,
@@ -17,9 +16,6 @@ import {
   Coins,
   Package,
   Star,
-  Edit3,
-  Save,
-  X,
   Crown,
   Zap,
   Target
@@ -28,7 +24,6 @@ import {
 interface UserProfile {
   id: string;
   walletAddress: string;
-  username: string;
   level: number;
   xp: number;
   pokecoins: number;
@@ -47,10 +42,9 @@ interface UserProfile {
 export default function ProfilePage() {
   const { ready, authenticated, user, getAccessToken } = usePrivy();
   const router = useRouter();
-  const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState(false);
-  const [newUsername, setNewUsername] = useState('');
+  const { user: profile, loading: profileLoading, error: profileError, refetch } = useUser();
+  const userStats = useUserStats(profile);
+  const [isLoading, setIsLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -59,64 +53,16 @@ export default function ProfilePage() {
       return;
     }
 
-    if (authenticated) {
+    if (ready) {
       // Initialize background system for authenticated users
       initializeBackground();
-      fetchProfile();
+      setIsLoading(false);
     }
   }, [ready, authenticated, router]);
 
-  const fetchProfile = async () => {
-    try {
-      const token = await getAccessToken();
-      const response = await fetch('/api/profile/me', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        setProfile(data.user);
-        setNewUsername(data.user.username || '');
-      }
-    } catch (error) {
-      console.error('Error fetching profile:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  const handleUpdateUsername = async () => {
-    if (!newUsername.trim()) return;
 
-    setSaving(true);
-    try {
-      const token = await getAccessToken();
-      const response = await fetch('/api/profile/me', {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: newUsername.trim() }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setProfile(prev => prev ? { ...prev, username: data.user.username } : null);
-        setEditing(false);
-      } else {
-        const error = await response.json();
-        alert(error.error || 'Error updating username');
-      }
-    } catch (error) {
-      console.error('Error updating username:', error);
-      alert('Error updating username');
-    } finally {
-      setSaving(false);
-    }
-  };
 
   const getWinRate = () => {
     if (!profile) return 0;
@@ -133,7 +79,7 @@ export default function ProfilePage() {
     return Math.min(Math.max(progress, 0), 100);
   };
 
-  if (!ready || loading) {
+  if (!ready || isLoading || profileLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 to-red-600">
         <div className="w-32 h-32 border-8 border-orange-800 bg-orange-400 animate-pulse flex items-center justify-center">
@@ -173,52 +119,15 @@ export default function ProfilePage() {
                     <User className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
-                    {editing ? (
-                      <div className="space-y-2">
-                        <Label htmlFor="username">Username</Label>
-                        <div className="flex space-x-2">
-                          <Input
-                            id="username"
-                            value={newUsername}
-                            onChange={(e) => setNewUsername(e.target.value)}
-                            placeholder="Enter your username"
-                            maxLength={20}
-                          />
-                          <Button
-                            size="sm"
-                            onClick={handleUpdateUsername}
-                            disabled={saving || !newUsername.trim()}
-                          >
-                            <Save className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => {
-                              setEditing(false);
-                              setNewUsername(profile?.username || '');
-                            }}
-                          >
-                            <X className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <h3 className="text-lg font-semibold">
-                          {profile?.username || 'No name'}
-                        </h3>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => setEditing(true)}
-                          className="mt-1"
-                        >
-                          <Edit3 className="w-4 h-4 mr-1" />
-                          Edit
-                        </Button>
-                      </div>
-                    )}
+                    <div>
+                      <h3 className="text-lg font-semibold">
+                        {profile?.walletAddress ? 
+                          `${profile.walletAddress.slice(0, 8)}...${profile.walletAddress.slice(-6)}` : 
+                          'Wallet not connected'
+                        }
+                      </h3>
+                      <p className="text-sm text-gray-500">Wallet Address</p>
+                    </div>
                   </div>
                 </div>
 
@@ -304,7 +213,7 @@ export default function ProfilePage() {
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-purple-600">
-                      {((profile?.stats.wins || 0) + (profile?.stats.losses || 0))}
+                      {(profile?.stats.wins || 0) + (profile?.stats.losses || 0)}
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-300">Total</div>
                   </div>
@@ -323,11 +232,11 @@ export default function ProfilePage() {
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-orange-600">{profile?.stats.packsOpened || 0}</div>
+                    <div className="text-2xl font-bold text-orange-600">{profile?.stats.packs_opened || 0}</div>
                     <div className="text-sm text-gray-600 dark:text-gray-300">Packs Opened</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-indigo-600">{profile?.stats.cardsOwned || 0}</div>
+                    <div className="text-2xl font-bold text-indigo-600">{profile?.stats.cards_owned || 0}</div>
                     <div className="text-sm text-gray-600 dark:text-gray-300">Cards</div>
                   </div>
                   <div className="text-center">
@@ -350,13 +259,13 @@ export default function ProfilePage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-orange-600">
-                      {(profile?.stats.totalWagered || 0) / 1_000_000_000} SOL
+                      {(profile?.stats.total_wagered || 0) / 1_000_000_000} SOL
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-300">Total Wagered</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-blue-600">
-                      {(profile?.stats.totalWon || 0) / 1_000_000_000} SOL
+                      {(profile?.stats.total_won || 0) / 1_000_000_000} SOL
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-300">Total Won</div>
                   </div>

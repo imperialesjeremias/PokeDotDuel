@@ -3,7 +3,12 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useBridge } from '../hooks/useBridge';
 
-export function EconomyPanel() {
+interface EconomyPanelProps {
+  pokecoinsBalance?: number;
+  solBalance?: number;
+}
+
+export function EconomyPanel({ pokecoinsBalance = 0, solBalance = 0 }: EconomyPanelProps) {
   const { publicKey } = useWallet();
   const {
     depositSol,
@@ -16,11 +21,15 @@ export function EconomyPanel() {
     pokecoinsToSol,
   } = useBridge();
 
-  const [pokecoinsBalance, setPokecoinsBalance] = useState(0);
+  const [localPokecoinsBalance, setLocalPokecoinsBalance] = useState(pokecoinsBalance);
   const [depositAmount, setDepositAmount] = useState(0.1);
   const [withdrawAmount, setWithdrawAmount] = useState(1000);
   const [exchangeRate, setExchangeRate] = useState({ pokecoinsPerSol: 10000, solPerPokecoin: 0.0001 });
   const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
+
+  useEffect(() => {
+    setLocalPokecoinsBalance(pokecoinsBalance);
+  }, [pokecoinsBalance]);
 
   useEffect(() => {
     if (publicKey) {
@@ -31,7 +40,7 @@ export function EconomyPanel() {
   const loadUserData = async () => {
     try {
       const balance = await getUserBalance(publicKey!.toString());
-      setPokecoinsBalance(balance);
+      setLocalPokecoinsBalance(balance);
 
       const rate = await getExchangeRate();
       setExchangeRate(rate);
@@ -103,10 +112,10 @@ export function EconomyPanel() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-2">PokéCoins Balance</h2>
-          <p className="text-3xl font-bold text-blue-600">{pokecoinsBalance.toLocaleString()}</p>
-          <p className="text-sm text-gray-600 dark:text-gray-300">
-            ≈ {(pokecoinsToSol(pokecoinsBalance) * 1_000_000_000).toFixed(0)} lamports
-          </p>
+          <p className="text-3xl font-bold text-blue-600">{localPokecoinsBalance.toLocaleString()}</p>
+                <p className="text-sm text-gray-500">
+                  ≈ {(pokecoinsToSol(localPokecoinsBalance) * 1_000_000_000).toFixed(0)} lamports
+                </p>
         </div>
 
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
@@ -122,7 +131,7 @@ export function EconomyPanel() {
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-2">SOL Equivalent</h2>
           <p className="text-2xl font-bold text-orange-600">
-            ≈ {pokecoinsToSol(pokecoinsBalance).toFixed(4)} SOL
+            ≈ {pokecoinsToSol(localPokecoinsBalance).toFixed(4)} SOL
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             Current value in SOL
@@ -186,7 +195,7 @@ export function EconomyPanel() {
                 onChange={(e) => setWithdrawAmount(Number(e.target.value))}
                 className="w-full p-2 border rounded"
                 min="1000"
-                max={pokecoinsBalance}
+                max={localPokecoinsBalance}
               />
             </div>
 
@@ -198,7 +207,7 @@ export function EconomyPanel() {
 
             <button
               onClick={handleWithdraw}
-              disabled={loading || withdrawAmount <= 0 || withdrawAmount > pokecoinsBalance}
+              disabled={loading || withdrawAmount <= 0 || withdrawAmount > localPokecoinsBalance}
               className="w-full bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 disabled:opacity-50"
             >
               {loading ? 'Withdrawing...' : 'Withdraw SOL'}
