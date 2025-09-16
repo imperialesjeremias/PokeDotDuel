@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { usePVP } from '../hooks/usePVP';
+import { useWebSocket } from '../lib/websocket';
 
 interface QuickMatchPanelProps {
   onClose?: () => void;
@@ -14,8 +15,11 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
     matchmakingStatus,
     loading,
     error,
-    currentLobby
+    currentLobby,
+    isConnected,
+    sendMessage
   } = usePVP();
+  const wsManager = useWebSocket();
 
   const [bracketId, setBracketId] = useState(1);
   const [wagerAmount, setWagerAmount] = useState(1000000); // 0.001 SOL in lamports
@@ -154,6 +158,32 @@ export function QuickMatchPanel({ onClose }: QuickMatchPanelProps) {
             <option value={10000000}>0.01 SOL</option>
             <option value={50000000}>0.05 SOL</option>
           </select>
+        </div>
+      </div>
+
+      {/* Connection Status */}
+      <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+            <span className="text-sm text-gray-600 dark:text-gray-300">
+              WebSocket: {isConnected ? 'Connected' : 'Disconnected'}
+            </span>
+          </div>
+          <button
+            onClick={async () => {
+              try {
+                console.log('Manual connection test...');
+                await wsManager.connect();
+                console.log('Manual connection successful');
+              } catch (err) {
+                console.error('Manual connection failed:', err);
+              }
+            }}
+            className="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
+          >
+            Test Connection
+          </button>
         </div>
       </div>
 

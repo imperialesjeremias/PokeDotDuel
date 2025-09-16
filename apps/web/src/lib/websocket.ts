@@ -12,7 +12,8 @@ class WebSocketManager {
 
   connect(token?: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:3001';
+      const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'http://localhost:4000';
+      console.log('Attempting to connect to WebSocket server at:', wsUrl);
       
       this.socket = io(wsUrl, {
         auth: {

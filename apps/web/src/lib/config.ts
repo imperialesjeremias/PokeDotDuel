@@ -6,7 +6,7 @@ export const CONFIG = {
   API_PREFIX: '/api',
 
   // WebSocket Configuration
-  WS_URL: process.env.NEXT_PUBLIC_WS_URL || 'http://localhost:3001',
+  WS_URL: process.env.NEXT_PUBLIC_WS_URL || 'http://localhost:4001',
 
   // Frontend Configuration
   FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000',

@@ -75,6 +75,10 @@ export class Pokedex {
    * Inicializa los movimientos desde los datos extraídos de Showdown
    */
   private initializeMovesFromShowdown(): void {
+    if (!GEN1_MOVES) {
+      console.error('GEN1_MOVES is undefined or null');
+      return;
+    }
     Object.entries(GEN1_MOVES).forEach(([moveId, moveData]) => {
       const move: Move = {
         id: moveData.id,
@@ -222,6 +226,10 @@ export class Pokedex {
    * Inicializa los Pokémon desde los datos extraídos de Showdown
    */
   private initializePokemonFromShowdown(): void {
+    if (!GEN1_POKEMON) {
+      console.error('GEN1_POKEMON is undefined or null');
+      return;
+    }
     Object.entries(GEN1_POKEMON).forEach(([pokemonId, pokemonData]) => {
       const pokemon: PokemonData = {
         dexNumber: pokemonData.dexNumber,

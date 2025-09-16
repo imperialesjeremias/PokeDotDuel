@@ -36,12 +36,15 @@ exports.CardSchema = zod_1.z.object({
 exports.UserSchema = zod_1.z.object({
     id: zod_1.z.string().uuid(),
     walletAddress: zod_1.z.string(),
+    generatedWalletAddress: zod_1.z.string().optional(),
     username: zod_1.z.string().optional(),
     createdAt: zod_1.z.string().datetime(),
+    updatedAt: zod_1.z.string().datetime(),
     level: zod_1.z.number().min(1),
     xp: zod_1.z.number().min(0),
     badges: zod_1.z.array(zod_1.z.any()),
     pokecoins: zod_1.z.number().min(0),
+    solBalance: zod_1.z.number().min(0),
     stats: zod_1.z.object({
         wins: zod_1.z.number().min(0),
         losses: zod_1.z.number().min(0),
@@ -125,6 +128,7 @@ exports.PackSchema = zod_1.z.object({
 exports.TransactionSchema = zod_1.z.object({
     id: zod_1.z.string().uuid(),
     userId: zod_1.z.string().uuid().optional(),
+    cardId: zod_1.z.string().uuid().optional(),
     kind: zod_1.z.enum([
         'DEPOSIT_SOL', 'WITHDRAW_SOL', 'BUY_POKECOINS', 'SELL_CARD',
         'BUY_CARD', 'BID', 'WAGER_DEPOSIT', 'WAGER_PAYOUT',

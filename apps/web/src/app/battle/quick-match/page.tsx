@@ -16,7 +16,9 @@ export default function QuickMatchBattlePage() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log('QuickMatchBattlePage auth state:', { ready, authenticated });
     if (ready && !authenticated) {
+      console.log('Redirecting to home - not authenticated');
       router.push('/');
     } else if (authenticated) {
       // Initialize background system for authenticated users

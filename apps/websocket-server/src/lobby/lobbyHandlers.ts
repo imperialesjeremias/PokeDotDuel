@@ -11,6 +11,15 @@ export function setupLobbyHandlers(io: Server, socket: Socket): void {
   // Almacenar el ID de usuario en el socket
   let userId: string | undefined;
 
+  // Handle authentication
+  socket.on('authenticate', (data: { userId: string }) => {
+    console.log('Authenticating user:', data.userId);
+    userId = data.userId;
+    socket.data = { ...socket.data, userId: data.userId };
+    socket.join(`user:${data.userId}`);
+    console.log('User authenticated and joined room:', data.userId);
+  });
+
   // Configurar callback para matchmaking
   lobbyManager.onMatchFound = (lobby: LobbyData, player1Id: string, player2Id: string) => {
     // Notificar a ambos jugadores que se encontró una partida
@@ -182,6 +191,45 @@ export function setupLobbyHandlers(io: Server, socket: Socket): void {
     }
   });
 
+  // Salir de un lobby
+  socket.on('leave_lobby', (data: { userId: string }, callback) => {
+    try {
+      if (!userId) {
+        return callback({ success: false, error: 'Not authenticated' });
+      }
+
+      const lobby = lobbyManager.getUserLobby(userId);
+      if (!lobby) {
+        return callback({ success: false, error: 'Not in a lobby' });
+      }
+
+      // Cerrar el lobby si el usuario estaba en uno
+      lobbyManager.closeLobby(lobby.id, 'CANCELLED');
+      
+      // Salir de la sala del lobby
+      socket.leave(`lobby:${lobby.id}`);
+      
+      // Enviar evento de cancelación a todos los usuarios en el lobby
+      const lobbyState: ServerMessage = {
+        type: 'LOBBY_STATE',
+        state: {
+          id: lobby.id,
+          bracketId: lobby.bracketId,
+          status: 'CANCELLED',
+          creatorId: lobby.creatorId,
+          opponentId: lobby.opponentId,
+          wagerLamports: lobby.wagerLamports,
+          escrowPda: lobby.escrowPda
+        }
+      };
+      
+      io.to(`lobby:${lobby.id}`).emit('message', lobbyState);
+      callback({ success: true, message: 'Left lobby successfully' });
+    } catch (error: any) {
+      callback({ success: false, error: error.message });
+    }
+  });
+
   // Marcar como listo
   socket.on('ready', (callback) => {
     try {
@@ -325,11 +373,41 @@ export function setupLobbyHandlers(io: Server, socket: Socket): void {
   // Crear lobby contra bot
   socket.on('play_vs_bot', (data: { bracketId: number, wagerLamports: number, difficulty?: 'easy' | 'medium' | 'hard' }, callback) => {
     try {
+      console.log('Received play_vs_bot request:', data, 'from user:', userId);
+      
       if (!userId) {
+        console.error('play_vs_bot: User not authenticated');
         return callback({ success: false, error: 'Not authenticated' });
       }
 
+      // Check if user is already in a lobby and leave it first
+      const existingLobby = lobbyManager.getUserLobby(userId);
+      if (existingLobby) {
+        console.log('User already in lobby, leaving first:', existingLobby.id);
+        lobbyManager.closeLobby(existingLobby.id, 'CANCELLED');
+        socket.leave(`lobby:${existingLobby.id}`);
+        
+        // Notify other users in the lobby about cancellation
+        const cancelState: ServerMessage = {
+          type: 'LOBBY_STATE',
+          state: {
+            id: existingLobby.id,
+            bracketId: existingLobby.bracketId,
+            status: 'CANCELLED',
+            creatorId: existingLobby.creatorId,
+            opponentId: existingLobby.opponentId,
+            wagerLamports: existingLobby.wagerLamports,
+            escrowPda: existingLobby.escrowPda
+          }
+        };
+        io.to(`lobby:${existingLobby.id}`).emit('message', cancelState);
+      }
+
+      console.log('Creating bot lobby for user:', userId, 'with params:', { bracketId: data.bracketId, wagerLamports: data.wagerLamports, difficulty: data.difficulty });
+      
       const lobby = lobbyManager.createBotLobby(userId, data.bracketId, data.wagerLamports);
+      
+      console.log('Bot lobby created successfully:', lobby.id);
       
       // Unir al usuario a la sala del lobby
       socket.join(`lobby:${lobby.id}`);
@@ -357,8 +435,11 @@ export function setupLobbyHandlers(io: Server, socket: Socket): void {
       };
       
       socket.emit('message', lobbyState);
+      
+      console.log('Bot battle setup complete, sending success response');
       callback({ success: true, data: lobby });
     } catch (error: any) {
+      console.error('Error creating bot lobby:', error);
       callback({ success: false, error: error.message });
     }
   });
