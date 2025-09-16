@@ -411,7 +411,7 @@ export default function QuickMatchPage() {
               </Card>
 
               {/* Quick Match Panel - Bot Battle */}
-              {/* <QuickMatchPanel /> */}
+              <QuickMatchPanel />
             </div>
           </div>
         )}

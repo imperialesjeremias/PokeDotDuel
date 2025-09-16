@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useConnection } from '@solana/wallet-adapter-react';
+import { usePrivy } from '@privy-io/react-auth';
+import { useRouter } from 'next/navigation';
 import { PublicKey, Transaction } from '@solana/web3.js';
 import { useWebSocket } from '../lib/websocket';
 import { LobbyState, ServerMessage, ClientMessage, BattleTeam } from '../types/shared';
@@ -10,6 +12,7 @@ interface UsePVPReturn {
   // Lobby management
   createLobby: (bracketId: number, wagerAmount: number) => Promise<string>;
   joinLobby: (lobbyId: string) => Promise<void>;
+  leaveLobby: () => Promise<void>;
   getLobby: (lobbyId: string) => Promise<LobbyState | null>;
 
   // Quick match and bot battles
@@ -46,6 +49,8 @@ interface UsePVPReturn {
 export function usePVP(): UsePVPReturn {
   const { publicKey, signTransaction } = useWallet();
   const { connection } = useConnection();
+  const { user, authenticated } = usePrivy();
+  const router = useRouter();
 
   const [currentLobby, setCurrentLobby] = useState<LobbyState | null>(null);
   const [currentBattle, setCurrentBattle] = useState<any | null>(null);
@@ -74,6 +79,8 @@ export function usePVP(): UsePVPReturn {
           break;
         case 'BATTLE_START':
           setCurrentBattle({ id: message.battleId, seed: message.seed });
+          // Navigate to battle scene when battle starts
+          router.push('/battle/scene');
           break;
         case 'BATTLE_END':
           setCurrentBattle(null);
@@ -107,16 +114,25 @@ export function usePVP(): UsePVPReturn {
 
   // WebSocket connection setup
   useEffect(() => {
-    if (!publicKey) return;
+    const userIdentifier = publicKey?.toString() || user?.id;
+    console.log('usePVP useEffect triggered:', { userIdentifier, authenticated, publicKey: !!publicKey, userId: user?.id });
+    
+    if (!userIdentifier || !authenticated) {
+      console.log('Skipping websocket connection - missing auth:', { userIdentifier, authenticated });
+      return;
+    }
 
     const connectWebSocket = async () => {
+      console.log('Attempting websocket connection...');
       try {
         await wsManager.connect();
+        console.log('Websocket connected successfully');
         setIsConnected(true);
         setError(null);
 
         // Authenticate with the server
-        wsManager.getSocket()?.emit('authenticate', { userId: publicKey.toString() });
+        console.log('Sending authenticate message with userId:', userIdentifier);
+        wsManager.getSocket()?.emit('authenticate', { userId: userIdentifier });
 
         // Set up message handlers
         wsManager.on('message', (message: ServerMessage) => {
@@ -160,7 +176,7 @@ export function usePVP(): UsePVPReturn {
       wsManager.disconnect();
       setIsConnected(false);
     };
-  }, [publicKey, wsManager]);
+  }, [publicKey, user, authenticated, wsManager]);
 
   // WebSocket-based functions
   const createLobby = useCallback(async (bracketId: number, wagerLamports: number): Promise<string> => {
@@ -194,7 +210,7 @@ export function usePVP(): UsePVPReturn {
     } finally {
       setLoading(false);
     }
-  }, [publicKey, wsManager]);
+  }, [publicKey, user, authenticated, wsManager]);
 
   const joinLobby = useCallback(async (lobbyId: string): Promise<void> => {
     if (!publicKey) {
@@ -228,6 +244,41 @@ export function usePVP(): UsePVPReturn {
       setLoading(false);
     }
   }, [publicKey, wsManager]);
+
+  const leaveLobby = useCallback(async (): Promise<void> => {
+    const userIdentifier = publicKey?.toString() || user?.id;
+    if (!userIdentifier || !authenticated) {
+      throw new Error('User not authenticated');
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      return new Promise<void>((resolve, reject) => {
+        if (!wsManager.isConnected()) {
+          reject(new Error('WebSocket not connected'));
+          return;
+        }
+
+        wsManager.getSocket()?.emit('leave_lobby', { userId: userIdentifier }, (response: any) => {
+          if (response && response.success) {
+            setCurrentLobby(null);
+            resolve();
+          } else {
+            const errorMsg = response?.error || 'Failed to leave lobby';
+            reject(new Error(errorMsg));
+          }
+        });
+      });
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to leave lobby';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, [publicKey, user, authenticated, wsManager]);
 
   const getLobby = useCallback(async (lobbyId: string): Promise<LobbyState | null> => {
     if (!publicKey) {
@@ -436,27 +487,56 @@ export function usePVP(): UsePVPReturn {
   }, [publicKey, wsManager]);
 
   const playVsBot = useCallback(async (bracketId: number, wagerAmount: number, difficulty: 'easy' | 'medium' | 'hard' = 'medium'): Promise<void> => {
-    if (!publicKey) {
-      throw new Error('Wallet not connected');
+    // Check for authentication - either Solana wallet or Privy
+    const userIdentifier = publicKey?.toString() || user?.id;
+    if (!userIdentifier || !authenticated) {
+      throw new Error('User not authenticated');
     }
+
+    console.log('Starting bot battle with:', { bracketId, wagerAmount, difficulty, isConnected: wsManager.isConnected(), userIdentifier });
 
     setLoading(true);
     setError(null);
 
     try {
-      // Create a default team for bot battle (this should be replaced with actual team selection)
-      const defaultTeam = {
-        id: 'bot-battle-team',
-        name: 'Bot Battle Team',
-        pokemon: [] // This should be populated with actual Pokemon data
-      };
+      // If user is already in a lobby, leave it first
+      if (currentLobby) {
+        console.log('User already in lobby, leaving first...');
+        await leaveLobby();
+      }
 
-      wsManager.getSocket()?.emit('play_vs_bot', { team: defaultTeam, difficulty });
-      setLoading(false);
+      return new Promise<void>((resolve, reject) => {
+        if (!wsManager.isConnected()) {
+          console.error('WebSocket not connected when trying to start bot battle');
+          reject(new Error('WebSocket not connected'));
+          return;
+        }
+
+        console.log('Emitting play_vs_bot event with:', { bracketId, wagerAmount, difficulty });
+        
+        wsManager.getSocket()?.emit('play_vs_bot', { 
+          userId: userIdentifier,
+          bracketId, 
+          wagerAmount, 
+          difficulty 
+        }, (response: any) => {
+          console.log('Received response from play_vs_bot:', response);
+          if (response && response.success) {
+            resolve();
+          } else {
+            const errorMsg = response?.error || 'Unknown error occurred';
+            console.error('Bot battle failed:', errorMsg);
+            reject(new Error(errorMsg));
+          }
+        });
+      });
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to start bot battle';
+      console.error('Exception in playVsBot:', err);
       setError(errorMessage);
       throw new Error(errorMessage);
+    } finally {
+      setLoading(false);
     }
   }, [publicKey, wsManager]);
 
@@ -538,6 +618,7 @@ export function usePVP(): UsePVPReturn {
     // Lobby Management
     createLobby,
     joinLobby,
+    leaveLobby,
     getLobby,
 
     // Quick match and bot battles

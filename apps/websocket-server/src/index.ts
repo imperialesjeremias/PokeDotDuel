@@ -19,7 +19,7 @@ const server = http.createServer(app);
 // Configurar Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: [process.env.CLIENT_URL || 'http://localhost:3001', 'http://localhost:3003'],
     methods: ['GET', 'POST']
   }
 });
@@ -32,6 +32,7 @@ app.get('/health', (req, res) => {
 // Manejar conexiones de Socket.IO
 io.on('connection', (socket) => {
   console.log(`Client connected: ${socket.id}`);
+  console.log('Socket handshake:', socket.handshake.headers.origin);
 
   // Configurar manejadores de batalla y lobby
   setupBattleHandlers(io, socket);
@@ -40,6 +41,18 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log(`Client disconnected: ${socket.id}`);
   });
+
+  socket.on('error', (error) => {
+    console.error('Socket error:', error);
+  });
+});
+
+// Add connection error logging
+io.engine.on('connection_error', (err) => {
+  console.log('Connection error:', err.req);
+  console.log('Error code:', err.code);
+  console.log('Error message:', err.message);
+  console.log('Error context:', err.context);
 });
 
 // Iniciar servidor
